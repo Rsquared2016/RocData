@@ -1,0 +1,13 @@
+# -e 40.808352,-74.168314,40.57146,-73.61728
+# -e 40.8393,-74.2635,40.6437,-73.6276
+# nice static:
+# python heatmap.py -p twitter_1M.coors.txt -r 5 -o NYC_z14_1M_blue.png -G gradient-adam-blue.png --osm -e 40.8393,-74.2635,40.5,-73.6558 -z 14
+# animation
+# python heatmap.py -p twitter_500K.coors.txt -r 5 -o NYC_z14_5K_blue.mpeg -G gradient-adam-blue.png --osm -e 40.8393,-74.2635,40.5,-73.6558 -z 12 -a
+# slow down animation
+# python heatmap.py -p twitter_500.coors.txt -r 5 -o NYC_z11_blue.avi -G gradient-adam-blue.png --osm -e 40.8393,-74.2635,40.5,-73.6558 -z 11 -a -f 30 -F -b 100000k -minrate 100000k -maxrate 100000k -bt 100000k -bufsize 185000k -y -r 30 -K
+
+ffmpeg -r 1 -i /var/folders/S6/S6rX+A1rHu8G-3GdhZb-J++++TI/-Tmp-/tmp7G_zcf/frame-%05d.png -b 100000k -minrate 100000k -maxrate 100000k -bt 100000k -bufsize 102400k -r 30 -y clique_gte_8_sample.gpx.avi
+
+last worked: (filters do not work, picture distorted)
+ffmpeg -r 1 -i /var/folders/S6/S6rX+A1rHu8G-3GdhZb-J++++TI/-Tmp-/tmp7G_zcf/frame-%05d.png -b 100000k -minrate 100000k -maxrate 100000k -bt 100000k -bufsize 102400k -r 30 -y clique_gte_8_sample.gpx.avi
