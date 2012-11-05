@@ -1,5 +1,5 @@
 # Example usage
-# python displaySimpleGraph_demo.py friendhip_graph_undirected.dot neato 7
+# python displaySimpleGraph_demo.py friendship_graph_undirected.dot neato 7
 
 # You need to install matplotlib library and python hooks to it and networkx
 # For python hooks, use easy_install command with --install-dir option (if you don't have root access)
@@ -42,10 +42,10 @@ print nx.info(G)
 #        G = G.subgraph(c)
 
 # Display only cliques larger or equal to N
-#(G, node_size, node_color) = pruneGraph.RemoveSmallCliques(G, N)
+(G, node_size, node_color) = pruneGraph.RemoveSmallCliques(G, N)
 #nx.drawing.nx_agraph.write_dot(G, GRAPH_PATH+'_gte_'+str(N)+'.dot')
-#print "Pruned Graph:"
-#print nx.info(G)
+print "Pruned Graph:"
+print nx.info(G)
 
 ########################################################
 # find a nice layout

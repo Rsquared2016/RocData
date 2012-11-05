@@ -1,7 +1,4 @@
-# TODO:
-# add mining of foursquare checkins: done
-
-# example: python -OO processTweets.py 2000 WORDS_labeled_all.txt /localdisk/log_disk_full_dec8_2011/log-geo-area_*.txt
+# example: python -OO processTweets.py 2000 words.txt log-geo-area_NYC_GPS_sorted_filtered_6237.dat
 
 from tweetReader import *
 from utils import *
