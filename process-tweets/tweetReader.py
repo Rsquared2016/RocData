@@ -59,12 +59,7 @@ class tweetReader:
         tweet.msgID = int(o['id'])
         tweet.json = line.strip()
 	datematch = self.rexCreated.match(o['created_at']).groups()
-	tweet.datetime = datetime( int(datematch[3]), 
-		self.months.index(datematch[2]), 
-		int(datematch[1]), 
-		int(datematch[4]), 
-		int(datematch[5]), 
-		int(datematch[6]))
+	tweet.datetime = datetime.strptime(tweet.createdAt, "%a, %d %b %Y %H:%M:%S +0000")
         return (tweet, line)
 
         
