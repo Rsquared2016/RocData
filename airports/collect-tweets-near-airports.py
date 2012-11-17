@@ -222,7 +222,7 @@ while True:
             if numTweets % 500 == 0:
                 updateVitals(db_status)
         sys.stdout.flush()
-    time.sleep(pauseTime * 60)
+    time.sleep(pauseTime)
 
 
 
