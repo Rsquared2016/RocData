@@ -69,8 +69,9 @@ class DbManager:
 """ execute the script """
 if __name__ == "__main__":
     """ initialize cmdline args and other parameters """
-    pause_time = int(sys.argv[1])
+    pause_time = float(sys.argv[1])
     refresh_time = int(sys.argv[2])
+    last_time = int(datetime.datetime.utcnow().strftime("%s"))
     dbname = 'airport_tweets'
     numTweets = 0
     numGeoTweets = 0
@@ -95,7 +96,7 @@ if __name__ == "__main__":
     db_airport_tweets.open()
 
     """ function for writing status """
-    def updateVitals(db, name):
+    def updateVitals(db, name, numPeople, numInteresting):
         idFor = '%s (%s) @ %s' % (name + '_interesting', "N/A", ip_addr)
         doc = db.get(idFor)
         try:
@@ -104,6 +105,8 @@ if __name__ == "__main__":
                 'num_tweets': numTweets,
                 'num_geo_tweets': numGeoTweets,
                 'num_non_geo_tweets': numNonGeoTweets,
+                'num_people': numPeople,
+                'num_interesting': numInteresting,
                 'started_at': start_time,
                 'last_update': str(datetime.datetime.utcnow()),
                 'pause_time': pause_time,
@@ -145,57 +148,67 @@ if __name__ == "__main__":
         # stuff our app uses
         search['origin'] = 'rest'
         search['airport'] = None
+        return search
 
     """ main program loop """
     while True:
-        # write vital signs 
-        updateVitals(db_status, dbname)
-
         # query for users -> airports, find cases with more than two airports
-        interestingQuery = []
+        interestingPeople = []
         numPeople = 0
         for row in db_airport_tweets.db.view('Tweet/user_airports', group=True, stale='update_after'):
             (key, value) = (int(row.key), row.value.split(', '))
             numPeople += 1
             if len(value) > 1:
-                interestingQuery.append(key)
+                interestingPeople.append(key)
         print "People: %d" % numPeople
-        # if the list of interesting people changed, update the stream
-        if tweet_stream == None or interestingPeople != interestingQuery:
-            interestingPeople = interestingQuery
-            tweet_stream = tweetstream.FilterStream(username, password, follow=interestingPeople)
         print "Interesting people: %s" % len(interestingPeople)
 
-        # pull in 
+        # pull in "interesting" tweets via the REST API, slowly
         try:
-            for tweet in tweet_stream:
-                # prep data slightly
-                tweet = rest2search(tweet)
-                tweet['text'] = re.sub(pNewLine, ' ', tweet['text']).encode("utf-8")
-                # Extract GPS: try 'geo' tag, fallback to 'location' tag
-                if not('geo' in tweet) and tweet['location'] != None:
-                     match = rexLatLon.search(tweet['location'])
-                     if bool(match):
-                         (lat, lon) = float(match.group('lat')), float(match.group('lon'))
-                         tweet['geo'] = {'type': 'Point', 'coordinates': (lat, lon)}
-                try:
-                    if len(tweet['geo']['coordinates']) != 2:
+            for uid in interestingPeople:
+                # grab user timeline
+                tweets = twitter.getUserTimeline(user_id=uid, count=100)
+                print "[%s]: %d tweets" % (uid, len(tweets))
+                for tweet in tweets:
+                    # prep data slightly
+                    tweet = rest2search(tweet)
+                    tweet['text'] = re.sub(pNewLine, ' ', tweet['text']).encode("utf-8")
+                    print "[%s]: says %s" % (uid, tweet['text'])
+                    # Extract GPS: try 'geo' tag, fallback to 'location' tag
+                    if not('geo' in tweet) and tweet['location'] != None:
+                         match = rexLatLon.search(tweet['location'])
+                         if bool(match):
+                             (lat, lon) = float(match.group('lat')), float(match.group('lon'))
+                             tweet['geo'] = {'type': 'Point', 'coordinates': (lat, lon)}
+                    try:
+                        if len(tweet['geo']['coordinates']) != 2:
+                            tweet['geo'] = None
+                    except (KeyError, TypeError):
                         tweet['geo'] = None
-                except (KeyError, TypeError):
-                    tweet['geo'] = None
-                # increase tweet counts and save
-                numTweets += 1
-                if tweet['geo'] != None:
-                    numGeoTweets += 1
-                else:
-                    numNonGeoTweets += 1
-                db_airport_tweets.save(tweet)
-        except (tweetstream.ConnectionError, tweetstream.AuthenticationError) as e:
-            print "Encountered issue establishing stream.\n%s" % e
-            print "Sleeping for %s seconds..." % pause_time
-            time.sleep(pause_time)
+                    # increase tweet counts and save
+                    numTweets += 1
+                    if tweet['geo'] != None:
+                        numGeoTweets += 1
+                    else:
+                        numNonGeoTweets += 1
+                    db_airport_tweets.save(tweet)
+                time.sleep(pause_time)
+                # write status if ~60s have elapsed
+                current_time = int(datetime.datetime.utcnow().strftime("%s"))
+                if current_time - last_time >= 60:
+                    updateVitals(db_status, dbname, numPeople, len(interestingPeople))
+                # update last_time if ~3600s have elapsed (rate limit)
+                if current_time - last_time >= 3600:
+                    last_time = int(datetime.datetime.utcnow().strftime("%s"))
+        except AttributeError as e:
+            print "Twython issue probably, probably hit rate limit. But let's find out!!!\n%s" % e
+            current_time = int(datetime.datetime.utcnow().strftime("%s"))
+            current_delta = current_time - last_time
+            refresh_delta = refresh_time - current_delta + 1
+            print "Sleeping for %s seconds..." % refresh_delta
+            time.sleep(refresh_delta)
             # reset the stream completely
-            tweet_stream = None
+            last_time = int(datetime.datetime.utcnow().strftime("%s"))
             interestingPeople = []
         except KeyError as e:
             print "%s" % e
