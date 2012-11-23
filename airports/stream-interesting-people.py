@@ -151,15 +151,12 @@ if __name__ == "__main__":
         return search
 
     """ sleep if rate limit is hit """
-    def backoff():
+    def backoff(last_time, refresh_time):
         current_time = int(datetime.datetime.utcnow().strftime("%s"))
         current_delta = current_time - last_time
         refresh_delta = refresh_time - current_delta + 1
         print "Sleeping for %s seconds..." % refresh_delta
         time.sleep(refresh_delta)
-        # reset the stream completely
-        last_time = int(datetime.datetime.utcnow().strftime("%s"))
-        interestingPeople = []
 
     """ main program loop """
     while True:
@@ -182,7 +179,9 @@ if __name__ == "__main__":
                 # check for rate limit, back off if so
                 try:
                     response = tweets['error']
-                    backoff()
+                    backoff(last_time, refresh_time)
+                    # reset the stream completely
+                    last_time = int(datetime.datetime.utcnow().strftime("%s"))
                     continue
                 except (TypeError, KeyError) as e:
                     pass
