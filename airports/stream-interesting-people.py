@@ -215,5 +215,5 @@ if __name__ == "__main__":
             continue
         except Exception as e:
             print "Uh oh, something bad happened..."
-            print "%s" % e
+            traceback.print_exc()
             sys.exit()
