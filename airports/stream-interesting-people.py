@@ -150,6 +150,17 @@ if __name__ == "__main__":
         search['airport'] = None
         return search
 
+    """ sleep if rate limit is hit """
+    def backoff():
+        current_time = int(datetime.datetime.utcnow().strftime("%s"))
+        current_delta = current_time - last_time
+        refresh_delta = refresh_time - current_delta + 1
+        print "Sleeping for %s seconds..." % refresh_delta
+        time.sleep(refresh_delta)
+        # reset the stream completely
+        last_time = int(datetime.datetime.utcnow().strftime("%s"))
+        interestingPeople = []
+
     """ main program loop """
     while True:
         # query for users -> airports, find cases with more than two airports
@@ -168,6 +179,14 @@ if __name__ == "__main__":
             for uid in interestingPeople:
                 # grab user timeline
                 tweets = twitter.getUserTimeline(user_id=uid, count=10)
+                # check for rate limit, back off if so
+                try:
+                    response = tweets['error']
+                    backoff()
+                    continue
+                except KeyError:
+                    pass
+
                 print "[%s]: %d tweets" % (uid, len(tweets))
                 for tweet in tweets:
                     # prep data slightly
@@ -200,16 +219,6 @@ if __name__ == "__main__":
                 # update last_time if ~3600s have elapsed (rate limit)
                 if current_time - last_time >= 3600:
                     last_time = int(datetime.datetime.utcnow().strftime("%s"))
-        except AttributeError as e:
-            print "Twython issue probably, probably hit rate limit. But let's find out!!!\n%s" % e
-            current_time = int(datetime.datetime.utcnow().strftime("%s"))
-            current_delta = current_time - last_time
-            refresh_delta = refresh_time - current_delta + 1
-            print "Sleeping for %s seconds..." % refresh_delta
-            time.sleep(refresh_delta)
-            # reset the stream completely
-            last_time = int(datetime.datetime.utcnow().strftime("%s"))
-            interestingPeople = []
         except KeyError as e:
             print "%s" % e
             continue
