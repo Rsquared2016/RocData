@@ -184,7 +184,7 @@ if __name__ == "__main__":
                     response = tweets['error']
                     backoff()
                     continue
-                except KeyError:
+                except (TypeError, KeyError) as e:
                     pass
 
                 print "[%s]: %d tweets" % (uid, len(tweets))
