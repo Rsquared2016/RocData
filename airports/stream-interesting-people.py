@@ -167,7 +167,7 @@ if __name__ == "__main__":
         try:
             for uid in interestingPeople:
                 # grab user timeline
-                tweets = twitter.getUserTimeline(user_id=uid, count=100)
+                tweets = twitter.getUserTimeline(user_id=uid, count=10)
                 print "[%s]: %d tweets" % (uid, len(tweets))
                 for tweet in tweets:
                     # prep data slightly
@@ -213,3 +213,7 @@ if __name__ == "__main__":
         except KeyError as e:
             print "%s" % e
             continue
+        except Exception as e:
+            print "Uh oh, something bad happened..."
+            print "%s" % e
+            sys.exit()
