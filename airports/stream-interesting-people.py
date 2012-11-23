@@ -1,6 +1,5 @@
 
 from twython import Twython
-import tweetstream
 import urllib2
 import time
 import json
@@ -79,11 +78,13 @@ if __name__ == "__main__":
     interestingPeople = []
     ip_addr = urllib2.urlopen("http://automation.whatismyip.com/n09230945.asp").read()
     start_time = str(datetime.datetime.utcnow())
-    tweet_stream = None
     username = 'corporaMine'
     password = 'tw1tterhea1th'
     rexLatLon = re.compile(r'(?P<lat>[-]*[0-9]+\.[0-9]+)[^0-9-]+(?P<lon>[-]*[0-9]+\.[0-9]+)')
     pNewLine = re.compile('[\r\n]+')
+
+    """ initialize Twython """
+    twitter = Twython()
 
     """ initialize CouchDB stuff """
     couch = couchdb.Server('http://dev.fount.in:5984')
@@ -95,7 +96,7 @@ if __name__ == "__main__":
 
     """ function for writing status """
     def updateVitals(db, name):
-        idFor = '%s (%s) @ %s' % (name, "N/A", ip_addr)
+        idFor = '%s (%s) @ %s' % (name + '_interesting', "N/A", ip_addr)
         doc = db.get(idFor)
         try:
             status = {
@@ -117,6 +118,34 @@ if __name__ == "__main__":
             print "Couldn't write status to server: %s" % e
             sys.exit
 
+    """ utility function for streaming -> search """
+    def rest2search(stream):
+        search = {}
+        search['_id'] = stream['id_str']
+        search['id'] = stream['id']
+        search['id_str'] = stream['id_str']
+        search['text'] = stream['text']
+        search['source'] = stream['source']
+        search['created_at'] = stream['created_at']
+        search['geo'] = None
+        if stream['geo'] != None:
+            search['geo'] = stream['geo']
+        search['metadata'] = None
+        search['to_user'] = stream['in_reply_to_screen_name']
+        search['to_user_id'] = stream['in_reply_to_user_id']
+        search['to_user_id_str'] = stream['in_reply_to_user_id_str']
+        search['to_user_name'] = '' # we'd have to look this up in the REST API, not worth it imo
+        search['from_user'] = stream['user']['screen_name']
+        search['from_user_id'] = stream['user']['id']
+        search['from_user_id_str'] = stream['user']['id_str']
+        search['from_user_name'] = stream['user']['name']
+        search['iso_language_code'] = stream['user']['lang']
+        search['profile_image_url'] = stream['user']['profile_image_url']
+        search['profile_image_url_https'] = stream['user']['profile_image_url_https']
+        # stuff our app uses
+        search['origin'] = 'rest'
+        search['airport'] = None
+
     """ main program loop """
     while True:
         # write vital signs 
@@ -124,24 +153,25 @@ if __name__ == "__main__":
 
         # query for users -> airports, find cases with more than two airports
         interestingQuery = []
+        numPeople = 0
         for row in db_airport_tweets.db.view('Tweet/user_airports', group=True, stale='update_after'):
             (key, value) = (int(row.key), row.value.split(', '))
+            numPeople += 1
             if len(value) > 1:
                 interestingQuery.append(key)
+        print "People: %d" % numPeople
         # if the list of interesting people changed, update the stream
         if tweet_stream == None or interestingPeople != interestingQuery:
             interestingPeople = interestingQuery
             tweet_stream = tweetstream.FilterStream(username, password, follow=interestingPeople)
-            print "Interesting people: %s" % interestingPeople
+        print "Interesting people: %s" % len(interestingPeople)
 
-        # attempt to pull in things from stream
+        # pull in 
         try:
             for tweet in tweet_stream:
                 # prep data slightly
-                tweet['_id'] = tweet['id_str']
-                tweet['origin'] = 'stream'
+                tweet = rest2search(tweet)
                 tweet['text'] = re.sub(pNewLine, ' ', tweet['text']).encode("utf-8")
-                tweet['airport'] = None
                 # Extract GPS: try 'geo' tag, fallback to 'location' tag
                 if not('geo' in tweet) and tweet['location'] != None:
                      match = rexLatLon.search(tweet['location'])
@@ -169,4 +199,4 @@ if __name__ == "__main__":
             interestingPeople = []
         except KeyError as e:
             print "%s" % e
-            pass
+            continue
