@@ -213,6 +213,8 @@ while True:
             tweet['text'] = re.sub(pNewLine, ' ', tweet['text']).encode("utf-8")
             # save airport code in the tweet
             tweet['airport'] = airport.code
+            # save origin!
+            tweet['origin'] = 'search'
 
             # persist tweets in database
             if geoOrAll == 'all' or tweet['geo'] != None:
