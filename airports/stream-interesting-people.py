@@ -67,7 +67,7 @@ class DbManager:
             return False
 
 """ function for writing status """
-def updateVitals(db, name, numPeople, numInteresting):
+def updateVitals(db, name, numPeople, numInteresting, currentUser):
     idFor = '%s (%s) @ %s' % (name + '_interesting', "N/A", ip_addr)
     doc = db.get(idFor)
     try:
@@ -79,6 +79,8 @@ def updateVitals(db, name, numPeople, numInteresting):
             'num_people': numPeople,
             'num_interesting': numInteresting,
             'started_at': start_time,
+            'current_person': currentUser,
+            'current_iteration': currentIteration,
             'last_update': str(datetime.datetime.utcnow()),
             'pause_time': pause_time,
             'db_name': name }
@@ -137,16 +139,24 @@ dbname = 'airport_tweets'
 numTweets = 0
 numGeoTweets = 0
 numNonGeoTweets = 0
+currentUser = 0
+currentIteration = 0
+lastId = None
 interestingPeople = []
 ip_addr = urllib2.urlopen("http://automation.whatismyip.com/n09230945.asp").read()
 start_time = str(datetime.datetime.utcnow())
-username = 'corporaMine'
-password = 'tw1tterhea1th'
 rexLatLon = re.compile(r'(?P<lat>[-]*[0-9]+\.[0-9]+)[^0-9-]+(?P<lon>[-]*[0-9]+\.[0-9]+)')
 pNewLine = re.compile('[\r\n]+')
 
-""" initialize Twython """
-twitter = Twython()
+""" initialize Twython with Sean Buckets credentials """
+consumer_key = 'dBed6SmjIPIGcdnkMI03nw'
+consumer_secret = 'ATICxmYw5dC9TBLgqg2s0QFeMagfwJALKDUTRoZN94'
+access_token = '981919850-pfAwbpx5gy6Ath4mQMLCldUywMN5PrPLwTABiMMe'
+access_secret = 'AItuj14hggRp7mTQ7slt1gps7lumRshi9LCF18TnII'
+twitter = Twython(twitter_token = consumer_key,
+    twitter_secret = consumer_secret,
+    oauth_token = access_token,
+    oauth_token_secret = access_secret)
 
 """ initialize CouchDB stuff """
 couch = couchdb.Server('http://dev.fount.in:5984')
@@ -156,6 +166,11 @@ db_status.open()
 db_airport_tweets = DbManager(dbname, couch)
 db_airport_tweets.open()
 
+""" grab the last user ID if it's available """
+status_doc = db_status.get('%s (%s) @ %s' % (dbname + '_interesting', "N/A", ip_addr))
+if status_doc != None and 'current_person' in status_doc:
+    lastId = status_doc['current_person']
+
 """ execute the script """
 if __name__ == "__main__":
     """ main program loop """
@@ -163,7 +178,12 @@ if __name__ == "__main__":
         # query for users -> airports, find cases with more than two airports
         interestingPeople = []
         numPeople = 0
-        for row in db_airport_tweets.db.view('Tweet/user_airports', group=True, stale='update_after'):
+        view = None
+        if lastId != None:
+            view = db_airport_tweets.db.view('Tweet/user_airports', group=True, stale='update_after', startkey=lastId)
+        else:
+            view = db_airport_tweets.db.view('Tweet/user_airports', group=True, stale='update_after')
+        for row in view:
             (key, value) = (int(row.key), row.value.split(', '))
             numPeople += 1
             if len(value) > 1:
@@ -171,13 +191,16 @@ if __name__ == "__main__":
 
         print "People: %d" % numPeople
         print "Interesting people: %s" % len(interestingPeople)
-        updateVitals(db_status, dbname, numPeople, len(interestingPeople))
+        lastId = None
+        updateVitals(db_status, dbname, numPeople, len(interestingPeople), None)
 
         # pull in "interesting" tweets via the REST API, slowly
         try:
+            currentIteration = 0
             for uid in interestingPeople:
                 # grab user timeline
-                tweets = twitter.getUserTimeline(user_id=uid, count=10)
+                currentIteration += 1
+                tweets = twitter.getUserTimeline(user_id=uid)
                 # check for rate limit, back off if so
                 try:
                     response = tweets['error']
@@ -216,11 +239,11 @@ if __name__ == "__main__":
                 # write status if ~60s have elapsed
                 current_time = int(datetime.datetime.utcnow().strftime("%s"))
                 if current_time - last_time >= 60:
-                    updateVitals(db_status, dbname, numPeople, len(interestingPeople))
+                    updateVitals(db_status, dbname, numPeople, len(interestingPeople), uid)
                 # update last_time if ~3600s have elapsed (rate limit)
                 if current_time - last_time >= refresh_time:
                     last_time = int(datetime.datetime.utcnow().strftime("%s"))
-            updateVitals(db_status, dbname, numPeople, len(interestingPeople))
+            updateVitals(db_status, dbname, numPeople, len(interestingPeople), None)
         except KeyError as e:
             print "%s" % e
             continue
