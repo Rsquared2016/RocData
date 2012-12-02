@@ -92,6 +92,7 @@ def updateVitals(db, name, numPeople, numInteresting, currentUser):
         db.save(status)
     except (socket.error, couchdb.http.ServerError) as e:
         print "Couldn't write status to server: %s" % e
+        sys.stdout.flush()
         sys.exit()
 
 """ utility function for streaming -> search """
@@ -250,4 +251,5 @@ if __name__ == "__main__":
         except Exception as e:
             print "Uh oh, something bad happened..."
             traceback.print_exc()
+            sys.stdout.flush()
             sys.exit()

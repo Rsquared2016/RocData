@@ -69,6 +69,7 @@ def signal_handler(signal, frame):
     pickle.dump(health_score_table, pfile)
     pfile.close()
     print "since: %s, num_tweets: %s, num_tweets_classified: %s" % (since, numTweets, numTweetsClassified)
+    sys.stdout.flush()
     sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
 
