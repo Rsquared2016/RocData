@@ -1,5 +1,6 @@
 
 from twython import Twython
+from extract_features import *
 import urllib2
 import time
 import json
@@ -53,6 +54,8 @@ def updateVitals(db):
         'started_at': startTime,
         'last_update': str(datetime.datetime.utcnow()),
         'pause_time': pauseTime,
+        'WORDS_file': words_file,
+        'SVM_file': svm_file,
         'db_name': dbName,
         'geo_or_all': geoOrAll }
     try:
@@ -112,6 +115,8 @@ def signal_handler(signal, frame):
         print 'Terminating, flushing file %s' % fileName
         log.close()
         print "Tweets logged: %d" % numTweets
+        updateVitals(db_status)
+        sys.stdout.flush()
         sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
 
@@ -135,6 +140,8 @@ begin = int(sys.argv[1])
 end = int(sys.argv[2])
 pauseTime = float(sys.argv[3]) # minutes
 geoOrAll = sys.argv[4].strip().lower()
+words_file = sys.argv[5]
+svm_file = sys.argv[6]
 print 'Collecting airports %d through %d' % (begin, end)
 
 ip_addr = urllib2.urlopen("http://automation.whatismyip.com/n09230945.asp").read()
@@ -142,6 +149,10 @@ instance_id = '%s (%s) @ %s' % (dbName, geoOrAll, ip_addr)
 
 """ Instantiate Twython with no Authentication """
 twitter = Twython()
+
+""" load up SVM stuff """
+WORDStoID = readUniverseOfWords(words_file)
+model = loadSVM(svm_file)
 
 """ instantiate couchdb connections """
 couch = couchdb.Server('http://dev.fount.in:5984')
@@ -215,6 +226,7 @@ while True:
             tweet['airport'] = airport.code
             # save origin!
             tweet['origin'] = 'search'
+            tweet['health'] = classifyTweetPython(tweet['text'], p, WORDStoID, model)
 
             # persist tweets in database
             if geoOrAll == 'all' or tweet['geo'] != None:

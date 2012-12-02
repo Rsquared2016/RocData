@@ -1,5 +1,6 @@
 
 from twython import Twython
+from extract_features import *
 import urllib2
 import time
 import json
@@ -83,6 +84,8 @@ def updateVitals(db, name, numPeople, numInteresting, currentUser):
             'current_iteration': currentIteration,
             'last_update': str(datetime.datetime.utcnow()),
             'pause_time': pause_time,
+            'WORDS_file': words_file,
+            'SVM_file': svm_file,
             'db_name': name }
         if doc != None:
             status['_rev'] = doc['_rev']
@@ -132,9 +135,20 @@ def backoff():
     print "Sleeping for %s seconds..." % refresh_delta
     time.sleep(refresh_delta)
 
+# Catch ctrl+C
+def signal_handler(signal, frame):
+    print "Stopping execution, updating vitals..."
+    updateVitals(db_status)
+    print "num_tweets: %s, last_id: %s" % (numTweets, lastId)
+    sys.stdout.flush()
+    sys.exit(0)
+signal.signal(signal.SIGINT, signal_handler)
+
 """ initialize cmdline args and other parameters """
 pause_time = float(sys.argv[1])
 refresh_time = int(sys.argv[2])
+words_file = sys.argv[3]
+svm_file = sys.argv[4]
 last_time = int(datetime.datetime.utcnow().strftime("%s"))
 dbname = 'airport_tweets'
 numTweets = 0
@@ -158,6 +172,10 @@ twitter = Twython(twitter_token = consumer_key,
     twitter_secret = consumer_secret,
     oauth_token = access_token,
     oauth_token_secret = access_secret)
+
+""" load up SVM stuff """
+WORDStoID = readUniverseOfWords(words_file)
+model = loadSVM(svm_file)
 
 """ initialize CouchDB stuff """
 couch = couchdb.Server('http://dev.fount.in:5984')
@@ -217,6 +235,8 @@ if __name__ == "__main__":
                     # prep data slightly
                     tweet = rest2search(tweet)
                     tweet['text'] = re.sub(pNewLine, ' ', tweet['text']).encode("utf-8")
+                    # classify the health
+                    tweet['health'] = classifyTweetPython(tweet['text'], p, WORDStoID, model)
                     print "[%s]: says %s" % (uid, tweet['text'])
                     # Extract GPS: try 'geo' tag, fallback to 'location' tag
                     if not('geo' in tweet) and tweet['location'] != None:

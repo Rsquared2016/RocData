@@ -44,12 +44,13 @@ def updateVitals(db):
         '_id': instance_id,
         'started_at': start_time,
         'last_update': str(datetime.datetime.utcnow()),
+        'last_tweet': currentId,
         'num_tweets': numTweets,
         'num_tweets_classified': numTweetsClassified,
         'WORDS_file': words_file,
+        'SVM_file': svm_file,
         'db_name': dbname,
-        'since': since,
-        'SVM_file': svm_file }
+        'since': since }
     try:
         doc = db[status['_id']]
         status['_rev'] = doc['_rev']
@@ -65,25 +66,19 @@ def updateVitals(db):
 def signal_handler(signal, frame):
     print "Stopping execution, dumping table, updating vitals..."
     updateVitals(db_status)
-    pfile = open(pickle_file, 'a+')
-    pickle.dump(health_score_table, pfile)
-    pfile.close()
     print "since: %s, num_tweets: %s, num_tweets_classified: %s" % (since, numTweets, numTweetsClassified)
     sys.stdout.flush()
     sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
 
 """ initialize cmdline args and other parameters """
-pickle_file = sys.argv[1]
-words_file = sys.argv[2]
-svm_file = sys.argv[3]
+words_file = sys.argv[1]
+svm_file = sys.argv[2]
 last_time = int(datetime.datetime.utcnow().strftime("%s"))
 dbname = 'classify_airports'
 numTweets = 0
 numTweetsClassified = 0
 currentId = None
-since = 1
-health_score_table = {}
 ip_addr = urllib2.urlopen("http://automation.whatismyip.com/n09230945.asp").read()
 instance_id = '%s (%s) @ %s' % (dbname, "N/A", ip_addr)
 start_time = str(datetime.datetime.utcnow())
@@ -95,56 +90,24 @@ p = re.compile('^#*[a-z]+\'*[a-z]*$')
 WORDStoID = readUniverseOfWords(words_file)
 model = loadSVM(svm_file)
 
-""" load up pickle stuff """
-pfile = open(pickle_file, 'a+')
-try:
-    for tweet, score in pickle.load(pfile).iteritems():
-        health_score_table[tweet] = score
-except EOFError:
-    log("%s empty, continuing..." % pickle_file)
-pfile.close()
-
 """ couchdb stuff """
 couch = couchdb.Server('http://dev.fount.in:5984')
 couch.resource.credentials = ('admin', 'admin')
 db_status = openOrCreateDb(couch, 'demon_status')
 db_airports = openOrCreateDb(couch, 'airport_tweets')
-# try to grab the last update seq so we don't waste time reclassifying
-status_doc = db_status.get(instance_id)
-if status_doc != None:
-    if 'since' in status_doc:
-        since = status_doc['since']
-    if 'num_tweets' in status_doc:
-        numTweets = status_doc['num_tweets']
-    if 'num_tweets_classified' in status_doc:
-        numTweetsClassified = status_doc['num_tweets_classified']
 updateVitals(db_status)
-print "since: %s, num_tweets: %s, num_tweets_classified: %s" % (since, numTweets, numTweetsClassified)
+print "last_tweet: %s, num_tweets: %s, num_tweets_classified: %s" % (currentId, numTweets, numTweetsClassified)
 
 if __name__ == "__main__":
     """ main program loop """
-    while True:
-        changes = db_airports.changes(feed = "longpoll", since = since, limit = 50)
-        since = changes['last_seq']
-        for change in changes['results']:
-            if change['id'].find('_design') != -1:
-                log("skipping over %s..." % tweet['_id'])
-                continue
-            tweet = None
-            try:
-                tweet = db_airports[change['id']]
-            except couchdb.http.ResourceNotFound:
-                log("could not load doc %s from database 'airport_tweets'." % change['id'])
-                continue
-            numTweets += 1
-            if not (tweet['_id'] in health_score_table):
-                health_score_table[tweet['_id']] = classifyTweetPython(tweet['text'], p, WORDStoID, model)
-                log("classified tweet %s: %s" % (tweet['_id'], health_score_table[tweet['_id']]))
-                numTweetsClassified += 1
-            else:
-                log("%s already classified: %s" % (tweet['_id'], health_score_table[tweet['_id']]))
-            if numTweetsClassified % 50 == 0:
-                updateVitals(db_status)
-        pfile = open(pickle_file, 'a+')
-        pickle.dump(health_score_table, pfile)
-        pfile.close()
+    for row in db_airports.view('Tweet/no_health', include_docs = True):
+        currentId = row.key
+        tweet = row.doc
+        numTweets += 1
+        tweet['health'] = classifyTweetPython(tweet['text'], p, WORDStoID, model)
+        log("classified tweet %s: %s" % (tweet['_id'], tweet['health']))
+        numTweetsClassified += 1
+        saveObjectToCouch(db_airports, tweet)
+        if numTweetsClassified % 50 == 0:
+            updateVitals(db_status)
+    updateVitals(db_status)
