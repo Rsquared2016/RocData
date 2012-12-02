@@ -135,6 +135,7 @@ numSuccessfulQueries = 0
 waitTime = 5 # minutes
 rexLatLon = re.compile(r'(?P<lat>[-]*[0-9]+\.[0-9]+)[^0-9-]+(?P<lon>[-]*[0-9]+\.[0-9]+)')
 pNewLine = re.compile('[\r\n]+')
+p = re.compile('^#*[a-z]+\'*[a-z]*$')
 
 begin = int(sys.argv[1])
 end = int(sys.argv[2])

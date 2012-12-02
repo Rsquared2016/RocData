@@ -162,6 +162,7 @@ ip_addr = urllib2.urlopen("http://automation.whatismyip.com/n09230945.asp").read
 start_time = str(datetime.datetime.utcnow())
 rexLatLon = re.compile(r'(?P<lat>[-]*[0-9]+\.[0-9]+)[^0-9-]+(?P<lon>[-]*[0-9]+\.[0-9]+)')
 pNewLine = re.compile('[\r\n]+')
+p = re.compile('^#*[a-z]+\'*[a-z]*$')
 
 """ initialize Twython with Sean Buckets credentials """
 consumer_key = 'dBed6SmjIPIGcdnkMI03nw'
