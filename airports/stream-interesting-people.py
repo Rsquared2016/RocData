@@ -69,11 +69,10 @@ class DbManager:
             print('Database instance for "%s" has not been opened or created.' % self.name)
             return False
 
-@atexit.register
 def emailAlert():
     SUBJECT = "[EXITED] %s" % instance_id
     TO = "sean.brennan@fount.in"
-    FROM = "the.demons@fount.in"
+    FROM = "demon@fount.in"
     text = "This instance [%s] has exited for some reason, please check its log." % instance_id
     BODY = string.join((
         "From: %s" % FROM,
@@ -86,7 +85,6 @@ def emailAlert():
     server.sendmail(FROM, [TO], BODY)
     server.quit()
 
-@atexit.register
 def printException():
     exc_type, exc_value, exc_traceback = sys.exc_info()
     print "*** print_tb:"
@@ -313,6 +311,7 @@ if __name__ == "__main__":
             continue
         except Exception as e:
             print "Uh oh, something bad happened..."
+            emailAlert()
             printException()
             sys.stdout.flush()
             sys.exit()

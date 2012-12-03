@@ -71,11 +71,10 @@ def updateVitals(db):
         time.sleep(60)
         pass
 
-@atexit.register
 def emailAlert():
     SUBJECT = "[EXITED] %s" % instance_id
     TO = "sean.brennan@fount.in"
-    FROM = "the.demons@fount.in"
+    FROM = "demon@fount.in"
     text = "This instance [%s] has exited for some reason, please check its log." % instance_id
     BODY = string.join((
         "From: %s" % FROM,
@@ -88,7 +87,6 @@ def emailAlert():
     server.sendmail(FROM, [TO], BODY)
     server.quit()
 
-@atexit.register
 def printException():
     exc_type, exc_value, exc_traceback = sys.exc_info()
     print "*** print_tb:"
@@ -201,6 +199,7 @@ while True:
         except: # catch all problems
             print 'Error caught, continuing after %d seconds' % (waitTime*60)
             print i, a
+            emailAlert()
             printException()
             time.sleep(waitTime)
             twitter = Twython()
