@@ -12,6 +12,7 @@ import couchdb
 import datetime
 import re
 import atexit
+import smtplib
 
 """
     Overview:

@@ -12,6 +12,7 @@ import couchdb
 import datetime
 import re
 import atexit
+import smtplib
 
 class Airport:
     def __init__(self, name, code, lat, lon):
