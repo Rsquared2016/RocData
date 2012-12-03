@@ -49,8 +49,7 @@ def updateVitals(db):
         'num_tweets_classified': numTweetsClassified,
         'WORDS_file': words_file,
         'SVM_file': svm_file,
-        'db_name': dbname,
-        'since': since }
+        'db_name': dbname }
     try:
         doc = db[status['_id']]
         status['_rev'] = doc['_rev']
@@ -66,7 +65,7 @@ def updateVitals(db):
 def signal_handler(signal, frame):
     print "Stopping execution, dumping table, updating vitals..."
     updateVitals(db_status)
-    print "since: %s, num_tweets: %s, num_tweets_classified: %s" % (since, numTweets, numTweetsClassified)
+    print "since: %s, num_tweets: %s, num_tweets_classified: %s" % (lastId, numTweets, numTweetsClassified)
     sys.stdout.flush()
     sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
@@ -97,10 +96,16 @@ db_status = openOrCreateDb(couch, 'demon_status')
 db_airports = openOrCreateDb(couch, 'airport_tweets')
 updateVitals(db_status)
 print "last_tweet: %s, num_tweets: %s, num_tweets_classified: %s" % (currentId, numTweets, numTweetsClassified)
-
+# STRICTLY TEMPORARY: these are simply for testing purposes, don't use them normally
+no_health_map = '''function(doc) {
+    if(!doc.health) {
+        emit(doc.id_str, doc.text);
+    }
+}'''
 if __name__ == "__main__":
     """ main program loop """
-    for row in db_airports.view('Tweet/no_health', include_docs = True):
+    #for row in db_airports.view('Tweet/no_health', include_docs = True):
+    for row in db_airports.query(map_fun = no_health_map, include_docs = True):
         currentId = row.key
         tweet = row.doc
         numTweets += 1

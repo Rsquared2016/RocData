@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 import couchdb
 import csv
-import datetime
+from datetime import datetime
 import re
 
 """ init cmdline args and whatnot """
@@ -30,7 +30,7 @@ db_airports = couch['airport_tweets']
 with open('airport-to-city.txt', 'r') as rmap_file:
     line = rmap_file.readline()
     while line != "":
-        code, region = line[0:3], re.sub(r'[\"]', r'', line[4:])
+        code, region = line[0:3], re.sub(r'[\"]', r'', line[4:]).strip()
         region_map[code] = region
         gft_bins[code] = []
         couch_bins[code] = []
@@ -50,18 +50,42 @@ with open('flu-trends.txt') as gft_file:
             except ValueError:
                 pass
 
+print "gft_bins: %s" % gft_bins
+
 """ retrieve stats from couch db """
-results = db_airports.view('Tweet/by_airport_day', reduce = True, group = True,
-    startkey = (airport, start.year, start.month, start.day),
-    endkey = (airport, (), (), ()))
+# STRICTLY TEMPORARY: these are simply for testing purposes, don't use them normally
+by_airport_day_map = '''function(doc) {
+    if(doc.health && doc.health >= 0.8 && doc.airport) {
+        var date = new Date(doc.created_at);
+        emit([doc.airport, date.getUTCFullYear(), date.getUTCMonth() + 1, date.getUTCDate()], 1);
+    }
+}'''
+by_airport_day_reduce = '''function(key, values, rereduce) {
+    return sum(values);
+}'''
+finish = datetime.utcnow()
+start_key = [airport, start.year, start.month, start.day]
+end_key = [airport, finish.year, finish.month, finish.day]
+print "startkey: %s" % (start_key,)
+print "endkey: %s" % (end_key,)
+results = db_airports.query(
+    map_fun = by_airport_day_map,
+    reduce_fun = by_airport_day_reduce,
+    reduce = True,
+    group = True,
+    startkey = start_key,
+    endkey = end_key)
 for row in results:
+    print "%s: %s" % (row.key, row.value)
     couch_bins[airport].append(row.value)
+
+print "couch_bins: %s" % couch_bins
 
 """ create histogram buckets for each dataset, then pdf """
 figure = plt.figure()
 axes = figure.add_subplot(111)
-gft_hist, gft_edges = np.histogram(gft_bins[airport], len(gft_bins[airport]))
-couch_hist, couch_edges = np.histogram(couch_bins[airport], len(couch_bins[airport]))
+gft_hist, gft_edges = np.histogram(gft_bins[airport], bins = len(gft_bins[airport]))
+couch_hist, couch_edges = np.histogram(couch_bins[airport], bins = len(couch_bins[airport]))
 # use bin centers rather than bin edges
 gft_center = 0.5 * (gft_edges[1:] + gft_edges[:-1])
 couch_center = 0.5 * (couch_edges[1:] + couch_edges[:-1])
@@ -75,4 +99,4 @@ axes.set_xlabel('Time')
 axes.set_ylabel('# of Sick Individuals')
 axes.grid(True)
 
-plt.show()
+plt.savefig("figures/%s.svg" % airport,  dpi=200, bbox_inches='tight', pad_inches=0, transparent=False)
