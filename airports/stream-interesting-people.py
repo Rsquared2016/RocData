@@ -11,6 +11,7 @@ import traceback
 import couchdb
 import datetime
 import re
+import atexit
 
 """
     Overview:
@@ -66,6 +67,46 @@ class DbManager:
         except AttributeError:
             print('Database instance for "%s" has not been opened or created.' % self.name)
             return False
+
+@atexit.register
+def emailAlert():
+    SUBJECT = "[EXITED] %s" % instance_id
+    TO = "sean.brennan@fount.in"
+    FROM = "the.demons@fount.in"
+    text = "This instance [%s] has exited for some reason, please check its log." % instance_id
+    BODY = string.join((
+        "From: %s" % FROM,
+        "To: %s" % TO,
+        "Subject: %s" % SUBJECT ,
+        "",
+        text
+    ), "\r\n")
+    server = smtplib.SMTP('localhost')
+    server.sendmail(FROM, [TO], BODY)
+    server.quit()
+
+@atexit.register
+def printException():
+    exc_type, exc_value, exc_traceback = sys.exc_info()
+    print "*** print_tb:"
+    traceback.print_tb(exc_traceback, limit=1, file=sys.stdout)
+    print "*** print_exception:"
+    traceback.print_exception(exc_type, exc_value, exc_traceback,
+                              limit=2, file=sys.stdout)
+    print "*** print_exc:"
+    traceback.print_exc()
+    print "*** format_exc, first and last line:"
+    formatted_lines = traceback.format_exc().splitlines()
+    print formatted_lines[0]
+    print formatted_lines[-1]
+    print "*** format_exception:"
+    print repr(traceback.format_exception(exc_type, exc_value,
+                                          exc_traceback))
+    print "*** extract_tb:"
+    print repr(traceback.extract_tb(exc_traceback))
+    print "*** format_tb:"
+    print repr(traceback.format_tb(exc_traceback))
+    print "*** tb_lineno:", exc_traceback.tb_lineno
 
 """ function for writing status """
 def updateVitals(db, name, numPeople, numInteresting, currentUser):
@@ -271,6 +312,6 @@ if __name__ == "__main__":
             continue
         except Exception as e:
             print "Uh oh, something bad happened..."
-            traceback.print_exc()
+            printException()
             sys.stdout.flush()
             sys.exit()
