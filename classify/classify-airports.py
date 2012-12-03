@@ -25,9 +25,6 @@ def openOrCreateDb(server, name):
         return db
 
 def saveObjectToCouch(db, o):
-    print o
-    return
-    o['_id'] = o['id_str']
     try:
         db.save(o, batch='ok')
         return True
@@ -43,7 +40,7 @@ def saveObjectToCouch(db, o):
 def signal_handler(signal, frame):
     print "Stopping execution, dumping table, updating vitals..."
     updateVitals(db_status)
-    print "since: %s, num_tweets: %s, num_tweets_classified: %s" % (currentIds, numTweets, numTweetsClassified)
+    print "since: %s, num_tweets: %s, num_tweets_classified: %s" % (currentId, numTweets, numTweetsClassified)
     sys.stdout.flush()
     sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
