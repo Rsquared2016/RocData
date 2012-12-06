@@ -12,8 +12,12 @@ import matplotlib.mlab as mlab
 import matplotlib.dates as mdates
 import couchdb
 import csv
-from datetime import datetime
+from datetime import datetime, timedelta
 import re
+
+def offset_to_key(origin, day_diff):
+    d = origin + timedelta(days = day_diff)
+    return [airport, d.year, d.month, d.day]
 
 def key_to_datetime(key):
     return datetime(*key[1:])
@@ -27,6 +31,15 @@ start, finish = None, None
 start_str = sys.argv[2] if len(sys.argv) >= 3 else "2012-11-11"
 finish_str = sys.argv[3] if len(sys.argv) >= 4 else datetime.utcnow().strftime("%Y-%m-%d")
 start, finish = datetime.strptime(start_str, "%Y-%m-%d"), datetime.strptime(finish_str, "%Y-%m-%d")
+# catch input errors:
+#   - quit if start date is not a sunday (week start)
+#   - quit if finish comes before start
+if start.weekday() != 6:
+    print "ERROR: start date must be on a Sunday. (google flu trends limitation)"
+    sys.exit(0)
+if start >= finish:
+    print "ERROR: start date must come before end date."
+    sys.exit(0)
 region_map = {}
 gft_keys,   gft_values   = {}, {}
 couch_keys, couch_values = {}, {}
@@ -44,8 +57,8 @@ with open('airport-to-city.txt', 'r') as rmap_file:
         region_map[code] = region
         gft_keys[code] = []
         gft_values[code] = []
-        couch_keys[code] = []
-        couch_values[code] = []
+        couch_keys[code] = [offset_to_key(start, i * 7) for i in range((finish - start).days / 7 + 1)]
+        couch_values[code] = [0.0 for i in range((finish - start).days / 7 + 1)]
         line = rmap_file.readline()
 
 """ retrieve stats from google flu trends csv """
@@ -78,8 +91,9 @@ results = db_airports.view(
     endkey = end_key)
 for row in results:
     print "%s: %s" % (row.key, row.value)
-    couch_keys[airport].append(row.key)
-    couch_values[airport].append(row.value)
+    result_day = key_to_datetime(row.key)
+    index = (result_day - start).days / 7
+    couch_values[code][index] += float(row.value) / 7
 
 """ create histogram buckets for each dataset, then pdf """
 figure = plt.figure()

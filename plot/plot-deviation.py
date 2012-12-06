@@ -37,6 +37,17 @@ start, finish = None, None
 start_str = sys.argv[2] if len(sys.argv) >= 3 else "2012-11-11"
 finish_str = sys.argv[3] if len(sys.argv) >= 4 else datetime.utcnow().strftime("%Y-%m-%d")
 start, finish = datetime.strptime(start_str, "%Y-%m-%d"), datetime.strptime(finish_str, "%Y-%m-%d")
+# we need to keep track of this so the statistics for the first week of collection aren't skewed
+collect_start = datetime(2012, 11, 17)
+# catch input errors:
+#   - quit if start date is not a sunday (week start)
+#   - quit if finish comes before start
+if start.weekday() != 6:
+    print "ERROR: start date must be on a Sunday. (google flu trends limitation)"
+    sys.exit(0)
+if start >= finish:
+    print "ERROR: start date must come before end date."
+    sys.exit(0)
 region_map = {}
 gft_keys,   gft_values,   gft_sum,   gft_count   = {}, {}, 0, 0
 couch_keys, couch_values, couch_sum, couch_count = {}, {}, 0, 0
@@ -54,8 +65,8 @@ with open('airport-to-city.txt', 'r') as rmap_file:
         region_map[code] = region
         gft_keys[code] = []
         gft_values[code] = []
-        couch_keys[code] = [offset_to_key(start, i) for i in range((finish - start).days + 1)]
-        couch_values[code] = [0 for i in range((finish - start).days + 1)]
+        couch_keys[code] = [offset_to_key(start, i * 7) for i in range((finish - start).days / 7 + 1)]
+        couch_values[code] = [0.0 for i in range((finish - start).days / 7 + 1)]
         line = rmap_file.readline()
 
 """ retrieve stats from google flu trends csv """
@@ -90,17 +101,23 @@ results = db_airports.view(
     endkey = end_key)
 for row in results:
     print "%s: %s" % (row.key, row.value)
-    index = (datetime(row.key[1], row.key[2], row.key[3]) - start).days
-    print "(index): %s, (length): %s" % (index, len(couch_values[airport]))
-    couch_keys[airport][index] = row.key
-    couch_values[airport][index] = row.value
+    result_day = key_to_datetime(row.key)
+    index = (result_day - start).days / 7
+    # weight sum properly if this result was between collection start and the next sunday
+    if result_day >= collect_start and result_day < collect_start + timedelta(days = 1):
+        print "next_week: %s" % (collect_start + timedelta(days = 1))
+        couch_values[airport][index] += float(row.value) / 1
+    else:
+        couch_values[airport][index] += float(row.value) / 7
     couch_sum += row.value
-couch_count = (finish - start).days
+# also account for collection start here
+couch_count = (finish - max(start, collect_start)).days + 1
 
 """ create lists for percent deviations """
 gft_avg, couch_avg = float(gft_sum) / gft_count, float(couch_sum) / couch_count
 print "Flu trends... sum: %s, count: %s, average: %s" % (gft_sum, gft_count, gft_avg)
 print "Couch... sum: %s, count: %s, average: %s" % (couch_sum, couch_count, couch_avg)
+print "Couch vals: %s" % couch_values[airport]
 gft_pct = [dev_percent(v, gft_avg) for v in gft_values[airport]]
 couch_pct = [dev_percent(v, couch_avg) for v in couch_values[airport]]
 
@@ -113,10 +130,9 @@ gft_line = axes.plot_date(gft_times, gft_pct, 'r-', linewidth = 1)
 couch_line = axes.plot_date(couch_times, couch_pct, 'b-', linewidth = 1)
 
 """ plot styling """
-axes.xaxis.set_major_locator(mdates.MonthLocator())
-axes.xaxis.set_major_formatter(mdates.DateFormatter('%B %Y'))
+axes.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday = 6))
+axes.xaxis.set_major_formatter(mdates.DateFormatter('%B %d'))
 axes.xaxis.set_minor_locator(mdates.DayLocator())
-axes.xaxis.set_major_formatter(mdates.DateFormatter('%a %d'))
 axes.set_xlabel('Day')
 axes.set_ylabel('% Deviation from Average')
 axes.set_xlim(start, finish)
