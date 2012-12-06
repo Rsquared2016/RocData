@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<<<<<<< HEAD
 <!-- Created with matplotlib (http://matplotlib.org/) -->
+=======
+<!-- Created with matplotlib (http://matplotlib.sourceforge.net/) -->
+>>>>>>> ignore update
 <svg height="374pt" version="1.1" viewBox="0 0 485 374" width="485pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
  <defs>
   <style type="text/css">
@@ -31,6 +35,7 @@ z
    <g id="line2d_1">
     <path clip-path="url(#pae2ff66d2a)" d="
 M39.5175 90.3472
+<<<<<<< HEAD
 L169.717 80.6985
 L299.918 -5.68434e-14" style="fill:none;stroke:#ff0000;"/>
    </g>
@@ -39,13 +44,28 @@ L299.918 -5.68434e-14" style="fill:none;stroke:#ff0000;"/>
 M169.717 344.723
 L374.317 344.723
 L467.317 344.723" style="fill:none;stroke:#0000ff;"/>
+=======
+L175.378 80.6985
+L311.239 -5.68434e-14" style="fill:none;stroke:#ff0000;"/>
+   </g>
+   <g id="line2d_2">
+    <path clip-path="url(#pae2ff66d2a)" d="
+M175.378 344.723
+L388.874 344.723
+L485.918 344.723" style="fill:none;stroke:#0000ff;"/>
+>>>>>>> ignore update
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
      <g id="line2d_3">
       <path clip-path="url(#pae2ff66d2a)" d="
+<<<<<<< HEAD
 M411.518 345.6
 L411.518 -5.68434e-14" style="fill:none;stroke:#000000;stroke-dasharray:1.000000,3.000000;stroke-dashoffset:0.0;stroke-linecap:butt;stroke-width:0.5;"/>
+=======
+M427.691 345.6
+L427.691 -5.68434e-14" style="fill:none;stroke:#000000;stroke-dasharray:1.000000,3.000000;stroke-dashoffset:0.0;stroke-linecap:butt;stroke-width:0.5;"/>
+>>>>>>> ignore update
      </g>
      <g id="line2d_4">
       <defs>
@@ -54,7 +74,11 @@ M0 0
 L0 -4" id="mcb557df647" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;"/>
       </defs>
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="411.5175" xlink:href="#mcb557df647" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="427.691413043" xlink:href="#mcb557df647" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_5">
@@ -64,7 +88,11 @@ M0 0
 L0 4" id="mdad270ee8e" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;"/>
       </defs>
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="411.5175" xlink:href="#mdad270ee8e" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="427.691413043" xlink:href="#mdad270ee8e" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="text_1">
@@ -188,7 +216,11 @@ Q24.2188 56 28.6094 56
 Q40.4844 56 46.3438 49.8438
 Q52.2031 43.7031 52.2031 31.2031" id="BitstreamVeraSans-Roman-61"/>
       </defs>
+<<<<<<< HEAD
       <g transform="translate(392.6915625 358.50625)scale(0.12 -0.12)">
+=======
+      <g transform="translate(408.865475544 358.50625)scale(0.12 -0.12)">
+>>>>>>> ignore update
        <use xlink:href="#BitstreamVeraSans-Roman-53"/>
        <use x="63.4765625" xlink:href="#BitstreamVeraSans-Roman-61"/>
        <use x="124.755859375" xlink:href="#BitstreamVeraSans-Roman-74"/>
@@ -223,270 +255,447 @@ L0 2" id="md27378e979" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.
     <g id="xtick_3">
      <g id="line2d_8">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="58.1174999997" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="58.9261956513" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_9">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="58.1174999997" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="58.9261956513" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_4">
      <g id="line2d_10">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="76.7174999993" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="78.3348913044" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_11">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="76.7174999993" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="78.3348913044" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_5">
      <g id="line2d_12">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="95.317499999" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="97.7435869556" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_13">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="95.317499999" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="97.7435869556" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_6">
      <g id="line2d_14">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="113.9175" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="117.152282609" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_15">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="113.9175" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="117.152282609" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_7">
      <g id="line2d_16">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="132.5175" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="136.56097826" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_17">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="132.5175" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="136.56097826" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_8">
      <g id="line2d_18">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="151.1175" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="155.969673913" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_19">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="151.1175" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="155.969673913" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_9">
      <g id="line2d_20">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="169.717499999" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="175.378369564" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_21">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="169.717499999" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="175.378369564" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_10">
      <g id="line2d_22">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="188.317499999" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="194.787065217" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_23">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="188.317499999" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="194.787065217" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_11">
      <g id="line2d_24">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="206.9175" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="214.195760868" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_25">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="206.9175" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="214.195760868" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_12">
      <g id="line2d_26">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="225.5175" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="233.604456522" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_27">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="225.5175" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="233.604456522" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_13">
      <g id="line2d_28">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="244.1175" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="253.013152173" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_29">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="244.1175" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="253.013152173" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_14">
      <g id="line2d_30">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="262.717499999" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="272.421847826" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_31">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="262.717499999" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="272.421847826" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_15">
      <g id="line2d_32">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="281.317499999" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="291.830543477" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_33">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="281.317499999" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="291.830543477" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_16">
      <g id="line2d_34">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="299.9175" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="311.23923913" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_35">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="299.9175" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="311.23923913" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_17">
      <g id="line2d_36">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="318.5175" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="330.647934783" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_37">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="318.5175" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="330.647934783" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_18">
      <g id="line2d_38">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="337.1175" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="350.056630434" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_39">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="337.1175" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="350.056630434" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_19">
      <g id="line2d_40">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="355.717499999" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="369.465326088" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_41">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="355.717499999" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="369.465326088" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_20">
      <g id="line2d_42">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="374.317499999" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="388.874021739" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_43">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="374.317499999" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="388.874021739" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_21">
      <g id="line2d_44">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="392.9175" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="408.282717392" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_45">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="392.9175" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="408.282717392" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_22">
      <g id="line2d_46">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="411.5175" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="427.691413043" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_47">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="411.5175" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="427.691413043" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_23">
      <g id="line2d_48">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="430.1175" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="447.100108696" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_49">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="430.1175" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="447.100108696" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_24">
      <g id="line2d_50">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="448.717499999" xlink:href="#m6f8f3139b3" y="345.6"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="466.508804347" xlink:href="#m6f8f3139b3" y="345.6"/>
+>>>>>>> ignore update
       </g>
      </g>
      <g id="line2d_51">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="448.717499999" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="466.508804347" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
+>>>>>>> ignore update
       </g>
      </g>
     </g>
     <g id="xtick_25">
      <g id="line2d_52">
       <g>
+<<<<<<< HEAD
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="467.317499999" xlink:href="#m6f8f3139b3" y="345.6"/>
       </g>
      </g>
@@ -503,6 +712,12 @@ L0 2" id="md27378e979" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.
       </g>
      </g>
      <g id="line2d_55">
+=======
+       <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="485.9175" xlink:href="#m6f8f3139b3" y="345.6"/>
+      </g>
+     </g>
+     <g id="line2d_53">
+>>>>>>> ignore update
       <g>
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="485.9175" xlink:href="#md27378e979" y="-5.68434188608e-14"/>
       </g>
@@ -557,12 +772,20 @@ z
    </g>
    <g id="matplotlib.axis_2">
     <g id="ytick_1">
+<<<<<<< HEAD
      <g id="line2d_56">
+=======
+     <g id="line2d_54">
+>>>>>>> ignore update
       <path clip-path="url(#pae2ff66d2a)" d="
 M39.5175 345.6
 L485.917 345.6" style="fill:none;stroke:#000000;stroke-dasharray:1.000000,3.000000;stroke-dashoffset:0.0;stroke-linecap:butt;stroke-width:0.5;"/>
      </g>
+<<<<<<< HEAD
      <g id="line2d_57">
+=======
+     <g id="line2d_55">
+>>>>>>> ignore update
       <defs>
        <path d="
 M0 0
@@ -572,7 +795,11 @@ L4 0" id="mc8fcea1516" style="stroke:#000000;stroke-linecap:butt;stroke-width:0.
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="39.5175" xlink:href="#mc8fcea1516" y="345.6"/>
       </g>
      </g>
+<<<<<<< HEAD
      <g id="line2d_58">
+=======
+     <g id="line2d_56">
+>>>>>>> ignore update
       <defs>
        <path d="
 M0 0
@@ -590,17 +817,29 @@ L-4 0" id="m0d5b0a6425" style="stroke:#000000;stroke-linecap:butt;stroke-width:0
      </g>
     </g>
     <g id="ytick_2">
+<<<<<<< HEAD
      <g id="line2d_59">
+=======
+     <g id="line2d_57">
+>>>>>>> ignore update
       <path clip-path="url(#pae2ff66d2a)" d="
 M39.5175 301.742
 L485.917 301.742" style="fill:none;stroke:#000000;stroke-dasharray:1.000000,3.000000;stroke-dashoffset:0.0;stroke-linecap:butt;stroke-width:0.5;"/>
      </g>
+<<<<<<< HEAD
      <g id="line2d_60">
+=======
+     <g id="line2d_58">
+>>>>>>> ignore update
       <g>
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="39.5175" xlink:href="#mc8fcea1516" y="301.74213198"/>
       </g>
      </g>
+<<<<<<< HEAD
      <g id="line2d_61">
+=======
+     <g id="line2d_59">
+>>>>>>> ignore update
       <g>
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="485.9175" xlink:href="#m0d5b0a6425" y="301.74213198"/>
       </g>
@@ -641,17 +880,29 @@ z
      </g>
     </g>
     <g id="ytick_3">
+<<<<<<< HEAD
      <g id="line2d_62">
+=======
+     <g id="line2d_60">
+>>>>>>> ignore update
       <path clip-path="url(#pae2ff66d2a)" d="
 M39.5175 257.884
 L485.917 257.884" style="fill:none;stroke:#000000;stroke-dasharray:1.000000,3.000000;stroke-dashoffset:0.0;stroke-linecap:butt;stroke-width:0.5;"/>
      </g>
+<<<<<<< HEAD
      <g id="line2d_63">
+=======
+     <g id="line2d_61">
+>>>>>>> ignore update
       <g>
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="39.5175" xlink:href="#mc8fcea1516" y="257.884263959"/>
       </g>
      </g>
+<<<<<<< HEAD
      <g id="line2d_64">
+=======
+     <g id="line2d_62">
+>>>>>>> ignore update
       <g>
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="485.9175" xlink:href="#m0d5b0a6425" y="257.884263959"/>
       </g>
@@ -666,17 +917,29 @@ L485.917 257.884" style="fill:none;stroke:#000000;stroke-dasharray:1.000000,3.00
      </g>
     </g>
     <g id="ytick_4">
+<<<<<<< HEAD
      <g id="line2d_65">
+=======
+     <g id="line2d_63">
+>>>>>>> ignore update
       <path clip-path="url(#pae2ff66d2a)" d="
 M39.5175 214.026
 L485.917 214.026" style="fill:none;stroke:#000000;stroke-dasharray:1.000000,3.000000;stroke-dashoffset:0.0;stroke-linecap:butt;stroke-width:0.5;"/>
      </g>
+<<<<<<< HEAD
      <g id="line2d_66">
+=======
+     <g id="line2d_64">
+>>>>>>> ignore update
       <g>
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="39.5175" xlink:href="#mc8fcea1516" y="214.026395939"/>
       </g>
      </g>
+<<<<<<< HEAD
      <g id="line2d_67">
+=======
+     <g id="line2d_65">
+>>>>>>> ignore update
       <g>
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="485.9175" xlink:href="#m0d5b0a6425" y="214.026395939"/>
       </g>
@@ -691,17 +954,29 @@ L485.917 214.026" style="fill:none;stroke:#000000;stroke-dasharray:1.000000,3.00
      </g>
     </g>
     <g id="ytick_5">
+<<<<<<< HEAD
      <g id="line2d_68">
+=======
+     <g id="line2d_66">
+>>>>>>> ignore update
       <path clip-path="url(#pae2ff66d2a)" d="
 M39.5175 170.169
 L485.917 170.169" style="fill:none;stroke:#000000;stroke-dasharray:1.000000,3.000000;stroke-dashoffset:0.0;stroke-linecap:butt;stroke-width:0.5;"/>
      </g>
+<<<<<<< HEAD
      <g id="line2d_69">
+=======
+     <g id="line2d_67">
+>>>>>>> ignore update
       <g>
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="39.5175" xlink:href="#mc8fcea1516" y="170.168527919"/>
       </g>
      </g>
+<<<<<<< HEAD
      <g id="line2d_70">
+=======
+     <g id="line2d_68">
+>>>>>>> ignore update
       <g>
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="485.9175" xlink:href="#m0d5b0a6425" y="170.168527919"/>
       </g>
@@ -741,17 +1016,29 @@ Q31.1094 20.4531 19.1875 8.29688" id="BitstreamVeraSans-Roman-32"/>
      </g>
     </g>
     <g id="ytick_6">
+<<<<<<< HEAD
      <g id="line2d_71">
+=======
+     <g id="line2d_69">
+>>>>>>> ignore update
       <path clip-path="url(#pae2ff66d2a)" d="
 M39.5175 126.311
 L485.917 126.311" style="fill:none;stroke:#000000;stroke-dasharray:1.000000,3.000000;stroke-dashoffset:0.0;stroke-linecap:butt;stroke-width:0.5;"/>
      </g>
+<<<<<<< HEAD
      <g id="line2d_72">
+=======
+     <g id="line2d_70">
+>>>>>>> ignore update
       <g>
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="39.5175" xlink:href="#mc8fcea1516" y="126.310659898"/>
       </g>
      </g>
+<<<<<<< HEAD
      <g id="line2d_73">
+=======
+     <g id="line2d_71">
+>>>>>>> ignore update
       <g>
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="485.9175" xlink:href="#m0d5b0a6425" y="126.310659898"/>
       </g>
@@ -766,17 +1053,29 @@ L485.917 126.311" style="fill:none;stroke:#000000;stroke-dasharray:1.000000,3.00
      </g>
     </g>
     <g id="ytick_7">
+<<<<<<< HEAD
      <g id="line2d_74">
+=======
+     <g id="line2d_72">
+>>>>>>> ignore update
       <path clip-path="url(#pae2ff66d2a)" d="
 M39.5175 82.4528
 L485.917 82.4528" style="fill:none;stroke:#000000;stroke-dasharray:1.000000,3.000000;stroke-dashoffset:0.0;stroke-linecap:butt;stroke-width:0.5;"/>
      </g>
+<<<<<<< HEAD
      <g id="line2d_75">
+=======
+     <g id="line2d_73">
+>>>>>>> ignore update
       <g>
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="39.5175" xlink:href="#mc8fcea1516" y="82.4527918782"/>
       </g>
      </g>
+<<<<<<< HEAD
      <g id="line2d_76">
+=======
+     <g id="line2d_74">
+>>>>>>> ignore update
       <g>
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="485.9175" xlink:href="#m0d5b0a6425" y="82.4527918782"/>
       </g>
@@ -824,17 +1123,29 @@ Q46.9688 40.9219 40.5781 39.3125" id="BitstreamVeraSans-Roman-33"/>
      </g>
     </g>
     <g id="ytick_8">
+<<<<<<< HEAD
      <g id="line2d_77">
+=======
+     <g id="line2d_75">
+>>>>>>> ignore update
       <path clip-path="url(#pae2ff66d2a)" d="
 M39.5175 38.5949
 L485.917 38.5949" style="fill:none;stroke:#000000;stroke-dasharray:1.000000,3.000000;stroke-dashoffset:0.0;stroke-linecap:butt;stroke-width:0.5;"/>
      </g>
+<<<<<<< HEAD
      <g id="line2d_78">
+=======
+     <g id="line2d_76">
+>>>>>>> ignore update
       <g>
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="39.5175" xlink:href="#mc8fcea1516" y="38.5949238579"/>
       </g>
      </g>
+<<<<<<< HEAD
      <g id="line2d_79">
+=======
+     <g id="line2d_77">
+>>>>>>> ignore update
       <g>
        <use style="stroke:#000000;stroke-linecap:butt;stroke-width:0.5;" x="485.9175" xlink:href="#m0d5b0a6425" y="38.5949238579"/>
       </g>
