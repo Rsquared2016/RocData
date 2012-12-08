@@ -3,16 +3,15 @@
 """
 
 import couchdb
-import json
 from datetime import datetime, timedelta
 import sys
 
 def key_to_datetime(key):
-    return datetime(key[1:])
+    return datetime(key[1], key[2], key[3])
 
 """ grab cmdline args and initialize parameters """
 file_name = sys.argv[1]
-health_split = float(sys.argv[2]) if len(sys.argv) >= 2 else 0.8
+health_split = float(sys.argv[2]) if len(sys.argv) >= 3 else 0.8
 time_slices = {}
 fill_slices = {}
 users = []
@@ -24,8 +23,9 @@ db_airports = couch['airport_tweets']
 
 """ grab all rows """
 results = db_airports.view("Tweet/max_health_score", reduce = True, group = True)
+print "Got %s rows." % len(results)
 for row in results:
-    user, date, score = row.key[0], key_to_datetime(key), row.value
+    user, date, score = row.key[0], key_to_datetime(row.key), row.value
     if not user in users:
         users.append(user)
     if not date in time_slices:
@@ -50,13 +50,13 @@ users.sort()
 print "Writing health observations for all users over every day..."
 """ dump observations to specified file """
 with open(file_name, 'w+') as obs_file:
-    output = [("%s\n" % users.join(" "))]
+    output = ["%s\n" % " ".join(users)]
     observations = []
     for date, pairs in time_slices.items():
         if len(pairs) != len(users):
             print "Seems we're missing user observations for %s..." % date
         states = [p[1] for p in pairs]
-        observations.append(states.join(" "))
+        observations.append(" ".join(states))
     output.extend(observations)
     obs_file.writelines(output)
 print "Finished writing data to %s" % file_name
