@@ -20,7 +20,7 @@ def key_to_datetime(key):
 
 def offset_to_key(origin, day_diff):
     d = origin + timedelta(days = day_diff)
-    return [airport, d.year, d.month, d.day]
+    return [area, d.year, d.month, d.day]
 
 def min_union(a, b):
     return min(set(a) | set(b))
@@ -62,7 +62,7 @@ couch.resource.credentials = ('admin', 'admin')
 db_mobile = couch['m']
 
 """ read in airport -> region mapping """
-for code, region in region_map:
+for (code, region) in region_map.items():
     gft_keys[code] = []
     gft_values[code] = []
     couch_keys[code] = [offset_to_key(start, i * 7) for i in range((finish - start).days / 7 + 1)]
