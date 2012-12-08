@@ -34,7 +34,7 @@ def dev_percent(val, avg):
 """ init cmdline args and whatnot """
 area = sys.argv[1]
 start, finish = None, None
-start_str = sys.argv[2] if len(sys.argv) >= 3 else "2012-10-07"
+start_str = sys.argv[2] if len(sys.argv) >= 3 else "2012-09-23"
 finish_str = sys.argv[3] if len(sys.argv) >= 4 else datetime.utcnow().strftime("%Y-%m-%d")
 start, finish = datetime.strptime(start_str, "%Y-%m-%d"), datetime.strptime(finish_str, "%Y-%m-%d")
 # catch input errors:
@@ -57,7 +57,7 @@ gft_keys,   gft_values,   gft_sum,   gft_count   = {}, {}, 0, 0
 couch_keys, couch_values, couch_sum, couch_count = {}, {}, 0, 0
 
 """ init couchdb stuff """
-couch = couchdb.Server('http://dev.fount.in:5984')
+couch = couchdb.Server('http://fount.in:5984')
 couch.resource.credentials = ('admin', 'admin')
 db_mobile = couch['m']
 
@@ -107,6 +107,11 @@ for row in results:
     couch_sum += row.value
 # also account for collection start here
 couch_count = (finish - start).days + 1
+# trim leading zeros (some cities started collecting later than others)
+while len(couch_values[area]) > 0 and couch_values[area][0] == 0.0:
+    couch_values[area].pop(0)
+    couch_keys[area].pop(0)
+    couch_count -= 1
 
 """ create lists for percent deviations """
 gft_avg, couch_avg = float(gft_sum) / gft_count, float(couch_sum) / couch_count
@@ -126,7 +131,7 @@ couch_line = axes.plot_date(couch_times, couch_pct, 'b-', linewidth = 1)
 
 """ plot styling """
 axes.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday = 6))
-axes.xaxis.set_major_formatter(mdates.DateFormatter('%B %d'))
+axes.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
 axes.xaxis.set_minor_locator(mdates.DayLocator())
 axes.set_xlabel('Day')
 axes.set_ylabel('% Deviation from Average')
