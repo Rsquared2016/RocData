@@ -1,0 +1,109 @@
+===============================
+   P1 partition information: JT_weight = 1.000000
+=== Clique Information ===
+Number of cliques = 1
+== Clique number: 0, root/right-interface clique, root/right-interface clique, leaf
+Clique information: 6 packed bits, 1 unsigned words (0 splits), weight = 1.806180, jt_weight = 1.000000
+9 Nodes: X1(0)[2],X2(0)[2],X3(0)[2],T1(0)[3],T2(0)[3],T3(0)[3],X1(1)[2],X2(1)[2],X3(1)[2]
+9 Assigned: X1(0),X2(0),X3(0),T1(0),T2(0),T3(0),X1(1),X2(1),X3(1)
+9 Assigned Sorted: X1(0)[2],T1(0)[3],X2(0)[2],T2(0)[3],X3(0)[2],T3(0)[3],X1(1)[2],X2(1)[2],X3(1)[2]
+9 Dispositions: 0 0 0 0 0 0 0 0 0
+9 Assigned Prob: X1(0),X2(0),X3(0),T1(0),T2(0),T3(0),X1(1),X2(1),X3(1)
+0 Cum Assigned Prob: 
+0 Union Incomming Seps: 
+0 Unassigned Iterated: 
+0 Cumulative Unassigned: 
+6 Hidden/Hashable: X1(0)[2],X2(0)[2],X3(0)[2],X1(1)[2],X2(1)[2],X3(1)[2]
+0 Clique Neighbors: 
+0 Clique Children: 
+0 Receive Seps: 
+0 incomming VE Separators
+Send Sep: -1
+
+=== Separator Information ===
+Number of separators = 0
+
+
+===============================
+   Co partition information: JT_weight = 1.000000
+=== Clique Information ===
+Number of cliques = 1
+== Clique number: 0, root/right-interface clique, root/right-interface clique, leaf/left-interface clique
+Clique information: 6 packed bits, 1 unsigned words (0 splits), weight = 1.806180, jt_weight = 1.000000
+9 Nodes: X1(1)[2],X2(1)[2],X3(1)[2],T1(1)[3],T2(1)[3],T3(1)[3],X1(2)[2],X2(2)[2],X3(2)[2]
+6 Assigned: T1(1),T2(1),T3(1),X1(2),X2(2),X3(2)
+6 Assigned Sorted: T1(1)[3],T2(1)[3],T3(1)[3],X1(2)[2],X2(2)[2],X3(2)[2]
+6 Dispositions: 0 0 0 0 0 0
+6 Assigned Prob: T1(1),T2(1),T3(1),X1(2),X2(2),X3(2)
+9 Cum Assigned Prob: X1(0),X2(0),X3(0),T1(0),T2(0),T3(0),X1(1),X2(1),X3(1)
+3 Union Incomming Seps: X1(1),X2(1),X3(1)
+0 Unassigned Iterated: 
+0 Cumulative Unassigned: 
+6 Hidden/Hashable: X1(1)[2],X2(1)[2],X3(1)[2],X1(2)[2],X2(2)[2],X3(2)[2]
+0 Clique Neighbors: 
+0 Clique Children: 
+1 Receive Seps: 0,
+0 incomming VE Separators
+Send Sep: -1
+
+=== Separator Information ===
+Number of separators = 1
+== Separator number: 0
+Separator information: 0 acc packed bits (0 words, 0 splits), 3 rem packed bits (1 words, 0 splits)
+3 Nodes: X1(1)[2],X2(1)[2],X3(1)[2]
+0 Acc Inter: 
+0 Hid Acc Inter: 
+3 remainder: X1(1),X2(1),X3(1)
+3 hRemainder: X1(1),X2(1),X3(1)
+
+
+===============================
+   E1 partition information: JT_weight = 1.000000
+=== Clique Information ===
+Number of cliques = 1
+== Clique number: 0, root/right-interface clique, root clique, leaf/left-interface clique
+Clique information: 3 packed bits, 1 unsigned words (0 splits), weight = 0.903090, jt_weight = 1.000000
+6 Nodes: X1(2)[2],X2(2)[2],X3(2)[2],T1(2)[3],T2(2)[3],T3(2)[3]
+3 Assigned: T1(2),T2(2),T3(2)
+3 Assigned Sorted: T1(2)[3],T2(2)[3],T3(2)[3]
+3 Dispositions: 0 0 0
+3 Assigned Prob: T1(2),T2(2),T3(2)
+15 Cum Assigned Prob: X1(0),X2(0),X3(0),T1(0),T2(0),T3(0),X1(1),X2(1),X3(1),T1(1),T2(1),T3(1),X1(2),X2(2),X3(2)
+3 Union Incomming Seps: X1(2),X2(2),X3(2)
+0 Unassigned Iterated: 
+0 Cumulative Unassigned: 
+3 Hidden/Hashable: X1(2)[2],X2(2)[2],X3(2)[2]
+0 Clique Neighbors: 
+0 Clique Children: 
+1 Receive Seps: 0,
+0 incomming VE Separators
+Send Sep: -1
+
+=== Separator Information ===
+Number of separators = 1
+== Separator number: 0
+Separator information: 0 acc packed bits (0 words, 0 splits), 3 rem packed bits (1 words, 0 splits)
+3 Nodes: X1(2)[2],X2(2)[2],X3(2)[2]
+0 Acc Inter: 
+0 Hid Acc Inter: 
+3 remainder: X1(2),X2(2),X3(2)
+3 hRemainder: X1(2),X2(2),X3(2)
+
+
+===============================
+
+===============================
+   P1 message order
+Number of messages: 0
+
+
+===============================
+   Co message order
+Number of messages: 0
+
+
+===============================
+   E1 message order
+Number of messages: 0
+
+

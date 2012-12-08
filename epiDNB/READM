@@ -1,0 +1,9 @@
+Run the bash script run.sh, which calles train_cmd.sh and test_cmd.sh.  The testing and training data is in the subdirectory data, containing {900,1500} training samples and {3000,9000,15000} testing samples.  To run over a specific data set, run:
+
+./train_cmd.sh 1500
+
+to train over 1500 samples, then
+
+./test_cmd.sh 9000
+
+to test over 9000 samples.

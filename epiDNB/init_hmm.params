@@ -1,0 +1,75 @@
+% Sickness model: 
+% X=0 ... person is healthy, X=1 ... person is sick
+% T=0 ... healthy tweet (SVM score below a threshold), T=1 ... sick tweet, T=2 ... no tweet
+
+%dense PMFs
+0
+
+%sparse PMFs
+0
+
+%means
+0
+
+%diagonal covariance matrices
+0
+
+%dlink matrices
+0
+
+%weight matrices
+0
+
+% MDCPTs
+3 %number of DenseCPTs to follow
+
+%GMTK notation is as follows:
+%cpt_index
+%cpt_name
+%number of parents
+%cardinality of parents
+%cardinality of self
+%dense_cpt values
+
+0
+pX
+0
+2
+0.95 0.05
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+1
+pX_given_X
+1
+2
+2
+0.95 0.05
+0.35 0.65
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+2
+pT_given_X
+1
+2
+3
+0.75 0.05 0.2   % Pr(tweet=x | healthy)
+0.1  0.8  0.1   % Pr(tweet=x | sick)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Gaussian Components
+0
+
+% Mixtures of Gaussians
+0
+
+% Gaussian Switching Mixtures of Gaussians
+0
+
+% Logistic-Regression-based Switching Mixutres of Gaussians
+0
+
+% MLP-based Switching Mixtures of Gaussians
+0
+
+
+
