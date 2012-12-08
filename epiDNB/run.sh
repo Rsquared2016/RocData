@@ -1,7 +1,6 @@
 #!/bin/bash
 
-#test data points: 3000,9000,15000
-#train data points: 900,1500
+python generate_obs.py
 
-./train_cmd.sh 1500
-./test_cmd.sh 15000
+./train_cmd.sh data/dbn_train_100.txt 
+./test_cmd.sh data/dbn_train_100.txt 
