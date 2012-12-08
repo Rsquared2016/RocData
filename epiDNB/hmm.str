@@ -1,0 +1,69 @@
+GRAPHICAL_MODEL dbn
+
+frame: 0 {
+variable : X1 {
+type : discrete hidden cardinality 2;
+conditionalparents : nil using DenseCPT("pX");
+  }
+
+variable : X2 {
+type : discrete hidden cardinality 2;
+conditionalparents : nil using DenseCPT("pX");
+  }
+
+variable : X3 {
+type : discrete hidden cardinality 2;
+conditionalparents : nil using DenseCPT("pX");
+  }
+
+variable : T1 {
+type : discrete observed 0:0 cardinality 3;
+conditionalparents : X1(0) using DenseCPT("pT_given_X");
+  }
+
+variable : T2 {
+type : discrete observed 1:1 cardinality 3;
+conditionalparents : X2(0) using DenseCPT("pT_given_X");
+  }
+
+variable : T3 {
+type : discrete observed 2:2 cardinality 3;
+conditionalparents : X3(0) using DenseCPT("pT_given_X");
+  }
+
+}
+
+frame: 1 {
+variable : X1 {
+type : discrete hidden cardinality 2;
+conditionalparents : X1(-1) using DenseCPT("pX_given_X");
+  }
+
+variable : X2 {
+type : discrete hidden cardinality 2;
+conditionalparents : X2(-1) using DenseCPT("pX_given_X");
+  }
+
+variable : X3 {
+type : discrete hidden cardinality 2;
+conditionalparents : X3(-1) using DenseCPT("pX_given_X");
+  }
+
+variable : T1 {
+type : discrete observed 0:0 cardinality 3;
+conditionalparents : X1(0) using DenseCPT("pT_given_X");
+  }
+
+variable : T2 {
+type : discrete observed 1:1 cardinality 3;
+conditionalparents : X2(0) using DenseCPT("pT_given_X");
+  }
+
+variable : T3 {
+type : discrete observed 2:2 cardinality 3;
+conditionalparents : X3(0) using DenseCPT("pT_given_X");
+  }
+
+}
+
+chunk 1:1;
