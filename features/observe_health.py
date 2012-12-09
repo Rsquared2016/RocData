@@ -15,6 +15,8 @@ health_split = float(sys.argv[2]) if len(sys.argv) >= 3 else 0.8
 time_slices = {}
 fill_slices = {}
 users = []
+# if we don't include this, we get stuff from like august 2011...
+start_date = datetime(2012, 11, 15)
 
 """ initialize couchdb """
 couch = couchdb.Server('http://dev.fount.in:5984')
@@ -22,10 +24,14 @@ couch.resource.credentials = ('admin', 'admin')
 db_airports = couch['airport_tweets']
 
 """ grab all rows """
-results = db_airports.view("Tweet/max_health_score", reduce = True, group = True)
+results = db_airports.view("Tweet/max_health_score", reduce = True, group = True, stale = 'update_after')
 print "Got %s rows." % len(results)
 for row in results:
     user, date, score = row.key[0], key_to_datetime(row.key), row.value
+    # skip REALLY old tweets
+    if date < start_date:
+        continue
+    print "[%s] %s @ %s" % (user, score, date)
     if not user in users:
         users.append(user)
     if not date in time_slices:
@@ -52,11 +58,13 @@ print "Writing health observations for all users over every day..."
 with open(file_name, 'w+') as obs_file:
     output = ["%s\n" % " ".join(users)]
     observations = []
-    for date, pairs in time_slices.items():
+    for date, pairs in sorted(time_slices.items()):
         if len(pairs) != len(users):
             print "Seems we're missing user observations for %s..." % date
-        states = [p[1] for p in pairs]
-        observations.append(" ".join(states))
+        states = [str(p[1]) for p in pairs]
+        # for debugging purposes!
+        #observations.append("%s\n" % date)
+        observations.append(" ".join(states) + "\n")
     output.extend(observations)
     obs_file.writelines(output)
 print "Finished writing data to %s" % file_name
