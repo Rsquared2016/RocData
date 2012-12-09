@@ -24,7 +24,7 @@
 0
 
 % MDCPTs
-3 %number of DenseCPTs to follow
+4 %number of DenseCPTs to follow
 
 %GMTK notation is as follows:
 %cpt_index
@@ -63,6 +63,20 @@ NUM_HIDDEN_STATES
 0.50 0.50   % Pr(healthy | sick-1, met=0)    Pr(sick | sick-1, met=0)
 0.40 0.60   % Pr(healthy | sick-1, met=1)    Pr(sick | sick-1, met=1)
 0.30 0.70   % Pr(healthy | sick-1, met=2)    Pr(sick | sick-1, met=2)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+3
+pH_given_H_M_BUCKETS
+2
+NUM_HIDDEN_STATES
+NUM_BUCKETS
+NUM_HIDDEN_STATES
+0.99 0.01   % Pr(healthy | healthy-1, bucket=0) Pr(sick | healthy-1, bucket=0)
+0.90 0.10   % Pr(healthy | healthy-1, bucket=1) Pr(sick | healthy-1, bucket=1)
+0.60 0.40   % Pr(healthy | healthy-1, bucket=2) Pr(sick | healthy-1, bucket=2)
+0.50 0.50   % Pr(healthy | sick-1, bucket=0)    Pr(sick | sick-1, bucket=0)
+0.40 0.60   % Pr(healthy | sick-1, bucket=1)    Pr(sick | sick-1, bucket=1)
+0.30 0.70   % Pr(healthy | sick-1, bucket=2)    Pr(sick | sick-1, bucket=2)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Gaussian Components

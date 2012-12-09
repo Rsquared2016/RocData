@@ -59,7 +59,7 @@ conditionalparents: H1(0), H3(0) using DeterministicCPT("meeting_2");
 variable : M3 {
 type: discrete hidden cardinality NUM_INDIVIDUALS;
 switchingparents: nil;
-conditionalparents: H1(0), H2(0) using DeterministicCPT("meeting_3");
+conditionalparents: H1(0), H2(0) using DeterministicCPT("meeting_3_buckets");
   }
 
 }
@@ -121,7 +121,7 @@ conditionalparents: H1(0), H3(0) using DeterministicCPT("meeting_2");
 variable : M3 {
 type: discrete hidden cardinality NUM_INDIVIDUALS;
 switchingparents: nil;
-conditionalparents: H1(0), H2(0) using DeterministicCPT("meeting_3");
+conditionalparents: H1(0), H2(0) using DeterministicCPT("meeting_3_buckets");
   }
 
 }
