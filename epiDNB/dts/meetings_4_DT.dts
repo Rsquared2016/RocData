@@ -1,0 +1,503 @@
+100 % number of decision trees in this file
+
+% These decision trees return the sum of select parents that represent encountered people (=the estimated number of distinct sick people met)
+
+0
+meeting_4_DT_0
+4
+-1 {(p0)} 
+
+1
+meeting_4_DT_1
+4
+-1 {(p0)} 
+
+2
+meeting_4_DT_2
+4
+-1 {(p0)} 
+
+3
+meeting_4_DT_3
+4
+-1 {(p0+p1)} 
+
+4
+meeting_4_DT_4
+4
+-1 {(p0)} 
+
+5
+meeting_4_DT_5
+4
+-1 {(p0)} 
+
+6
+meeting_4_DT_6
+4
+-1 {(p0)} 
+
+7
+meeting_4_DT_7
+4
+-1 {(p0+p1)} 
+
+8
+meeting_4_DT_8
+4
+-1 {(p0)} 
+
+9
+meeting_4_DT_9
+4
+-1 {(p0+p1)} 
+
+10
+meeting_4_DT_10
+4
+-1 {(p0)} 
+
+11
+meeting_4_DT_11
+4
+-1 {(p0)} 
+
+12
+meeting_4_DT_12
+4
+-1 {(p0)} 
+
+13
+meeting_4_DT_13
+4
+-1 {(p0+p1)} 
+
+14
+meeting_4_DT_14
+4
+-1 {(p0)} 
+
+15
+meeting_4_DT_15
+4
+-1 {(p0+p1)} 
+
+16
+meeting_4_DT_16
+4
+-1 {(p0)} 
+
+17
+meeting_4_DT_17
+4
+-1 {(p0)} 
+
+18
+meeting_4_DT_18
+4
+-1 {(p0)} 
+
+19
+meeting_4_DT_19
+4
+-1 {(p0)} 
+
+20
+meeting_4_DT_20
+4
+-1 {(p0+p1)} 
+
+21
+meeting_4_DT_21
+4
+-1 {(p0+p1)} 
+
+22
+meeting_4_DT_22
+4
+-1 {(p0+p1)} 
+
+23
+meeting_4_DT_23
+4
+-1 {(p0)} 
+
+24
+meeting_4_DT_24
+4
+-1 {(p0)} 
+
+25
+meeting_4_DT_25
+4
+-1 {(p0+p1)} 
+
+26
+meeting_4_DT_26
+4
+-1 {(p0+p1)} 
+
+27
+meeting_4_DT_27
+4
+-1 {(p0)} 
+
+28
+meeting_4_DT_28
+4
+-1 {(p0)} 
+
+29
+meeting_4_DT_29
+4
+-1 {(p0)} 
+
+30
+meeting_4_DT_30
+4
+-1 {(p0+p1)} 
+
+31
+meeting_4_DT_31
+4
+-1 {(p0)} 
+
+32
+meeting_4_DT_32
+4
+-1 {(p0+p1)} 
+
+33
+meeting_4_DT_33
+4
+-1 {(p0+p1)} 
+
+34
+meeting_4_DT_34
+4
+-1 {(p0+p1)} 
+
+35
+meeting_4_DT_35
+4
+-1 {(p0+p1)} 
+
+36
+meeting_4_DT_36
+4
+-1 {(p0+p1)} 
+
+37
+meeting_4_DT_37
+4
+-1 {(p0+p1)} 
+
+38
+meeting_4_DT_38
+4
+-1 {(p0+p1)} 
+
+39
+meeting_4_DT_39
+4
+-1 {(p0+p1)} 
+
+40
+meeting_4_DT_40
+4
+-1 {(p0)} 
+
+41
+meeting_4_DT_41
+4
+-1 {(p0+p1)} 
+
+42
+meeting_4_DT_42
+4
+-1 {(p0+p1)} 
+
+43
+meeting_4_DT_43
+4
+-1 {(p0+p1)} 
+
+44
+meeting_4_DT_44
+4
+-1 {(p0+p1)} 
+
+45
+meeting_4_DT_45
+4
+-1 {(p0+p1)} 
+
+46
+meeting_4_DT_46
+4
+-1 {(p0+p1)} 
+
+47
+meeting_4_DT_47
+4
+-1 {(p0+p1)} 
+
+48
+meeting_4_DT_48
+4
+-1 {(p0+p1)} 
+
+49
+meeting_4_DT_49
+4
+-1 {(p0)} 
+
+50
+meeting_4_DT_50
+4
+-1 {(p0+p1)} 
+
+51
+meeting_4_DT_51
+4
+-1 {(p0+p1)} 
+
+52
+meeting_4_DT_52
+4
+-1 {(p0+p1)} 
+
+53
+meeting_4_DT_53
+4
+-1 {(p0)} 
+
+54
+meeting_4_DT_54
+4
+-1 {(p0+p1)} 
+
+55
+meeting_4_DT_55
+4
+-1 {(p0)} 
+
+56
+meeting_4_DT_56
+4
+-1 {(p0+p1)} 
+
+57
+meeting_4_DT_57
+4
+-1 {(p0+p1)} 
+
+58
+meeting_4_DT_58
+4
+-1 {(p0)} 
+
+59
+meeting_4_DT_59
+4
+-1 {(p0)} 
+
+60
+meeting_4_DT_60
+4
+-1 {(p0)} 
+
+61
+meeting_4_DT_61
+4
+-1 {(p0)} 
+
+62
+meeting_4_DT_62
+4
+-1 {(p0+p1)} 
+
+63
+meeting_4_DT_63
+4
+-1 {(p0)} 
+
+64
+meeting_4_DT_64
+4
+-1 {(p0+p1)} 
+
+65
+meeting_4_DT_65
+4
+-1 {(p0)} 
+
+66
+meeting_4_DT_66
+4
+-1 {(p0)} 
+
+67
+meeting_4_DT_67
+4
+-1 {(p0+p1)} 
+
+68
+meeting_4_DT_68
+4
+-1 {(p0+p1)} 
+
+69
+meeting_4_DT_69
+4
+-1 {(p0+p1)} 
+
+70
+meeting_4_DT_70
+4
+-1 {(p0)} 
+
+71
+meeting_4_DT_71
+4
+-1 {(p0+p1)} 
+
+72
+meeting_4_DT_72
+4
+-1 {(p0+p1)} 
+
+73
+meeting_4_DT_73
+4
+-1 {(p0+p1)} 
+
+74
+meeting_4_DT_74
+4
+-1 {(p0)} 
+
+75
+meeting_4_DT_75
+4
+-1 {(p0)} 
+
+76
+meeting_4_DT_76
+4
+-1 {(p0+p1)} 
+
+77
+meeting_4_DT_77
+4
+-1 {(p0+p1)} 
+
+78
+meeting_4_DT_78
+4
+-1 {(p0+p1)} 
+
+79
+meeting_4_DT_79
+4
+-1 {(p0)} 
+
+80
+meeting_4_DT_80
+4
+-1 {(p0)} 
+
+81
+meeting_4_DT_81
+4
+-1 {(p0+p1)} 
+
+82
+meeting_4_DT_82
+4
+-1 {(p0)} 
+
+83
+meeting_4_DT_83
+4
+-1 {(p0)} 
+
+84
+meeting_4_DT_84
+4
+-1 {(p0)} 
+
+85
+meeting_4_DT_85
+4
+-1 {(p0+p1)} 
+
+86
+meeting_4_DT_86
+4
+-1 {(p0+p1)} 
+
+87
+meeting_4_DT_87
+4
+-1 {(p0)} 
+
+88
+meeting_4_DT_88
+4
+-1 {(p0)} 
+
+89
+meeting_4_DT_89
+4
+-1 {(p0+p1)} 
+
+90
+meeting_4_DT_90
+4
+-1 {(p0)} 
+
+91
+meeting_4_DT_91
+4
+-1 {(p0)} 
+
+92
+meeting_4_DT_92
+4
+-1 {(p0+p1)} 
+
+93
+meeting_4_DT_93
+4
+-1 {(p0+p1)} 
+
+94
+meeting_4_DT_94
+4
+-1 {(p0+p1)} 
+
+95
+meeting_4_DT_95
+4
+-1 {(p0+p1)} 
+
+96
+meeting_4_DT_96
+4
+-1 {(p0+p1)} 
+
+97
+meeting_4_DT_97
+4
+-1 {(p0+p1)} 
+
+98
+meeting_4_DT_98
+4
+-1 {(p0)} 
+
+99
+meeting_4_DT_99
+4
+-1 {(p0+p1)} 

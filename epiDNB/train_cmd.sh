@@ -4,11 +4,6 @@
 # -allocateDenseCpts integer]           Automatically allocate undefined CPTs. (-1) = don't read params, (0) = don't allocate, (1) = use random initial CPT values, (2) = use uniform values {0}
 
 echo
-echo "Triangulating..."
-rm -rf dbn.str.trifile
-gmtkTriangulate -str dbn.str -inputM dbn.mtr &&
-
-echo
 echo "Training..."
 iters=1000
 thresh=0.000001
@@ -41,5 +36,3 @@ gmtkEMtrain -strFile dbn.str -triFile dbn.str.trifile -inputMasterFile dbn.maste
 #     NUM="1500"
 #     fi
 # fi
-
-exit 0

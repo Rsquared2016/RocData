@@ -1,13 +1,13 @@
 #ifndef COMMON_PARAMS
 #define COMMON_PARAMS
 
-% total number of people in the dateset
-#define NUM_INDIVIDUALS 3 
+% Total number of people in the dateset
+#define NUM_INDIVIDUALS 3
 
-% max number of people one can meet
+% Max number of people one can meet
 #define NUM_INDIVIDUALS_MINUS_ONE 2
 
-% number of buckets to divide meetings into (e.g., [less than 10 meetings, 10 and more])
+% Number of buckets to divide meetings into (e.g., [less than 10 meetings, 10 and more])
 #define NUM_BUCKETS 3
 
 % 0=healthy, 1=sick
