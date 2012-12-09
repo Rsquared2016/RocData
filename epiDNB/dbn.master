@@ -1,6 +1,5 @@
 #include "dbn.header"
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 			DECISION TREEs
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -8,20 +7,20 @@ DT_IN_FILE inline
 
 4 %NUM_INDIVIDUALS % number of decision trees
 
-0 % Decision tree that sums up the number of sick individuals person 1 met
+0 % Decision tree that sums up the number of sick individuals person 0 met at time 0
 meeting_1_DT % name of DT
 NUM_INDIVIDUALS_MINUS_ONE % # of parents
--1 {p0+p1} % return the sum of all parents (the estimated number of distinct sick people met)
+-1 {p0+p1} % return the sum of parents that represent encountered people (=the estimated number of distinct sick people met)
 
-1 % Decision tree that sums up the number of sick individuals person 1 met
+1
 meeting_2_DT % name of DT
 NUM_INDIVIDUALS_MINUS_ONE % # of parents
--1 {p0+p1} % return the sum of all parents (the estimated number of distinct sick people met)
+-1 {p0+p1}
 
-2 % Decision tree that sums up the number of sick individuals person 1 met
+2
 meeting_3_DT % name of DT
 NUM_INDIVIDUALS_MINUS_ONE % # of parents
--1 {p0+p1} % return the sum of all parents (the estimated number of distinct sick people met)
+-1 {p0+p1}
 
 3
 isMoreThan_10_DT
@@ -30,7 +29,7 @@ NUM_INDIVIDUALS_MINUS_ONE
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% DETERMINISTIC_CPTs
+% DETERMINISTIC CPTs
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 DETERMINISTIC_CPT_IN_FILE inline
 
@@ -61,6 +60,6 @@ meeting_3_DT % name of DT that implements this table
 3
 meeting_3_buckets
 NUM_INDIVIDUALS_MINUS_ONE % # of parents
-% cardinalities (healthy or sick) of parents + cardinality of the output of the DT (0...NUM_INDIVIDUALS_MINUS_ONE)
+% cardinalities (healthy or sick) of parents + number of buckets
 NUM_HIDDEN_STATES NUM_HIDDEN_STATES NUM_BUCKETS 
 isMoreThan_10_DT % name of DT that implements this table
