@@ -1,4 +1,4 @@
-GRAPHICAL_MODEL dbn
+GRAPHICAL_MODEL epiDBN
 
 #include "dbn.header"
 
@@ -7,6 +7,11 @@ frame: 0 {
 
 %%%%%%%%%%%%%%%
 % Health states
+
+variable : H0 {
+type : discrete hidden cardinality NUM_HIDDEN_STATES;
+conditionalparents : nil using DenseCPT("pH");
+  }
 
 variable : H1 {
 type : discrete hidden cardinality NUM_HIDDEN_STATES;
@@ -18,48 +23,43 @@ type : discrete hidden cardinality NUM_HIDDEN_STATES;
 conditionalparents : nil using DenseCPT("pH");
   }
 
-variable : H3 {
-type : discrete hidden cardinality NUM_HIDDEN_STATES;
-conditionalparents : nil using DenseCPT("pH");
-  }
-
 %%%%%%%%%%%%%%%%%%%%%%%%
 % Twitter status updates
 
-variable : T1 {
+variable : T0 {
 type : discrete observed 0:0 cardinality NUM_OBSERVED_STATES;
+conditionalparents : H0(0) using DenseCPT("pT_given_H");
+  }
+
+variable : T1 {
+type : discrete observed 1:1 cardinality NUM_OBSERVED_STATES;
 conditionalparents : H1(0) using DenseCPT("pT_given_H");
   }
 
 variable : T2 {
-type : discrete observed 1:1 cardinality NUM_OBSERVED_STATES;
-conditionalparents : H2(0) using DenseCPT("pT_given_H");
-  }
-
-variable : T3 {
 type : discrete observed 2:2 cardinality NUM_OBSERVED_STATES;
-conditionalparents : H3(0) using DenseCPT("pT_given_H");
+conditionalparents : H2(0) using DenseCPT("pT_given_H");
   }
 
 %%%%%%%%%%
 % Meetings
 
+variable : M0 {
+type: discrete hidden cardinality NUM_INDIVIDUALS;
+switchingparents: nil;
+conditionalparents: H1(0), H2(0) using DeterministicCPT("meeting_0");
+  }
+
 variable : M1 {
 type: discrete hidden cardinality NUM_INDIVIDUALS;
 switchingparents: nil;
-conditionalparents: H2(0), H3(0) using DeterministicCPT("meeting_1");
+conditionalparents: H0(0), H2(0) using DeterministicCPT("meeting_1");
   }
 
 variable : M2 {
 type: discrete hidden cardinality NUM_INDIVIDUALS;
 switchingparents: nil;
-conditionalparents: H1(0), H3(0) using DeterministicCPT("meeting_2");
-  }
-
-variable : M3 {
-type: discrete hidden cardinality NUM_INDIVIDUALS;
-switchingparents: nil;
-conditionalparents: H1(0), H2(0) using DeterministicCPT("meeting_3_buckets");
+conditionalparents: H0(0), H1(0) using DeterministicCPT("meeting_2");
   }
 
 }
@@ -69,6 +69,11 @@ frame: 1 {
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Health states evolution + impact of meetings
+
+variable : H0 {
+type : discrete hidden cardinality NUM_HIDDEN_STATES;
+conditionalparents : H0(-1), M0(-1) using DenseCPT("pH_given_H_M");
+  }
 
 variable : H1 {
 type : discrete hidden cardinality NUM_HIDDEN_STATES;
@@ -80,48 +85,43 @@ type : discrete hidden cardinality NUM_HIDDEN_STATES;
 conditionalparents : H2(-1), M2(-1) using DenseCPT("pH_given_H_M");
   }
 
-variable : H3 {
-type : discrete hidden cardinality NUM_HIDDEN_STATES;
-conditionalparents : H3(-1), M2(-1) using DenseCPT("pH_given_H_M");
-  }
-
 %%%%%%%%%%%%%%%%%%%%%%%%
 % Twitter status updates
 
-variable : T1 {
+variable : T0 {
 type : discrete observed 0:0 cardinality NUM_OBSERVED_STATES;
+conditionalparents : H0(0) using DenseCPT("pT_given_H");
+  }
+
+variable : T1 {
+type : discrete observed 1:1 cardinality NUM_OBSERVED_STATES;
 conditionalparents : H1(0) using DenseCPT("pT_given_H");
   }
 
 variable : T2 {
-type : discrete observed 1:1 cardinality NUM_OBSERVED_STATES;
-conditionalparents : H2(0) using DenseCPT("pT_given_H");
-  }
-
-variable : T3 {
 type : discrete observed 2:2 cardinality NUM_OBSERVED_STATES;
-conditionalparents : H3(0) using DenseCPT("pT_given_H");
+conditionalparents : H2(0) using DenseCPT("pT_given_H");
   }
 
 %%%%%%%%%%
 % Meetings
 
+variable : M0 {
+type: discrete hidden cardinality NUM_INDIVIDUALS;
+switchingparents: nil;
+conditionalparents: H1(0), H2(0) using DeterministicCPT("meeting_0");
+  }
+
 variable : M1 {
 type: discrete hidden cardinality NUM_INDIVIDUALS;
 switchingparents: nil;
-conditionalparents: H2(0), H3(0) using DeterministicCPT("meeting_1");
+conditionalparents: H0(0), H2(0) using DeterministicCPT("meeting_1");
   }
 
 variable : M2 {
 type: discrete hidden cardinality NUM_INDIVIDUALS;
 switchingparents: nil;
-conditionalparents: H1(0), H3(0) using DeterministicCPT("meeting_2");
-  }
-
-variable : M3 {
-type: discrete hidden cardinality NUM_INDIVIDUALS;
-switchingparents: nil;
-conditionalparents: H1(0), H2(0) using DeterministicCPT("meeting_3_buckets");
+conditionalparents: H0(0), H1(0) using DeterministicCPT("meeting_2");
   }
 
 }

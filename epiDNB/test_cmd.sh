@@ -17,5 +17,3 @@ gmtkViterbi -strFile dbn.str -triFile dbn.str.trifile -inputMasterFile dbn.maste
 #TRUE_LABELS=`basename $TEST .txt`
 #DIR_NAME=`dirname $TEST` 
 #./verify.sh $DIR_NAME/${TRUE_LABELS}_true_labels.txt
-
-exit 0
