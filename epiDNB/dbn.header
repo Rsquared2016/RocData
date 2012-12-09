@@ -1,0 +1,19 @@
+#ifndef COMMON_PARAMS
+#define COMMON_PARAMS
+
+% total number of people in the dateset
+#define NUM_INDIVIDUALS 3 
+
+% max number of people one can meet
+#define NUM_INDIVIDUALS_MINUS_ONE 2
+
+% number of buckets to divide meetings into (e.g., [less than 10 meetings, 10 and more])
+#define NUM_BUCKETS 3
+
+% 0=healthy, 1=sick
+#define NUM_HIDDEN_STATES 2
+
+% 0=healthy tweet, 1=sick tweet, 2=no tweet
+#define NUM_OBSERVED_STATES 3
+
+#endif

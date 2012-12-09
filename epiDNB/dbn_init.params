@@ -1,6 +1,9 @@
 % Sickness model: 
-% X=0 ... person is healthy, X=1 ... person is sick
+% H=0 ... person is healthy, H=1 ... person is sick
 % T=0 ... healthy tweet (SVM score below a threshold), T=1 ... sick tweet, T=2 ... no tweet
+% M=x ... met x distinct individuals
+
+#include "dbn.header"
 
 %dense PMFs
 0
@@ -21,7 +24,7 @@
 0
 
 % MDCPTs
-3 %number of DenseCPTs to follow
+4 %number of DenseCPTs to follow
 
 %GMTK notation is as follows:
 %cpt_index
@@ -31,29 +34,49 @@
 %cardinality of self
 %dense_cpt values
 
+%%%%%%%%%%%%%%%%%%%%%%%%%
 0
-pX
+pH % Only for initial time slice
 0
-2
+NUM_HIDDEN_STATES
 0.95 0.05
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 1
-pX_given_X
+pT_given_H
 1
-2
-2
-0.95 0.05
-0.35 0.65
-
-%%%%%%%%%%%%%%%%%%%%%%%%%
-2
-pT_given_X
-1
-2
-3
+NUM_HIDDEN_STATES
+NUM_OBSERVED_STATES
 0.75 0.05 0.2   % Pr(tweet=x | healthy)
 0.1  0.8  0.1   % Pr(tweet=x | sick)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+2
+pH_given_H_M
+2
+NUM_HIDDEN_STATES
+NUM_INDIVIDUALS
+NUM_HIDDEN_STATES
+0.99 0.01   % Pr(healthy | healthy-1, met=0) Pr(sick | healthy-1, met=0)
+0.90 0.10   % Pr(healthy | healthy-1, met=1) Pr(sick | healthy-1, met=1)
+0.60 0.40   % Pr(healthy | healthy-1, met=2) Pr(sick | healthy-1, met=2)
+0.50 0.50   % Pr(healthy | sick-1, met=0)    Pr(sick | sick-1, met=0)
+0.40 0.60   % Pr(healthy | sick-1, met=1)    Pr(sick | sick-1, met=1)
+0.30 0.70   % Pr(healthy | sick-1, met=2)    Pr(sick | sick-1, met=2)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+3
+pH_given_H_M_BUCKETS
+2
+NUM_HIDDEN_STATES
+NUM_BUCKETS
+NUM_HIDDEN_STATES
+0.99 0.01   % Pr(healthy | healthy-1, bucket=0) Pr(sick | healthy-1, bucket=0)
+0.90 0.10   % Pr(healthy | healthy-1, bucket=1) Pr(sick | healthy-1, bucket=1)
+0.60 0.40   % Pr(healthy | healthy-1, bucket=2) Pr(sick | healthy-1, bucket=2)
+0.50 0.50   % Pr(healthy | sick-1, bucket=0)    Pr(sick | sick-1, bucket=0)
+0.40 0.60   % Pr(healthy | sick-1, bucket=1)    Pr(sick | sick-1, bucket=1)
+0.30 0.70   % Pr(healthy | sick-1, bucket=2)    Pr(sick | sick-1, bucket=2)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
 % Gaussian Components
@@ -72,4 +95,23 @@ pT_given_X
 0
 
 
+
+% 1 % The number of DenseCPTs
+% 0 % The index number of the first DenseCPT (zero start)
+% C_given_F_M % name of this CPT
+% 2 % two parents
+% 4 2 3 % parent cardinalities (here, 4 and 2) and self cardinality (3).
+% % The 4x2x3 table -- for each value of the pair F and M, we have
+% % three probabilities for each of the possible child values. This
+% % means that P(C=c|F=f,M=m) = A_{fmc} where f is the outer (major) row
+% % index, m is the inner (minor) row index, and c is the column index,
+% % and that this is the order the probabilities are given in the table.
+% 0.2 0.4 0.4 % P(C=0|F=0,M=0), P(C=1|F=0,M=0), P(C=2|F=0,M=0)
+% 0.4 0.4 0.2 % P(C=0|F=0,M=1), P(C=1|F=0,M=1), P(C=2|F=0,M=1)
+% 0.3 0.4 0.3 % P(C=0|F=1,M=0), P(C=1|F=1,M=0), P(C=2|F=1,M=0)
+% 0.1 0.1 0.8 % P(C=0|F=1,M=1), P(C=1|F=1,M=1), P(C=2|F=1,M=1)
+% 0.1 0.5 0.4 % P(C=0|F=2,M=0), P(C=1|F=2,M=0), P(C=2|F=2,M=0)
+% 0.9 0.0 0.1 % P(C=0|F=2,M=1), P(C=1|F=2,M=1), P(C=2|F=2,M=1)
+% 0.3 0.3 0.4 % P(C=0|F=3,M=0), P(C=1|F=3,M=0), P(C=2|F=3,M=0)
+% 0.7 0.2 0.1 % P(C=0|F=3,M=1), P(C=1|F=3,M=1), P(C=2|F=3,M=1)
 

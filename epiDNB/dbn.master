@@ -1,0 +1,65 @@
+#include "dbn.header"
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 			DECISION TREEs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+DT_IN_FILE inline
+
+4 %NUM_INDIVIDUALS % number of decision trees
+
+0 % Decision tree that sums up the number of sick individuals person 0 met at time 0
+meeting_1_DT % name of DT
+NUM_INDIVIDUALS_MINUS_ONE % # of parents
+-1 {p0+p1} % return the sum of parents that represent encountered people (=the estimated number of distinct sick people met)
+
+1
+meeting_2_DT % name of DT
+NUM_INDIVIDUALS_MINUS_ONE % # of parents
+-1 {p0+p1}
+
+2
+meeting_3_DT % name of DT
+NUM_INDIVIDUALS_MINUS_ONE % # of parents
+-1 {p0+p1}
+
+3
+isMoreThan_10_DT
+NUM_INDIVIDUALS_MINUS_ONE
+-1 {(p0+p1)>10} % check if sum is >10
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DETERMINISTIC CPTs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+DETERMINISTIC_CPT_IN_FILE inline
+
+4 %NUM_INDIVIDUALS % number of CPTs
+
+0 % first DETERMINISTIC_CPT
+meeting_1
+NUM_INDIVIDUALS_MINUS_ONE % # of parents
+% cardinalities (healthy or sick) of parents + cardinality of the output of the DT (0...NUM_INDIVIDUALS_MINUS_ONE)
+% TODO: bucket the number of people met
+NUM_HIDDEN_STATES NUM_HIDDEN_STATES NUM_INDIVIDUALS 
+meeting_1_DT % name of DT that implements this table
+
+1
+meeting_2
+NUM_INDIVIDUALS_MINUS_ONE % # of parents
+% cardinalities (healthy or sick) of parents + cardinality of the output of the DT (0...NUM_INDIVIDUALS_MINUS_ONE)
+NUM_HIDDEN_STATES NUM_HIDDEN_STATES NUM_INDIVIDUALS 
+meeting_2_DT % name of DT that implements this table
+
+2
+meeting_3
+NUM_INDIVIDUALS_MINUS_ONE % # of parents
+% cardinalities (healthy or sick) of parents + cardinality of the output of the DT (0...NUM_INDIVIDUALS_MINUS_ONE)
+NUM_HIDDEN_STATES NUM_HIDDEN_STATES NUM_INDIVIDUALS 
+meeting_3_DT % name of DT that implements this table
+
+3
+meeting_3_buckets
+NUM_INDIVIDUALS_MINUS_ONE % # of parents
+% cardinalities (healthy or sick) of parents + number of buckets
+NUM_HIDDEN_STATES NUM_HIDDEN_STATES NUM_BUCKETS 
+isMoreThan_10_DT % name of DT that implements this table
