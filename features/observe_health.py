@@ -68,3 +68,4 @@ with open(file_name, 'w+') as obs_file:
     output.extend(observations)
     obs_file.writelines(output)
 print "Finished writing data to %s" % file_name
+print "# Users: %s" % len(users)
