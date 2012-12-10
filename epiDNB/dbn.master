@@ -33,31 +33,31 @@ DETERMINISTIC_CPT_IN_FILE inline
 
 4 % number of CPTs
 
-% cardinalities (healthy or sick) of parents + cardinality of the output of the DT (0...NUM_INDIVIDUALS_MINUS_ONE)
+% cardinalities of parents (frameNo & health states) + cardinality of the output of the DT (0...NUM_INDIVIDUALS_MINUS_ONE)
 % TODO: bucket the number of people met
 
 0
 meeting_0
-NUM_INDIVIDUALS_MINUS_ONE % # of parents
-NUM_HIDDEN_STATES NUM_HIDDEN_STATES  NUM_INDIVIDUALS 
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS NUM_HIDDEN_STATES NUM_HIDDEN_STATES  NUM_INDIVIDUALS 
 meeting_0_DT
 
 1
 meeting_1
-NUM_INDIVIDUALS_MINUS_ONE % # of parents
-NUM_HIDDEN_STATES NUM_HIDDEN_STATES  NUM_INDIVIDUALS 
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS NUM_HIDDEN_STATES NUM_HIDDEN_STATES  NUM_INDIVIDUALS 
 meeting_1_DT
 
 2
 meeting_2
-NUM_INDIVIDUALS_MINUS_ONE % # of parents
-NUM_HIDDEN_STATES NUM_HIDDEN_STATES  NUM_INDIVIDUALS 
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS NUM_HIDDEN_STATES NUM_HIDDEN_STATES  NUM_INDIVIDUALS 
 meeting_2_DT
 
 
 3
 meeting_buckets
-NUM_INDIVIDUALS_MINUS_ONE % # of parents
-% cardinalities (healthy or sick) of parents + number of buckets
-NUM_HIDDEN_STATES NUM_HIDDEN_STATES  NUM_BUCKETS 
+NUM_MEETING_NODE_PARENTS
+% cardinalities of parents (frameNo & health states) + number of buckets
+NUM_TIMESTEPS NUM_HIDDEN_STATES NUM_HIDDEN_STATES  NUM_BUCKETS 
 isMoreThan_10_DT % name of DT that implements this table

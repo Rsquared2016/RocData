@@ -16,4 +16,10 @@
 % 0=healthy tweet, 1=sick tweet, 2=no tweet
 #define NUM_OBSERVED_STATES 3
 
+% Number of time slices (used for "private" decision trees)
+#define NUM_TIMESTEPS 100
+
+% Number of parents of the meetings nodes (NUM_INDIVIDUALS + 1 (frameNo))
+#define NUM_MEETING_NODE_PARENTS 4
+
 #endif

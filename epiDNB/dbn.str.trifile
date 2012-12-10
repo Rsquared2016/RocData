@@ -1,27 +1,29 @@
 % Structure File Identification Information
-0 H0 0 2 D 0 1 0 
-1 H1 0 2 D 0 1 0 
-2 H2 0 2 D 0 1 0 
-3 T0 0 3 D 0 1 1 H0 0 
-4 T1 0 3 D 0 1 1 H1 0 
-5 T2 0 3 D 0 1 1 H2 0 
-6 M0 0 3 D 0 1 2 H1 0 H2 0 
-7 M1 0 3 D 0 1 2 H0 0 H2 0 
-8 M2 0 3 D 0 1 2 H0 0 H1 0 
-9 H0 1 2 D 0 1 2 H0 -1 M0 -1 
-10 H1 1 2 D 0 1 2 H1 -1 M1 -1 
-11 H2 1 2 D 0 1 2 H2 -1 M2 -1 
-12 T0 1 3 D 0 1 1 H0 0 
-13 T1 1 3 D 0 1 1 H1 0 
-14 T2 1 3 D 0 1 1 H2 0 
-15 M0 1 3 D 0 1 2 H1 0 H2 0 
-16 M1 1 3 D 0 1 2 H0 0 H2 0 
-17 M2 1 3 D 0 1 2 H0 0 H1 0 
+0 frameNo 0 100 D 0 1 0 
+1 H0 0 2 D 0 1 0 
+2 H1 0 2 D 0 1 0 
+3 H2 0 2 D 0 1 0 
+4 T0 0 3 D 0 1 1 H0 0 
+5 T1 0 3 D 0 1 1 H1 0 
+6 T2 0 3 D 0 1 1 H2 0 
+7 M0 0 3 D 0 1 3 frameNo 0 H1 0 H2 0 
+8 M1 0 3 D 0 1 3 frameNo 0 H0 0 H2 0 
+9 M2 0 3 D 0 1 3 frameNo 0 H0 0 H1 0 
+10 frameNo 1 100 D 0 1 0 
+11 H0 1 2 D 0 1 2 H0 -1 M0 -1 
+12 H1 1 2 D 0 1 2 H1 -1 M1 -1 
+13 H2 1 2 D 0 1 2 H2 -1 M2 -1 
+14 T0 1 3 D 0 1 1 H0 0 
+15 T1 1 3 D 0 1 1 H1 0 
+16 T2 1 3 D 0 1 1 H2 0 
+17 M0 1 3 D 0 1 3 frameNo 0 H1 0 H2 0 
+18 M1 1 3 D 0 1 3 frameNo 0 H0 0 H2 0 
+19 M2 1 3 D 0 1 3 frameNo 0 H0 0 H1 0 
 1 1 
 @@@!!!TRIFILE_END_OF_ID_STRING!!!@@@ 
 
 % ---
-% GMTK Triangulation File Created: Sunday December 09 2012, 18:34:48 EST
+% GMTK Triangulation File Created: Monday December 10 2012, 18:39:23 EST
 % Options-: triangulationHeuristic: completed, jtWeight: T, jtwUB: F, jtwPUI: 0.000000, jtwMC: F, jtwSNSC: 1.000000, jtwDNSC: 1.000000, pfCobWeight: 0.000000, findBestBoundary: T, traverseFraction: 1.000000, noBoundaryMemoize: F, forceLeftRight: , boundaryHeuristic: S, 
 % ---
 
@@ -44,65 +46,68 @@ Left_interface:Run_Bdry_Alg(T),Bnd_Heurs(S),TravFrac(1.000000),Tri_Heur(complete
 
 % ---
 % --- P partition information: variables and their neighbors
-% H0(0) : H1(0), H2(0), T0(0), T1(0), T2(0), M0(0), M1(0), M2(0), H0(1), H1(1), H2(1),
-% H1(0) : H0(0), H2(0), T0(0), T1(0), T2(0), M0(0), M1(0), M2(0), H0(1), H1(1), H2(1),
-% H2(0) : H0(0), H1(0), T0(0), T1(0), T2(0), M0(0), M1(0), M2(0), H0(1), H1(1), H2(1),
-% T0(0) : H0(0), H1(0), H2(0), T1(0), T2(0), M0(0), M1(0), M2(0), H0(1), H1(1), H2(1),
-% T1(0) : H0(0), H1(0), H2(0), T0(0), T2(0), M0(0), M1(0), M2(0), H0(1), H1(1), H2(1),
-% T2(0) : H0(0), H1(0), H2(0), T0(0), T1(0), M0(0), M1(0), M2(0), H0(1), H1(1), H2(1),
-% M0(0) : H0(0), H1(0), H2(0), T0(0), T1(0), T2(0), M1(0), M2(0), H0(1), H1(1), H2(1),
-% M1(0) : H0(0), H1(0), H2(0), T0(0), T1(0), T2(0), M0(0), M2(0), H0(1), H1(1), H2(1),
-% M2(0) : H0(0), H1(0), H2(0), T0(0), T1(0), T2(0), M0(0), M1(0), H0(1), H1(1), H2(1),
-% H0(1) : H0(0), H1(0), H2(0), T0(0), T1(0), T2(0), M0(0), M1(0), M2(0), H1(1), H2(1),
-% H1(1) : H0(0), H1(0), H2(0), T0(0), T1(0), T2(0), M0(0), M1(0), M2(0), H0(1), H2(1),
-% H2(1) : H0(0), H1(0), H2(0), T0(0), T1(0), T2(0), M0(0), M1(0), M2(0), H0(1), H1(1),
+% frameNo(0) : H0(0), H1(0), H2(0), T0(0), T1(0), T2(0), M0(0), M1(0), M2(0), H0(1), H1(1), H2(1),
+% H0(0) : frameNo(0), H1(0), H2(0), T0(0), T1(0), T2(0), M0(0), M1(0), M2(0), H0(1), H1(1), H2(1),
+% H1(0) : frameNo(0), H0(0), H2(0), T0(0), T1(0), T2(0), M0(0), M1(0), M2(0), H0(1), H1(1), H2(1),
+% H2(0) : frameNo(0), H0(0), H1(0), T0(0), T1(0), T2(0), M0(0), M1(0), M2(0), H0(1), H1(1), H2(1),
+% T0(0) : frameNo(0), H0(0), H1(0), H2(0), T1(0), T2(0), M0(0), M1(0), M2(0), H0(1), H1(1), H2(1),
+% T1(0) : frameNo(0), H0(0), H1(0), H2(0), T0(0), T2(0), M0(0), M1(0), M2(0), H0(1), H1(1), H2(1),
+% T2(0) : frameNo(0), H0(0), H1(0), H2(0), T0(0), T1(0), M0(0), M1(0), M2(0), H0(1), H1(1), H2(1),
+% M0(0) : frameNo(0), H0(0), H1(0), H2(0), T0(0), T1(0), T2(0), M1(0), M2(0), H0(1), H1(1), H2(1),
+% M1(0) : frameNo(0), H0(0), H1(0), H2(0), T0(0), T1(0), T2(0), M0(0), M2(0), H0(1), H1(1), H2(1),
+% M2(0) : frameNo(0), H0(0), H1(0), H2(0), T0(0), T1(0), T2(0), M0(0), M1(0), H0(1), H1(1), H2(1),
+% H0(1) : frameNo(0), H0(0), H1(0), H2(0), T0(0), T1(0), T2(0), M0(0), M1(0), M2(0), H1(1), H2(1),
+% H1(1) : frameNo(0), H0(0), H1(0), H2(0), T0(0), T1(0), T2(0), M0(0), M1(0), M2(0), H0(1), H2(1),
+% H2(1) : frameNo(0), H0(0), H1(0), H2(0), T0(0), T1(0), T2(0), M0(0), M1(0), M2(0), H0(1), H1(1),
 % --- P partition definition
-P_PARTITION 12 H0 0 H1 0 H2 0 T0 0 T1 0 T2 0 M0 0 M1 0 M2 0 H0 1 H1 1 H2 1 
+P_PARTITION 13 frameNo 0 H0 0 H1 0 H2 0 T0 0 T1 0 T2 0 M0 0 M1 0 M2 0 H0 1 H1 1 H2 1 
 
 % ---
 % --- C partition information: variables and their neighbors
-% H0(1) : H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
-% H1(1) : H0(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
-% H2(1) : H0(1), H1(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
-% T0(1) : H0(1), H1(1), H2(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
-% T1(1) : H0(1), H1(1), H2(1), T0(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
-% T2(1) : H0(1), H1(1), H2(1), T0(1), T1(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
-% M0(1) : H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M1(1), M2(1), H0(2), H1(2), H2(2),
-% M1(1) : H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M2(1), H0(2), H1(2), H2(2),
-% M2(1) : H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), H0(2), H1(2), H2(2),
-% H0(2) : H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H1(2), H2(2),
-% H1(2) : H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H2(2),
-% H2(2) : H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2),
+% frameNo(1) : H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
+% H0(1) : frameNo(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
+% H1(1) : frameNo(1), H0(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
+% H2(1) : frameNo(1), H0(1), H1(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
+% T0(1) : frameNo(1), H0(1), H1(1), H2(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
+% T1(1) : frameNo(1), H0(1), H1(1), H2(1), T0(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
+% T2(1) : frameNo(1), H0(1), H1(1), H2(1), T0(1), T1(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
+% M0(1) : frameNo(1), H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M1(1), M2(1), H0(2), H1(2), H2(2),
+% M1(1) : frameNo(1), H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M2(1), H0(2), H1(2), H2(2),
+% M2(1) : frameNo(1), H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), H0(2), H1(2), H2(2),
+% H0(2) : frameNo(1), H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H1(2), H2(2),
+% H1(2) : frameNo(1), H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H2(2),
+% H2(2) : frameNo(1), H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2),
 % --- C partition definition
-C_PARTITION 12 H0 1 H1 1 H2 1 T0 1 T1 1 T2 1 M0 1 M1 1 M2 1 H0 2 H1 2 H2 2 
+C_PARTITION 13 frameNo 1 H0 1 H1 1 H2 1 T0 1 T1 1 T2 1 M0 1 M1 1 M2 1 H0 2 H1 2 H2 2 
 
 % ---
 % --- E partition information: variables and their neighbors
-% H0(2) : H1(2), H2(2), T0(2), T1(2), T2(2), M0(2), M1(2), M2(2),
-% H1(2) : H0(2), H2(2), T0(2), T1(2), T2(2), M0(2), M1(2), M2(2),
-% H2(2) : H0(2), H1(2), T0(2), T1(2), T2(2), M0(2), M1(2), M2(2),
-% T0(2) : H0(2), H1(2), H2(2), T1(2), T2(2), M0(2), M1(2), M2(2),
-% T1(2) : H0(2), H1(2), H2(2), T0(2), T2(2), M0(2), M1(2), M2(2),
-% T2(2) : H0(2), H1(2), H2(2), T0(2), T1(2), M0(2), M1(2), M2(2),
-% M0(2) : H0(2), H1(2), H2(2), T0(2), T1(2), T2(2), M1(2), M2(2),
-% M1(2) : H0(2), H1(2), H2(2), T0(2), T1(2), T2(2), M0(2), M2(2),
-% M2(2) : H0(2), H1(2), H2(2), T0(2), T1(2), T2(2), M0(2), M1(2),
+% frameNo(2) : H0(2), H1(2), H2(2), T0(2), T1(2), T2(2), M0(2), M1(2), M2(2),
+% H0(2) : frameNo(2), H1(2), H2(2), T0(2), T1(2), T2(2), M0(2), M1(2), M2(2),
+% H1(2) : frameNo(2), H0(2), H2(2), T0(2), T1(2), T2(2), M0(2), M1(2), M2(2),
+% H2(2) : frameNo(2), H0(2), H1(2), T0(2), T1(2), T2(2), M0(2), M1(2), M2(2),
+% T0(2) : frameNo(2), H0(2), H1(2), H2(2), T1(2), T2(2), M0(2), M1(2), M2(2),
+% T1(2) : frameNo(2), H0(2), H1(2), H2(2), T0(2), T2(2), M0(2), M1(2), M2(2),
+% T2(2) : frameNo(2), H0(2), H1(2), H2(2), T0(2), T1(2), M0(2), M1(2), M2(2),
+% M0(2) : frameNo(2), H0(2), H1(2), H2(2), T0(2), T1(2), T2(2), M1(2), M2(2),
+% M1(2) : frameNo(2), H0(2), H1(2), H2(2), T0(2), T1(2), T2(2), M0(2), M2(2),
+% M2(2) : frameNo(2), H0(2), H1(2), H2(2), T0(2), T1(2), T2(2), M0(2), M1(2),
 % --- E partition definition
-E_PARTITION 9 H0 2 H1 2 H2 2 T0 2 T1 2 T2 2 M0 2 M1 2 M2 2 
+E_PARTITION 10 frameNo 2 H0 2 H1 2 H2 2 T0 2 T1 2 T2 2 M0 2 M1 2 M2 2 
 
 % ---
 % --- PC information : variables and their neighbors
-% H0(1) : H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
-% H1(1) : H0(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
-% H2(1) : H0(1), H1(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
+% H0(1) : frameNo(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
+% H1(1) : frameNo(1), H0(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
+% H2(1) : frameNo(1), H0(1), H1(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2), H2(2),
 % --- PC interface definition
 PC_PARTITION 3 H0 1 H1 1 H2 1 
 
 % ---
 % --- CE information : variables and their neighbors
-% H0(2) : H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H1(2), H2(2),
-% H1(2) : H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H2(2),
-% H2(2) : H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2),
+% H0(2) : frameNo(1), H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H1(2), H2(2),
+% H1(2) : frameNo(1), H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H2(2),
+% H2(2) : frameNo(1), H0(1), H1(1), H2(1), T0(1), T1(1), T2(1), M0(1), M1(1), M2(1), H0(2), H1(2),
 % --- CE interface definition
 CE_PARTITION 3 H0 2 H1 2 H2 2 
 
@@ -110,7 +115,8 @@ CE_PARTITION 3 H0 2 H1 2 H2 2
 % ---- P Partitions Cliques and their weights
 % ---- 1 total max-cliques 
 % ---- Triangulation came from method: 1-completed
-% 0 : 12  1.806180
+% 0 : 13  1.806180
+%    frameNo(0)
 %    H0(0)
 %    H1(0)
 %    H2(0)
@@ -126,13 +132,14 @@ CE_PARTITION 3 H0 2 H1 2 H2 2
 % Maximum clique state space = 1e1.806180, total state space = 1e1.806180
 1-completed 
 1 
-0 12 H0 0 H1 0 H2 0 T0 0 T1 0 T2 0 M0 0 M1 0 M2 0 H0 1 H1 1 H2 1 
+0 13 frameNo 0 H0 0 H1 0 H2 0 T0 0 T1 0 T2 0 M0 0 M1 0 M2 0 H0 1 H1 1 H2 1 
 
 % ---
 % ---- C Partitions Cliques and their weights
 % ---- 1 total max-cliques 
 % ---- Triangulation came from method: 1-completed
-% 0 : 12  1.806180
+% 0 : 13  1.806180
+%    frameNo(1)
 %    H0(1)
 %    H1(1)
 %    H2(1)
@@ -148,13 +155,14 @@ CE_PARTITION 3 H0 2 H1 2 H2 2
 % Maximum clique state space = 1e1.806180, total state space = 1e1.806180
 1-completed 
 1 
-0 12 H0 1 H1 1 H2 1 T0 1 T1 1 T2 1 M0 1 M1 1 M2 1 H0 2 H1 2 H2 2 
+0 13 frameNo 1 H0 1 H1 1 H2 1 T0 1 T1 1 T2 1 M0 1 M1 1 M2 1 H0 2 H1 2 H2 2 
 
 % ---
 % ---- E Partitions Cliques and their weights
 % ---- 1 total max-cliques 
 % ---- Triangulation came from method: 1-completed
-% 0 : 9  0.903090
+% 0 : 10  0.903090
+%    frameNo(2)
 %    H0(2)
 %    H1(2)
 %    H2(2)
@@ -167,7 +175,7 @@ CE_PARTITION 3 H0 2 H1 2 H2 2
 % Maximum clique state space = 1e0.903090, total state space = 1e0.903090
 1-completed 
 1 
-0 9 H0 2 H1 2 H2 2 T0 2 T1 2 T2 2 M0 2 M1 2 M2 2 
+0 10 frameNo 2 H0 2 H1 2 H2 2 T0 2 T1 2 T2 2 M0 2 M1 2 M2 2 
 
 
 % ----

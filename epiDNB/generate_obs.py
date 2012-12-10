@@ -7,14 +7,14 @@ def writeDTs(numTimeSlices, numUsers):
 %d
 meeting_%d_DT_%d
 %d
--1 {(p0+p1)} 
+-1 {p0+p1} 
 """
 	template2 = \
 """
 %d
 meeting_%d_DT_%d
 %d
--1 {(p0)} 
+-1 {p0} 
 """
 	for user in xrange(0,numUsers):
 		foutDT = open('dts/meetings_%d_DT.dts' % user, 'w')
@@ -39,6 +39,14 @@ GRAPHICAL_MODEL epiDBN
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 frame: 0 {
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Frame number counter used to invoke a "private" decision tree for each time slice
+variable : frameNo {
+ type: discrete observed 0:0 cardinality NUM_TIMESTEPS;
+ switchingparents: nil;
+ conditionalparents: nil using DeterministicCPT("frameNumbers");
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Health states
 %s
@@ -52,6 +60,14 @@ frame: 0 {
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 frame: 1 {
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Frame number counter used to invoke a "private" decision tree for each time slice
+variable : frameNo {
+ type: discrete observed 0:0 cardinality NUM_TIMESTEPS;
+ switchingparents: nil;
+ conditionalparents: nil using DeterministicCPT("frameNumbers");
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Health states evolution + impact of meetings
@@ -71,15 +87,17 @@ chunk 1:1;
 """\
 variable : H%d {
  type : discrete hidden cardinality NUM_HIDDEN_STATES;
- conditionalparents : nil using DenseCPT("pH");
+ switchingparents: nil;
+ conditionalparents: nil using DenseCPT("pH");
 }
 """
 
 	template_pT_given_H = \
 """\
 variable : T%d {
- type : discrete observed 0:0 cardinality NUM_OBSERVED_STATES;
- conditionalparents : H%d(0) using DenseCPT("pT_given_H");
+ type : discrete observed %d:%d cardinality NUM_OBSERVED_STATES;
+ switchingparents: nil;
+ conditionalparents: H%d(0) using DenseCPT("pT_given_H");
 }
 """
 
@@ -87,7 +105,8 @@ variable : T%d {
 """\
 variable : M%d {
  type: discrete hidden cardinality NUM_INDIVIDUALS;
- conditionalparents: %s using DeterministicCPT("meeting_%d");
+ switchingparents: nil;
+ conditionalparents: frameNo(0), %s using DeterministicCPT("meeting_%d");
 }
 """
 
@@ -95,7 +114,8 @@ variable : M%d {
 """\
 variable : H%d {
  type : discrete hidden cardinality NUM_HIDDEN_STATES;
- conditionalparents : H%d(-1), M%d(-1) using DenseCPT("pH_given_H_M");
+ switchingparents: nil;
+ conditionalparents: H%d(-1), M%d(-1) using DenseCPT("pH_given_H_M");
 }
 """
 	pH = ""
@@ -104,7 +124,7 @@ variable : H%d {
 	pH_given_H_M = ""
 	for i in xrange(0,numUsers):
 		pH += template_pH % i
-		pT_given_H += template_pT_given_H % (i, i)
+		pT_given_H += template_pT_given_H % (i, i+1, i+1, i)
 		parents = ""
 		for j in xrange(0,numUsers):
 			if j!=i:
@@ -144,15 +164,15 @@ DETERMINISTIC_CPT_IN_FILE inline
 
 %d %% number of CPTs
 
-%% cardinalities (healthy or sick) of parents + cardinality of the output of the DT (0...NUM_INDIVIDUALS_MINUS_ONE)
+%% cardinalities of parents (frameNo & health states) + cardinality of the output of the DT (0...NUM_INDIVIDUALS_MINUS_ONE)
 %% TODO: bucket the number of people met
 
 %s
 %d
 meeting_buckets
-NUM_INDIVIDUALS_MINUS_ONE %% # of parents
-%% cardinalities (healthy or sick) of parents + number of buckets
-%s NUM_BUCKETS 
+NUM_MEETING_NODE_PARENTS
+%% cardinalities of parents (frameNo & health states) + number of buckets
+NUM_TIMESTEPS %s NUM_BUCKETS 
 isMoreThan_10_DT %% name of DT that implements this table
 """
 
@@ -168,8 +188,8 @@ dts/meetings_%d_DT.dts
 """\
 %d
 meeting_%d
-NUM_INDIVIDUALS_MINUS_ONE %% # of parents
-%s NUM_INDIVIDUALS 
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS %s NUM_INDIVIDUALS 
 meeting_%d_DT
 
 """
@@ -182,7 +202,7 @@ meeting_%d_DT
 	foutMaster.close()
 
 
-def writeHeaderFile(numUsers):
+def writeHeaderFile(numTimeSteps, numUsers):
 	foutHeader = open('dbn.header', 'w')
 	template = \
 """\
@@ -204,30 +224,37 @@ def writeHeaderFile(numUsers):
 %% 0=healthy tweet, 1=sick tweet, 2=no tweet
 #define NUM_OBSERVED_STATES 3
 
+%% Number of time slices (used for "private" decision trees)
+#define NUM_TIMESTEPS %d
+
+%% Number of parents of the meetings nodes (NUM_INDIVIDUALS + 1 (frameNo))
+#define NUM_MEETING_NODE_PARENTS %d
+
 #endif
 """
-	foutHeader.write(template % (numUsers, numUsers-1))
+	foutHeader.write(template % (numUsers, numUsers-1, numTimeSteps, numUsers+1))
 	foutHeader.close()
 
 
 if __name__ == '__main__':
-	numLines = 100
+	numTimeSteps = 100
 	cardinality = 3
 	numUsers = 3
 
 	# Write observations for EM here
-	fout = open('data/dbn_train_%d.txt' % numLines, 'w')
+	fout = open('data/dbn_train_%d.txt' % numTimeSteps, 'w')
 	# Write true labels here
-	foutLabels = open('data/dbn_train_%d_true_labels.txt' % numLines, 'w')
+	foutLabels = open('data/dbn_train_%d_true_labels.txt' % numTimeSteps, 'w')
 	# Write decision trees encoding meeting structure
-	writeDTs(numLines, numUsers)
+	writeDTs(numTimeSteps, numUsers)
 	writeStrFile(numUsers)
 	writeMasterFile(numUsers)
-	writeHeaderFile(numUsers)
+	writeHeaderFile(numTimeSteps, numUsers)
 
 	# Deterministic
-	for lineNum in xrange(0,numLines):
-		if lineNum < numLines/3.0:
+	for t in xrange(0,numTimeSteps):
+		fout.write('%d ' % t) # frameNo
+		if t < numTimeSteps/3.0:
 			for col in xrange(0, numUsers):
 				fout.write('%d ' % 0)
 				foutLabels.write('%d ' % 0)
@@ -239,7 +266,7 @@ if __name__ == '__main__':
 		foutLabels.write('\n')
 
 	# # Random	
-	# for lineNum in xrange(0,numLines):
+	# for t in xrange(0,numTimeSteps):
 	# 	for col in xrange(0, numUsers):
 	# 		fout.write('%d ' % random.randint(0, cardinality-1)),
 	# 	print
