@@ -13,3 +13,8 @@ python displaySimpleGraph_demo.py friendship_graph_undirected.dot neato 7
 Render heatmap of twitter flights:
 cd heatmap-flights
 python heatmap.py -p twitter_1M.coors.txt -r 5 -o NYC_z14_1M_blue.png -G gradient-adam-blue.png --osm -e 40.8393,-74.2635,40.5,-73.6558 -z 14
+
+Compile gmtk-2012-12-07_2148 on MAC mountain lion x64
+./configure CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 && make && make install
+on linux, just
+./configure prefix=.../bin && make && make install
