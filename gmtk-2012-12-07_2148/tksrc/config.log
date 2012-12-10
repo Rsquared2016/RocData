@@ -30,8 +30,8 @@ Kernel configured for up to 4 processors.
 Processor type: i486 (Intel 80486)
 Processors active: 0 1 2 3
 Primary memory available: 16.00 gigabytes
-Default processor set: 179 tasks, 1009 threads, 4 processors
-Load average: 4.11, Mach factor: 1.02
+Default processor set: 172 tasks, 971 threads, 4 processors
+Load average: 3.37, Mach factor: 0.63
 /bin/machine           = unknown
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
@@ -181,9 +181,9 @@ configure:4910: checking lex library
 configure:4924: gcc -o conftest -m64  -m64 conftest.c   >&5
 Undefined symbols for architecture x86_64:
   "_yywrap", referenced from:
-      _yylex in ccGiLyR6.o
-      _input in ccGiLyR6.o
-      _main in ccGiLyR6.o
+      _yylex in cc67qLNt.o
+      _input in cc67qLNt.o
+      _main in cc67qLNt.o
 ld: symbol(s) not found for architecture x86_64
 collect2: ld returned 1 exit status
 configure:4924: $? = 1
@@ -5135,7 +5135,7 @@ am_cv_make_support_nested_variables=yes
 ## Output variables. ##
 ## ----------------- ##
 
-ACLOCAL='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/tksrc/missing --run aclocal-1.12'
+ACLOCAL='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/tksrc/missing --run aclocal-1.12'
 AMDEPBACKSLASH='\'
 AMDEP_FALSE='#'
 AMDEP_TRUE=''
@@ -5145,9 +5145,9 @@ AM_DEFAULT_V='$(AM_DEFAULT_VERBOSITY)'
 AM_DEFAULT_VERBOSITY='1'
 AM_V='$(V)'
 AR='ar'
-AUTOCONF='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/tksrc/missing --run autoconf'
-AUTOHEADER='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/tksrc/missing --run autoheader'
-AUTOMAKE='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/tksrc/missing --run automake-1.12'
+AUTOCONF='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/tksrc/missing --run autoconf'
+AUTOHEADER='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/tksrc/missing --run autoheader'
+AUTOMAKE='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/tksrc/missing --run automake-1.12'
 AWK='awk'
 CC='gcc'
 CCDEPMODE='depmode=gcc3'
@@ -5186,7 +5186,7 @@ LEX_OUTPUT_ROOT='lex.yy'
 LIBOBJS=' ${LIBOBJDIR}error$U.o'
 LIBS='-lm '
 LTLIBOBJS=' ${LIBOBJDIR}error$U.lo'
-MAKEINFO='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/tksrc/missing --run makeinfo'
+MAKEINFO='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/tksrc/missing --run makeinfo'
 MAKE_BUNDLE_FALSE=''
 MAKE_BUNDLE_TRUE='#'
 MKDIR_P='./install-sh -c -d'
@@ -5253,7 +5253,7 @@ host_vendor='apple'
 htmldir='${docdir}'
 includedir='${prefix}/include'
 infodir='${datarootdir}/info'
-install_sh='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/tksrc/install-sh'
+install_sh='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/tksrc/install-sh'
 libdir='${exec_prefix}/lib'
 libexecdir='${exec_prefix}/libexec'
 localedir='${datarootdir}/locale'

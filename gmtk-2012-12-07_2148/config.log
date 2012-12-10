@@ -30,8 +30,8 @@ Kernel configured for up to 4 processors.
 Processor type: i486 (Intel 80486)
 Processors active: 0 1 2 3
 Primary memory available: 16.00 gigabytes
-Default processor set: 177 tasks, 975 threads, 4 processors
-Load average: 1.40, Mach factor: 2.59
+Default processor set: 170 tasks, 974 threads, 4 processors
+Load average: 1.16, Mach factor: 2.84
 /bin/machine           = unknown
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
@@ -205,15 +205,15 @@ config.status:778: creating tests/atlocal
 config.status:778: creating Makefile
 config.status:950: executing depfiles commands
 config.status:950: executing tests/atconfig commands
-configure:5249: === configuring in IEEEFloatingpoint (/Users/adam/code/gmtk-2012-12-07_2148/IEEEFloatingpoint)
+configure:5249: === configuring in IEEEFloatingpoint (/Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/IEEEFloatingpoint)
 configure:5312: running /bin/sh ./configure --disable-option-checking '--prefix=/usr/local'  'CFLAGS=-m64' 'CXXFLAGS=-m64' 'LDFLAGS=-m64' --cache-file=/dev/null --srcdir=.
-configure:5249: === configuring in miscSupport (/Users/adam/code/gmtk-2012-12-07_2148/miscSupport)
+configure:5249: === configuring in miscSupport (/Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/miscSupport)
 configure:5312: running /bin/sh ./configure --disable-option-checking '--prefix=/usr/local'  'CFLAGS=-m64' 'CXXFLAGS=-m64' 'LDFLAGS=-m64' --cache-file=/dev/null --srcdir=.
-configure:5249: === configuring in featureFileIO (/Users/adam/code/gmtk-2012-12-07_2148/featureFileIO)
+configure:5249: === configuring in featureFileIO (/Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/featureFileIO)
 configure:5312: running /bin/sh ./configure --disable-option-checking '--prefix=/usr/local'  'CFLAGS=-m64' 'CXXFLAGS=-m64' 'LDFLAGS=-m64' --cache-file=/dev/null --srcdir=.
-configure:5249: === configuring in mitk (/Users/adam/code/gmtk-2012-12-07_2148/mitk)
+configure:5249: === configuring in mitk (/Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk)
 configure:5312: running /bin/sh ./configure --disable-option-checking '--prefix=/usr/local'  'CFLAGS=-m64' 'CXXFLAGS=-m64' 'LDFLAGS=-m64' --cache-file=/dev/null --srcdir=.
-configure:5249: === configuring in tksrc (/Users/adam/code/gmtk-2012-12-07_2148/tksrc)
+configure:5249: === configuring in tksrc (/Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/tksrc)
 configure:5312: running /bin/sh ./configure --disable-option-checking '--prefix=/usr/local'  'CFLAGS=-m64' 'CXXFLAGS=-m64' 'LDFLAGS=-m64' --cache-file=/dev/null --srcdir=.
 
 ## ---------------- ##
@@ -255,7 +255,7 @@ am_cv_prog_tar_ustar=gnutar
 ## Output variables. ##
 ## ----------------- ##
 
-ACLOCAL='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/missing --run aclocal-1.12'
+ACLOCAL='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/missing --run aclocal-1.12'
 AMDEPBACKSLASH='\'
 AMDEP_FALSE='#'
 AMDEP_TRUE=''
@@ -264,9 +264,9 @@ AM_BACKSLASH='\'
 AM_DEFAULT_V='$(AM_DEFAULT_VERBOSITY)'
 AM_DEFAULT_VERBOSITY='1'
 AM_V='$(V)'
-AUTOCONF='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/missing --run autoconf'
-AUTOHEADER='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/missing --run autoheader'
-AUTOMAKE='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/missing --run automake-1.12'
+AUTOCONF='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/missing --run autoconf'
+AUTOHEADER='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/missing --run autoheader'
+AUTOMAKE='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/missing --run automake-1.12'
 AWK='awk'
 CC='gcc'
 CCDEPMODE='depmode=none'
@@ -288,7 +288,7 @@ LDFLAGS='-m64'
 LIBOBJS=''
 LIBS=''
 LTLIBOBJS=''
-MAKEINFO='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/missing --run makeinfo'
+MAKEINFO='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/missing --run makeinfo'
 MKDIR_P='./install-sh -c -d'
 OBJEXT='o'
 PACKAGE='gmtk'
@@ -326,7 +326,7 @@ host_alias=''
 htmldir='${docdir}'
 includedir='${prefix}/include'
 infodir='${datarootdir}/info'
-install_sh='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/install-sh'
+install_sh='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/install-sh'
 libdir='${exec_prefix}/lib'
 libexecdir='${exec_prefix}/libexec'
 localedir='${datarootdir}/locale'

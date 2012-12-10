@@ -18,3 +18,7 @@ Compile gmtk-2012-12-07_2148 on MAC mountain lion x64
 ./configure CFLAGS=-m64 CXXFLAGS=-m64 LDFLAGS=-m64 && make && make install
 on linux, just
 ./configure prefix=.../bin && make && make install
+
+to compile with DBN structure visualization (gmtkViz), run this first (throws compile errors though):
+brew install wxmac --devel
+which wx-config

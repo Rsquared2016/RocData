@@ -30,8 +30,8 @@ Kernel configured for up to 4 processors.
 Processor type: i486 (Intel 80486)
 Processors active: 0 1 2 3
 Primary memory available: 16.00 gigabytes
-Default processor set: 179 tasks, 1010 threads, 4 processors
-Load average: 2.54, Mach factor: 1.46
+Default processor set: 173 tasks, 957 threads, 4 processors
+Load average: 3.22, Mach factor: 1.35
 /bin/machine           = unknown
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
@@ -685,7 +685,7 @@ am_cv_make_support_nested_variables=yes
 ## Output variables. ##
 ## ----------------- ##
 
-ACLOCAL='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/mitk/discrete-mi/missing --run aclocal-1.12'
+ACLOCAL='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk/discrete-mi/missing --run aclocal-1.12'
 AMDEPBACKSLASH='\'
 AMDEP_FALSE='#'
 AMDEP_TRUE=''
@@ -695,9 +695,9 @@ AM_DEFAULT_V='$(AM_DEFAULT_VERBOSITY)'
 AM_DEFAULT_VERBOSITY='1'
 AM_V='$(V)'
 AR='ar'
-AUTOCONF='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/mitk/discrete-mi/missing --run autoconf'
-AUTOHEADER='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/mitk/discrete-mi/missing --run autoheader'
-AUTOMAKE='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/mitk/discrete-mi/missing --run automake-1.12'
+AUTOCONF='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk/discrete-mi/missing --run autoconf'
+AUTOHEADER='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk/discrete-mi/missing --run autoheader'
+AUTOMAKE='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk/discrete-mi/missing --run automake-1.12'
 AWK='awk'
 CC='gcc'
 CCDEPMODE='depmode=gcc3'
@@ -724,7 +724,7 @@ LDFLAGS='-m64'
 LIBOBJS=' ${LIBOBJDIR}error$U.o'
 LIBS='-lm '
 LTLIBOBJS=' ${LIBOBJDIR}error$U.lo'
-MAKEINFO='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/mitk/discrete-mi/missing --run makeinfo'
+MAKEINFO='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk/discrete-mi/missing --run makeinfo'
 MKDIR_P='./install-sh -c -d'
 NO_ASSERTIONS_FALSE=''
 NO_ASSERTIONS_TRUE='#'
@@ -770,7 +770,7 @@ host_alias=''
 htmldir='${docdir}'
 includedir='${prefix}/include'
 infodir='${datarootdir}/info'
-install_sh='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/mitk/discrete-mi/install-sh'
+install_sh='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk/discrete-mi/install-sh'
 libdir='${exec_prefix}/lib'
 libexecdir='${exec_prefix}/libexec'
 localedir='${datarootdir}/locale'
