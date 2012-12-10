@@ -30,8 +30,8 @@ Kernel configured for up to 4 processors.
 Processor type: i486 (Intel 80486)
 Processors active: 0 1 2 3
 Primary memory available: 16.00 gigabytes
-Default processor set: 178 tasks, 975 threads, 4 processors
-Load average: 3.35, Mach factor: 1.36
+Default processor set: 172 tasks, 972 threads, 4 processors
+Load average: 2.94, Mach factor: 1.52
 /bin/machine           = unknown
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
@@ -181,9 +181,9 @@ configure:4864: checking lex library
 configure:4878: gcc -o conftest -m64  -m64 conftest.c   >&5
 Undefined symbols for architecture x86_64:
   "_yywrap", referenced from:
-      _yylex in cc6cpvtY.o
-      _input in cc6cpvtY.o
-      _main in cc6cpvtY.o
+      _yylex in ccBwyLzA.o
+      _input in ccBwyLzA.o
+      _main in ccBwyLzA.o
 ld: symbol(s) not found for architecture x86_64
 collect2: ld returned 1 exit status
 configure:4878: $? = 1
@@ -4957,7 +4957,7 @@ am_cv_make_support_nested_variables=yes
 ## Output variables. ##
 ## ----------------- ##
 
-ACLOCAL='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/featureFileIO/missing --run aclocal-1.12'
+ACLOCAL='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/featureFileIO/missing --run aclocal-1.12'
 AMDEPBACKSLASH='\'
 AMDEP_FALSE='#'
 AMDEP_TRUE=''
@@ -4967,9 +4967,9 @@ AM_DEFAULT_V='$(AM_DEFAULT_VERBOSITY)'
 AM_DEFAULT_VERBOSITY='1'
 AM_V='$(V)'
 AR='ar'
-AUTOCONF='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/featureFileIO/missing --run autoconf'
-AUTOHEADER='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/featureFileIO/missing --run autoheader'
-AUTOMAKE='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/featureFileIO/missing --run automake-1.12'
+AUTOCONF='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/featureFileIO/missing --run autoconf'
+AUTOHEADER='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/featureFileIO/missing --run autoheader'
+AUTOMAKE='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/featureFileIO/missing --run automake-1.12'
 AWK='awk'
 CC='gcc'
 CCDEPMODE='depmode=gcc3'
@@ -5005,7 +5005,7 @@ LEX_OUTPUT_ROOT='lex.yy'
 LIBOBJS=' ${LIBOBJDIR}error$U.o'
 LIBS='-lm '
 LTLIBOBJS=' ${LIBOBJDIR}error$U.lo'
-MAKEINFO='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/featureFileIO/missing --run makeinfo'
+MAKEINFO='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/featureFileIO/missing --run makeinfo'
 MKDIR_P='./install-sh -c -d'
 NO_ASSERTIONS_FALSE=''
 NO_ASSERTIONS_TRUE='#'
@@ -5062,7 +5062,7 @@ host_vendor='apple'
 htmldir='${docdir}'
 includedir='${prefix}/include'
 infodir='${datarootdir}/info'
-install_sh='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/featureFileIO/install-sh'
+install_sh='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/featureFileIO/install-sh'
 libdir='${exec_prefix}/lib'
 libexecdir='${exec_prefix}/libexec'
 localedir='${datarootdir}/locale'

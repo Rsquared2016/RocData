@@ -30,8 +30,8 @@ Kernel configured for up to 4 processors.
 Processor type: i486 (Intel 80486)
 Processors active: 0 1 2 3
 Primary memory available: 16.00 gigabytes
-Default processor set: 178 tasks, 1008 threads, 4 processors
-Load average: 2.67, Mach factor: 1.45
+Default processor set: 172 tasks, 983 threads, 4 processors
+Load average: 3.04, Mach factor: 1.52
 /bin/machine           = unknown
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
@@ -1043,7 +1043,7 @@ config.status:899: creating Makefile
 config.status:899: creating config.h
 config.status:1080: config.h is unchanged
 config.status:1128: executing depfiles commands
-configure:7516: === configuring in discrete-mi (/Users/adam/code/gmtk-2012-12-07_2148/mitk/discrete-mi)
+configure:7516: === configuring in discrete-mi (/Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk/discrete-mi)
 configure:7579: running /bin/sh ./configure --disable-option-checking '--prefix=/usr/local'  'CFLAGS=-m64' 'CXXFLAGS=-m64' 'LDFLAGS=-m64' --cache-file=/dev/null --srcdir=.
 
 ## ---------------- ##
@@ -1140,7 +1140,7 @@ am_cv_make_support_nested_variables=yes
 ## Output variables. ##
 ## ----------------- ##
 
-ACLOCAL='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/mitk/missing --run aclocal-1.12'
+ACLOCAL='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk/missing --run aclocal-1.12'
 AMDEPBACKSLASH='\'
 AMDEP_FALSE='#'
 AMDEP_TRUE=''
@@ -1150,9 +1150,9 @@ AM_DEFAULT_V='$(AM_DEFAULT_VERBOSITY)'
 AM_DEFAULT_VERBOSITY='1'
 AM_V='$(V)'
 AR='ar'
-AUTOCONF='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/mitk/missing --run autoconf'
-AUTOHEADER='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/mitk/missing --run autoheader'
-AUTOMAKE='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/mitk/missing --run automake-1.12'
+AUTOCONF='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk/missing --run autoconf'
+AUTOHEADER='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk/missing --run autoheader'
+AUTOMAKE='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk/missing --run automake-1.12'
 AWK='awk'
 CC='gcc'
 CCDEPMODE='depmode=gcc3'
@@ -1181,7 +1181,7 @@ LDFLAGS='-m64'
 LIBOBJS=' ${LIBOBJDIR}error$U.o'
 LIBS='-lm '
 LTLIBOBJS=' ${LIBOBJDIR}error$U.lo'
-MAKEINFO='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/mitk/missing --run makeinfo'
+MAKEINFO='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk/missing --run makeinfo'
 MKDIR_P='./install-sh -c -d'
 NO_ASSERTIONS_FALSE=''
 NO_ASSERTIONS_TRUE='#'
@@ -1237,7 +1237,7 @@ host_vendor='apple'
 htmldir='${docdir}'
 includedir='${prefix}/include'
 infodir='${datarootdir}/info'
-install_sh='${SHELL} /Users/adam/code/gmtk-2012-12-07_2148/mitk/install-sh'
+install_sh='${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk/install-sh'
 libdir='${exec_prefix}/lib'
 libexecdir='${exec_prefix}/libexec'
 localedir='${datarootdir}/locale'
