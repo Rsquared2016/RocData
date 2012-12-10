@@ -42,7 +42,7 @@ numTweets = 0
 results = db.view('Tweet/by_day_all_geo',
     reduce = False,
     include_docs = True,
-    startkey = [2012, 10, 17],
+    startkey = [2012, 11, 1],
     endkey = [2012, 11, 9])
 print "Grabbing NYC and SF..."
 for row in results:
@@ -54,7 +54,7 @@ for row in results:
             numTweets += 1
             if numTweets % 50 == 0:
                 print "%s tweets read." % numTweets
-        except ResourceConflict:
+        except couchdb.http.ResourceConflict:
             continue
 print "%s tweets read. Done." % numTweets
     
