@@ -7,14 +7,28 @@ def writeDTs(numTimeSlices, numUsers):
 0
 meeting_%d_DT
 %d
--1 {p1+p2} 
+0 7 0 1 2 3 4 5 default %% query on parent 0, make 7 splits
+ -1 {p1+p2}
+ -1 0
+ -1 {p1}
+ -1 {p1+p2}
+ -1 {p1+p2}
+ -1 0
+ -1 0
 """
 	template2 = \
 """
 0
 meeting_%d_DT
 %d
--1 {p1} 
+0 7 0 1 2 3 4 5 default
+ -1 0
+ -1 0
+ -1 0
+ -1 0
+ -1 0
+ -1 {p1}
+ -1 -100
 """
 	for user in xrange(0,numUsers):
 		foutDT = open('dts/meetings_%d_DT.dts' % user, 'w')
@@ -236,9 +250,9 @@ def writeHeaderFile(numTimeSteps, numUsers):
 
 
 if __name__ == '__main__':
-	numTimeSteps = 100
-	cardinality = 3
-	numUsers = 3
+	numUsers = int(sys.argv[1])
+	numTimeSteps = int(sys.argv[2])
+	cardinality = int(sys.argv[3])
 
 	# Write observations for EM here
 	fout = open('data/dbn_train_%d.txt' % numTimeSteps, 'w')
