@@ -1,8 +1,8 @@
 """
-    observe_health.py <db-name> <file-path> [<health-split>]
+    observe_health.py <db-name> <file-path> <health-split> <start-date> <end-date>
 
     example:
-        python observe_health.py airport_toy health_toy.txt 0.8
+        python observe_health.py airport_toy health_toy.txt 0.8 2012-11-17 2012-12-9
 """
 
 import couchdb
@@ -35,16 +35,18 @@ logging.basicConfig(filename = 'observe_health.log', level = logging.DEBUG, file
 """ grab cmdline args and initialize parameters """
 db_name = sys.argv[1]
 file_name = sys.argv[2]
-health_split = float(sys.argv[3]) if len(sys.argv) >= 4 else 0.8
+health_split = float(sys.argv[3])
+dt = [int(d) for d in sys.argv[4].split('-')]
+start_date = datetime(dt[0], dt[1], dt[2])
+dt = [int(d) for d in sys.argv[5].split('-')]
+end_date = datetime(dt[0], dt[1], dt[2])
+min_tweet_count = 3 # don't include users who tweeted fewer times than min_tweet_count
+
 time_slices = set()
 users = set()
 activeUsers = set()
 userToNumTweets = {}
 userToDailyHealth = {} # { (userID, datetime): maxHealthScoreOverDatetime, ... } 
-# if we don't include this, we get stuff from like august 2011...
-start_date = datetime(2012, 11, 17)
-end_date = start_date
-min_tweet_count = 3 # don't include users who tweeted fewer times than min_tweet_count
 
 """ initialize couchdb """
 couch = couchdb.Server('http://dev.fount.in:5984')
@@ -56,9 +58,7 @@ results = db.view("Tweet/max_health_score", reduce = True, group = True)
 print "Tweets read from view: %d" % len(results)
 for row in results:
     user, date, score = row.key[0], key_to_datetime(row.key), row.value
-    end_date = max(end_date, date)
-    # skip REALLY old tweets
-    if date < start_date:
+    if date < start_date or date > end_date:
         continue
     #print "[%s] %s @ %s" % (user, score, date)
     updateUserToDailyHealth(user, date, score, userToDailyHealth)
@@ -74,7 +74,11 @@ for (userID, numTweets) in sorted(userToNumTweets.iteritems(), key=operator.item
     activeUsers.add(userID)
     logging.debug('%s: %d' % (userID, numTweets))
 
-print "Found %d days in the db (%s - %s)." % ((end_date-start_date).days, start_date, end_date)
+if (end_date-start_date).days+1 != len(time_slices):
+    print 'Not all requested days found in db.'
+    exit(-1)
+
+print "Using %d days from the db (%s - %s)." % (len(time_slices), start_date, end_date)
 print "Found %d active users who tweeted >=%d times (out of %d (%.2f%%))" % (len(activeUsers), min_tweet_count, len(users), float(len(activeUsers))/len(users)*100)
 
 print "Writing time indices and health observations for all users over every day..."

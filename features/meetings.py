@@ -1,8 +1,8 @@
 """
-    meetings.py <db-name> <file-path> [<distance-slack-km> <time-slack-hours>]
+    meetings.py <db-name> <file-path> <distance-slack-km> <time-slack-hours> <start-date> <end-date>
 
     example:
-        python meetings.py airport_toy meetings_toy.pickle 0.1 1
+        python meetings.py airport_toy meetings_toy.pickle 0.1 1 2012-11-17 2012-12-9
 """
 
 import couchdb
@@ -48,26 +48,33 @@ logging.basicConfig(filename = 'meetings.log', level = logging.DEBUG, filemode =
 """ grab cmdline args and initialize parameters """
 db_name = sys.argv[1]
 file_name = sys.argv[2]
-space_slack = float(sys.argv[3]) if len(sys.argv) >= 4 else 0.1
-time_slack = float(sys.argv[4]) if len(sys.argv) >= 5 else 1.0
-collect_start = datetime(2012, 11, 17)
+space_slack = float(sys.argv[3])
+time_slack = float(sys.argv[4])
+dt = [int(d) for d in sys.argv[5].split('-')]
+start_date = datetime(dt[0], dt[1], dt[2])
+dt = [int(d) for d in sys.argv[6].split('-')]
+end_date = datetime(dt[0], dt[1], dt[2])
+
 slice_table = {}
+time_slices = set()
 meetings = {}
 users = set()
 
 """ initialize couchdb """
 couch = couchdb.Server('http://dev.fount.in:5984')
 couch.resource.credentials = ('admin', 'admin')
-db_airports = couch[db_name]
+db = couch[db_name]
 
 """ grab all rows, place them in slicess """
-results = db_airports.view("Tweet/meetings", include_docs = True)
+results = db.view("Tweet/meetings", include_docs = True)
 print "Tweets read from view: %d" % len(results)
 logging.debug("Querying \"Tweet/meetings\" and slicing...")
 for row in results:
     key, value, doc = row.key, row.value, row.doc
     stamp = couch_key_to_slice_key(key)
-    if doc['created_at'] == None or doc['geo'] == None or key_created_at(doc['created_at']) < collect_start:
+    date = datetime(key[1], key[2], key[3])
+    time_slices.add(date)
+    if doc['created_at'] == None or doc['geo'] == None or date < start_date or date > end_date:
         continue
     if not stamp in slice_table:
         slice_table[stamp] = []
@@ -79,6 +86,10 @@ for row in results:
 
 logging.debug("Got %s rows." % len(results))
 print "Got %s rows." % len(results)
+
+if (end_date-start_date).days+1 != len(time_slices):
+    print 'Not all requested days found in db.'
+    exit(-1)
 
 print "Users: %s" % len(users)
 """ sort tweets across all slices, infer meetings """
