@@ -13,14 +13,8 @@ import pprint
 import sys
 import math
 
-def couch_key_to_slice_key(couch_key):
-    return "%s %04d-%02d-%02d" % (couch_key[0], couch_key[1], couch_key[2], couch_key[3])
-
 def key_created_at(created_at):
     return datetime.strptime(created_at, '%a, %d %b %Y %H:%M:%S +0000')
-
-def datetime_to_stamp(date):
-    return date.strftime('%Y-%m-%d %H:%M:%S')
 
 def time_difference(a, b):
     a_time, b_time = key_created_at(a), key_created_at(b)
@@ -71,18 +65,17 @@ print "Tweets read from view: %d" % len(results)
 logging.debug("Querying \"Tweet/meetings\" and slicing...")
 for row in results:
     key, value, doc = row.key, row.value, row.doc
-    stamp = couch_key_to_slice_key(key)
     date = datetime(key[1], key[2], key[3])
     time_slices.add(date)
     if doc['created_at'] == None or doc['geo'] == None or date < start_date or date > end_date:
         continue
-    if not stamp in slice_table:
-        slice_table[stamp] = []
-        meetings[stamp] = {}
+    if not date in slice_table:
+        slice_table[date] = []
+        meetings[date] = {}
     if not value in users:
         users = users | set([value])
-    slice_table[stamp].append((value, doc['created_at'], doc['geo']))
-    logging.debug("\t[%s] <- (%s, %s, %s)" % (stamp, value, doc['created_at'], doc['geo']))
+    slice_table[date].append((value, doc['created_at'], doc['geo']))
+    logging.debug("\t[%s] <- (%s, %s, %s)" % (date, value, doc['created_at'], doc['geo']))
 
 logging.debug("Got %s rows." % len(results))
 print "Got %s rows." % len(results)
@@ -94,7 +87,7 @@ if (end_date-start_date).days+1 != len(time_slices):
 print "Users: %s" % len(users)
 """ sort tweets across all slices, infer meetings """
 logging.debug("\nSorting all slices and finding meetings...")
-for (stamp, entries) in slice_table.items():
+for (date, entries) in slice_table.items():
     # if we sort the list by time of tweet, we can reduce time significantly
     # ex: if timediff between (a = (..., noon, ...), b = (..., 3pm, ...)) is too great,
     # no need to check further than b for a meetings
@@ -105,21 +98,21 @@ for (stamp, entries) in slice_table.items():
         logging.debug("sample: %s, %s, %s, ...)" % (samples[0], samples[1], samples[2]))
     for i in range(len(entries)):
         for j in range(i, len(entries)):
-            a, b = entries[i][0], entries[j][0]
+            a, b = int(entries[i][0]), int(entries[j][0])
             if a == b:
                 continue
             time_diff = time_difference(entries[i][1], entries[j][1])
             space_diff = calcDistanceOptimized(entries[i][2], entries[j][2])
             # output meeting and log if meeting hasn't already been added
             if time_diff <= time_slack and space_diff <= space_slack:
-                if new_meeting(a, b, meetings[stamp]):
+                if new_meeting(a, b, meetings[date]):
                     logging.debug("\t(%s, %s): [time: %.3f hr, space: %.3f km] -> YES!" % (a, b, time_diff, space_diff))
-                    if not a in meetings[stamp]:
-                        meetings[stamp][a] = []
-                    if not b in meetings[stamp]:
-                        meetings[stamp][b] = []
-                    meetings[stamp][a].append(b)
-                    meetings[stamp][b].append(a)
+                    if not a in meetings[date]:
+                        meetings[date][a] = []
+                    if not b in meetings[date]:
+                        meetings[date][b] = []
+                    meetings[date][a].append(b)
+                    meetings[date][b].append(a)
                 else:
                     logging.debug("\t(%s, %s): [time: %.3f hr, space: %.3f km] -> SKIP!" % (a, b, time_diff, space_diff))
             else:
@@ -130,7 +123,7 @@ for (stamp, entries) in slice_table.items():
 
 """ dump results to pickle """
 logging.debug("\nDumping to file %s using cPickle." % file_name)
-with open(file_name, 'w+') as pfile:
+with open(file_name, 'wb') as pfile:
     pickle.dump(meetings, pfile, -1)
 # for debugging!
 #with open(file_name + 'p', 'w+') as pfile:
