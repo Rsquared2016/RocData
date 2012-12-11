@@ -10,7 +10,7 @@ frame: 0 {
 variable : frameNo {
  type: discrete observed 0:0 cardinality NUM_TIMESTEPS;
  switchingparents: nil;
- conditionalparents: nil using DeterministicCPT("frameNumbers");
+ conditionalparents: nil using DenseCPT("frameNumbers"); % This CPT is left undefined which makes it uniform when -allocateDenseCpts 2
 }
 
 %%%%%%%%%%%%%%%%
@@ -77,7 +77,7 @@ frame: 1 {
 variable : frameNo {
  type: discrete observed 0:0 cardinality NUM_TIMESTEPS;
  switchingparents: nil;
- conditionalparents: nil using DeterministicCPT("frameNumbers");
+ conditionalparents: nil using DenseCPT("frameNumbers"); % This CPT is left undefined which makes it uniform when -allocateDenseCpts 2
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -4,27 +4,26 @@ import sys
 def writeDTs(numTimeSlices, numUsers):
 	template1 = \
 """
+0
+meeting_%d_DT
 %d
-meeting_%d_DT_%d
-%d
--1 {p0+p1} 
+-1 {p1+p2} 
 """
 	template2 = \
 """
+0
+meeting_%d_DT
 %d
-meeting_%d_DT_%d
-%d
--1 {p0} 
+-1 {p1} 
 """
 	for user in xrange(0,numUsers):
 		foutDT = open('dts/meetings_%d_DT.dts' % user, 'w')
-		foutDT.write('%d %% number of decision trees in this file\n\n' % numTimeSlices)
-		foutDT.write('% These decision trees return the sum of select parents that represent encountered people (=the estimated number of distinct sick people met)\n')
-		for dtNum in xrange(0,numTimeSlices):
-			if random.randint(0, 1) == 0:
-				foutDT.write(template1 % (dtNum, user, dtNum, numUsers-1))
-			else:
-				foutDT.write(template2 % (dtNum, user, dtNum, numUsers-1))
+		foutDT.write('1 %% number of decision trees in this file\n\n')
+		foutDT.write('% Conditioned on a given time step, this decision tree returns the sum of select parents that represent encountered people (=the estimated number of distinct sick people met)\n')
+		if random.randint(0, 1) == 0:
+			foutDT.write(template1 % (user, numUsers))
+		else:
+			foutDT.write(template2 % (user, numUsers))
 		foutDT.close()
 
 
@@ -44,7 +43,7 @@ frame: 0 {
 variable : frameNo {
  type: discrete observed 0:0 cardinality NUM_TIMESTEPS;
  switchingparents: nil;
- conditionalparents: nil using DeterministicCPT("frameNumbers");
+ conditionalparents: nil using DenseCPT("frameNumbers"); %% This CPT is left undefined which makes it uniform when -allocateDenseCpts 2
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -66,7 +65,7 @@ frame: 1 {
 variable : frameNo {
  type: discrete observed 0:0 cardinality NUM_TIMESTEPS;
  switchingparents: nil;
- conditionalparents: nil using DeterministicCPT("frameNumbers");
+ conditionalparents: nil using DenseCPT("frameNumbers"); %% This CPT is left undefined which makes it uniform when -allocateDenseCpts 2
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -153,7 +152,7 @@ DT_IN_FILE inline
 %s
 %d
 isMoreThan_10_DT
-NUM_INDIVIDUALS_MINUS_ONE
+NUM_MEETING_NODE_PARENTS
 -1 {(p0+p1)>10} %% check if sum is >10
 
 
@@ -232,7 +231,7 @@ def writeHeaderFile(numTimeSteps, numUsers):
 
 #endif
 """
-	foutHeader.write(template % (numUsers, numUsers-1, numTimeSteps, numUsers+1))
+	foutHeader.write(template % (numUsers, numUsers-1, numTimeSteps, numUsers))
 	foutHeader.close()
 
 

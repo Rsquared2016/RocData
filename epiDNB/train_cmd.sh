@@ -3,6 +3,10 @@
 # [-random bool]                         Randomize the parameters {F}
 # -allocateDenseCpts integer]           Automatically allocate undefined CPTs. (-1) = don't read params, (0) = don't allocate, (1) = use random initial CPT values, (2) = use uniform values {0}
 
+NUM_OBSERVATIONS=$1
+TRAIN=$2
+echo $TRAIN > train.txt
+
 echo
 echo "Training..."
 iters=1000
@@ -14,10 +18,7 @@ if [ -z "$1" ]
  	exit
  fi
 
-TRAIN=$1
-echo $TRAIN > train.txt
-
-gmtkEMtrain -strFile dbn.str -triFile dbn.str.trifile -inputMasterFile dbn.master -inputTrainableParameters dbn_init.params -outputTrainableParameters dbn_trained.params -of1 train.txt -fmt1 ascii -nf1 0 -ni1 3 -dirichletPriors T -maxE $iters -lldp $thresh -objsNotToTrain dbn_notrain.params -random F
+gmtkEMtrain -strFile dbn.str -triFile dbn.str.trifile -inputMasterFile dbn.master -inputTrainableParameters dbn_init.params -outputTrainableParameters dbn_trained.params -of1 train.txt -fmt1 ascii -nf1 0 -ni1 $NUM_OBSERVATIONS -dirichletPriors T -maxE $iters -lldp $thresh -objsNotToTrain dbn_notrain.params -allocateDenseCpts 2 -random F
 
 
 

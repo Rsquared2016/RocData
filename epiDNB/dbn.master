@@ -22,7 +22,7 @@ dts/meetings_2_DT.dts
 
 3
 isMoreThan_10_DT
-NUM_INDIVIDUALS_MINUS_ONE
+NUM_MEETING_NODE_PARENTS
 -1 {(p0+p1)>10} % check if sum is >10
 
 

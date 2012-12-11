@@ -4,11 +4,11 @@
 Number of cliques = 1
 == Clique number: 0, root/right-interface clique, root/right-interface clique, leaf
 Clique information: 12 packed bits, 1 unsigned words (0 splits), weight = 1.806180, jt_weight = 1.000000
-12 Nodes: H0(0)[2],H1(0)[2],H2(0)[2],T0(0)[3],T1(0)[3],T2(0)[3],M0(0)[3],M1(0)[3],M2(0)[3],H0(1)[2],H1(1)[2],H2(1)[2]
-12 Assigned: H0(0),H1(0),H2(0),T0(0),T1(0),T2(0),M0(0),M1(0),M2(0),H0(1),H1(1),H2(1)
-12 Assigned Sorted: H0(0)[2],T0(0)[3],H1(0)[2],T1(0)[3],H2(0)[2],T2(0)[3],M0(0)[3],M1(0)[3],M2(0)[3],H0(1)[2],H1(1)[2],H2(1)[2]
-12 Dispositions: 0 0 0 0 0 0 0 0 0 0 0 0
-12 Assigned Prob: H0(0),H1(0),H2(0),T0(0),T1(0),T2(0),M0(0),M1(0),M2(0),H0(1),H1(1),H2(1)
+13 Nodes: frameNo(0)[100],H0(0)[2],H1(0)[2],H2(0)[2],T0(0)[3],T1(0)[3],T2(0)[3],M0(0)[3],M1(0)[3],M2(0)[3],H0(1)[2],H1(1)[2],H2(1)[2]
+13 Assigned: frameNo(0),H0(0),H1(0),H2(0),T0(0),T1(0),T2(0),M0(0),M1(0),M2(0),H0(1),H1(1),H2(1)
+13 Assigned Sorted: frameNo(0)[100],H0(0)[2],T0(0)[3],H1(0)[2],T1(0)[3],H2(0)[2],T2(0)[3],M0(0)[3],M1(0)[3],M2(0)[3],H0(1)[2],H1(1)[2],H2(1)[2]
+13 Dispositions: 0 0 0 0 0 0 0 0 0 0 0 0 0
+13 Assigned Prob: frameNo(0),H0(0),H1(0),H2(0),T0(0),T1(0),T2(0),M0(0),M1(0),M2(0),H0(1),H1(1),H2(1)
 0 Cum Assigned Prob: 
 0 Union Incomming Seps: 
 0 Unassigned Iterated: 
@@ -30,12 +30,12 @@ Number of separators = 0
 Number of cliques = 1
 == Clique number: 0, root/right-interface clique, root/right-interface clique, leaf/left-interface clique
 Clique information: 12 packed bits, 1 unsigned words (0 splits), weight = 1.806180, jt_weight = 1.000000
-12 Nodes: H0(1)[2],H1(1)[2],H2(1)[2],T0(1)[3],T1(1)[3],T2(1)[3],M0(1)[3],M1(1)[3],M2(1)[3],H0(2)[2],H1(2)[2],H2(2)[2]
-9 Assigned: T0(1),T1(1),T2(1),M0(1),M1(1),M2(1),H0(2),H1(2),H2(2)
-9 Assigned Sorted: T0(1)[3],T1(1)[3],T2(1)[3],M0(1)[3],M1(1)[3],M2(1)[3],H0(2)[2],H1(2)[2],H2(2)[2]
-9 Dispositions: 0 0 0 0 0 0 0 0 0
-9 Assigned Prob: T0(1),T1(1),T2(1),M0(1),M1(1),M2(1),H0(2),H1(2),H2(2)
-12 Cum Assigned Prob: H0(0),H1(0),H2(0),T0(0),T1(0),T2(0),M0(0),M1(0),M2(0),H0(1),H1(1),H2(1)
+13 Nodes: frameNo(1)[100],H0(1)[2],H1(1)[2],H2(1)[2],T0(1)[3],T1(1)[3],T2(1)[3],M0(1)[3],M1(1)[3],M2(1)[3],H0(2)[2],H1(2)[2],H2(2)[2]
+10 Assigned: frameNo(1),T0(1),T1(1),T2(1),M0(1),M1(1),M2(1),H0(2),H1(2),H2(2)
+10 Assigned Sorted: frameNo(1)[100],T0(1)[3],T1(1)[3],T2(1)[3],M0(1)[3],M1(1)[3],M2(1)[3],H0(2)[2],H1(2)[2],H2(2)[2]
+10 Dispositions: 0 0 0 0 0 0 0 0 0 0
+10 Assigned Prob: frameNo(1),T0(1),T1(1),T2(1),M0(1),M1(1),M2(1),H0(2),H1(2),H2(2)
+13 Cum Assigned Prob: frameNo(0),H0(0),H1(0),H2(0),T0(0),T1(0),T2(0),M0(0),M1(0),M2(0),H0(1),H1(1),H2(1)
 3 Union Incomming Seps: H0(1),H1(1),H2(1)
 0 Unassigned Iterated: 
 0 Cumulative Unassigned: 
@@ -63,12 +63,12 @@ Separator information: 0 acc packed bits (0 words, 0 splits), 3 rem packed bits 
 Number of cliques = 1
 == Clique number: 0, root/right-interface clique, root clique, leaf/left-interface clique
 Clique information: 9 packed bits, 1 unsigned words (0 splits), weight = 0.903090, jt_weight = 1.000000
-9 Nodes: H0(2)[2],H1(2)[2],H2(2)[2],T0(2)[3],T1(2)[3],T2(2)[3],M0(2)[3],M1(2)[3],M2(2)[3]
-6 Assigned: T0(2),T1(2),T2(2),M0(2),M1(2),M2(2)
-6 Assigned Sorted: T0(2)[3],T1(2)[3],T2(2)[3],M0(2)[3],M1(2)[3],M2(2)[3]
-6 Dispositions: 0 0 0 0 0 0
-6 Assigned Prob: T0(2),T1(2),T2(2),M0(2),M1(2),M2(2)
-21 Cum Assigned Prob: H0(0),H1(0),H2(0),T0(0),T1(0),T2(0),M0(0),M1(0),M2(0),H0(1),H1(1),H2(1),T0(1),T1(1),T2(1),M0(1),M1(1),M2(1),H0(2),H1(2),H2(2)
+10 Nodes: frameNo(2)[100],H0(2)[2],H1(2)[2],H2(2)[2],T0(2)[3],T1(2)[3],T2(2)[3],M0(2)[3],M1(2)[3],M2(2)[3]
+7 Assigned: frameNo(2),T0(2),T1(2),T2(2),M0(2),M1(2),M2(2)
+7 Assigned Sorted: frameNo(2)[100],T0(2)[3],T1(2)[3],T2(2)[3],M0(2)[3],M1(2)[3],M2(2)[3]
+7 Dispositions: 0 0 0 0 0 0 0
+7 Assigned Prob: frameNo(2),T0(2),T1(2),T2(2),M0(2),M1(2),M2(2)
+23 Cum Assigned Prob: frameNo(0),H0(0),H1(0),H2(0),T0(0),T1(0),T2(0),M0(0),M1(0),M2(0),frameNo(1),H0(1),H1(1),H2(1),T0(1),T1(1),T2(1),M0(1),M1(1),M2(1),H0(2),H1(2),H2(2)
 3 Union Incomming Seps: H0(2),H1(2),H2(2)
 0 Unassigned Iterated: 
 0 Cumulative Unassigned: 
