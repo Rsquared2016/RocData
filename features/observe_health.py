@@ -1,5 +1,8 @@
 """
-    observe_health.py <file-path> [<health-split>]
+    observe_health.py <db-name> <file-path> [<health-split>]
+
+    example:
+        python observe_health.py airport_toy health.txt 0.8
 """
 
 import couchdb
@@ -10,8 +13,9 @@ def key_to_datetime(key):
     return datetime(key[1], key[2], key[3])
 
 """ grab cmdline args and initialize parameters """
-file_name = sys.argv[1]
-health_split = float(sys.argv[2]) if len(sys.argv) >= 3 else 0.8
+db_name = sys.argv[1]
+file_name = sys.argv[2]
+health_split = float(sys.argv[3]) if len(sys.argv) >= 4 else 0.8
 time_slices = {}
 fill_slices = {}
 users = []
@@ -21,11 +25,11 @@ start_date = datetime(2012, 11, 15)
 """ initialize couchdb """
 couch = couchdb.Server('http://dev.fount.in:5984')
 couch.resource.credentials = ('admin', 'admin')
-db_airports = couch['airport_tweets']
+db_airports = couch['airport_toy']
 
 """ grab all rows """
-results = db_airports.view("Tweet/max_health_score", reduce = True, group = True, stale = 'update_after')
-print "Got %s rows." % len(results)
+results = db_airports.view("Tweet/max_health_score", reduce = True, group = True)
+print "Tweets read from view: %d" % len(results)
 for row in results:
     user, date, score = row.key[0], key_to_datetime(row.key), row.value
     # skip REALLY old tweets

@@ -1,5 +1,8 @@
 """
-    meetings.py <file-path> [<distance-slack> <time-slack>]
+    meetings.py <db-name> <file-path> [<distance-slack-km> <time-slack-hours>]
+
+    example:
+        python meetings.py airport_toy meetings_toy.pickle 0.1 1
 """
 
 import couchdb
@@ -43,9 +46,10 @@ def new_meeting(a, b, meetings):
 logging.basicConfig(filename = 'meetings.log', level = logging.DEBUG, filemode = 'w')
 
 """ grab cmdline args and initialize parameters """
-file_name = sys.argv[1]
-space_slack = float(sys.argv[2]) if len(sys.argv) >= 3 else 0.1
-time_slack = float(sys.argv[3]) if len(sys.argv) >= 4 else 1.0
+db_name = sys.argv[1]
+file_name = sys.argv[2]
+space_slack = float(sys.argv[3]) if len(sys.argv) >= 4 else 0.1
+time_slack = float(sys.argv[4]) if len(sys.argv) >= 5 else 1.0
 collect_start = datetime(2012, 11, 17)
 slice_table = {}
 meetings = {}
@@ -54,10 +58,11 @@ users = set()
 """ initialize couchdb """
 couch = couchdb.Server('http://dev.fount.in:5984')
 couch.resource.credentials = ('admin', 'admin')
-db_airports = couch['airport_tweets']
+db_airports = couch[db_name]
 
 """ grab all rows, place them in slicess """
-results = db_airports.view("Tweet/meetings", include_docs = True, stale = 'update_after')
+results = db_airports.view("Tweet/meetings", include_docs = True)
+print "Tweets read from view: %d" % len(results)
 logging.debug("Querying \"Tweet/meetings\" and slicing...")
 for row in results:
     key, value, doc = row.key, row.value, row.doc
