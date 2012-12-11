@@ -115,7 +115,7 @@ for (stamp, entries) in slice_table.items():
 """ dump results to pickle """
 logging.debug("\nDumping to file %s using cPickle." % file_name)
 with open(file_name, 'w+') as pfile:
-    pickle.dump(meetings, pfile)
+    pickle.dump(meetings, pfile, -1)
 # for debugging!
 #with open(file_name + 'p', 'w+') as pfile:
 #    pp = pprint.PrettyPrinter(indent = 4, stream = pfile)
