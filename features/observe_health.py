@@ -2,7 +2,7 @@
     observe_health.py <db-name> <file-path> [<health-split>]
 
     example:
-        python observe_health.py airport_toy health.txt 0.8
+        python observe_health.py airport_toy health_toy.txt 0.8
 """
 
 import couchdb
@@ -42,9 +42,9 @@ activeUsers = set()
 userToNumTweets = {}
 userToDailyHealth = {} # { (userID, datetime): maxHealthScoreOverDatetime, ... } 
 # if we don't include this, we get stuff from like august 2011...
-start_date = datetime(2012, 12, 1)
+start_date = datetime(2012, 11, 17)
 end_date = start_date
-min_tweet_count = 7 # don't include users who tweeted fewer times than min_tweet_count
+min_tweet_count = 3 # don't include users who tweeted fewer times than min_tweet_count
 
 """ initialize couchdb """
 couch = couchdb.Server('http://dev.fount.in:5984')

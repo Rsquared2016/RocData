@@ -43,7 +43,7 @@ def new_meeting(a, b, meetings):
     return not (b in meetings[a] and a in meetings[b])
 
 """ start logging module """
-logging.basicConfig(filename = 'meetings.log', level = logging.DEBUG, filemode = 'w', format='%(message)s'))
+logging.basicConfig(filename = 'meetings.log', level = logging.DEBUG, filemode = 'w', format='%(message)s')
 
 """ grab cmdline args and initialize parameters """
 db_name = sys.argv[1]
