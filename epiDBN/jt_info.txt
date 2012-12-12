@@ -3,17 +3,17 @@
 === Clique Information ===
 Number of cliques = 1
 == Clique number: 0, root/right-interface clique, root/right-interface clique, leaf
-Clique information: 12 packed bits, 1 unsigned words (0 splits), weight = 1.806180, jt_weight = 1.000000
-13 Nodes: frameNo(0)[6],H0(0)[2],H1(0)[2],H2(0)[2],T0(0)[3],T1(0)[3],T2(0)[3],M0(0)[3],M1(0)[3],M2(0)[3],H0(1)[2],H1(1)[2],H2(1)[2]
-13 Assigned: frameNo(0),H0(0),H1(0),H2(0),T0(0),T1(0),T2(0),M0(0),M1(0),M2(0),H0(1),H1(1),H2(1)
-13 Assigned Sorted: frameNo(0)[6],H0(0)[2],T0(0)[3],H1(0)[2],T1(0)[3],H2(0)[2],T2(0)[3],M0(0)[3],M1(0)[3],M2(0)[3],H0(1)[2],H1(1)[2],H2(1)[2]
-13 Dispositions: 0 0 0 0 0 0 0 0 0 0 0 0 0
-13 Assigned Prob: frameNo(0),H0(0),H1(0),H2(0),T0(0),T1(0),T2(0),M0(0),M1(0),M2(0),H0(1),H1(1),H2(1)
+Clique information: 54 packed bits, 2 unsigned words (0 splits), weight = 5.418540, jt_weight = 1.000000
+37 Nodes: frameNo(0)[23],H0(0)[2],H1(0)[2],H2(0)[2],H3(0)[2],H4(0)[2],H5(0)[2],H6(0)[2],H7(0)[2],H8(0)[2],T0(0)[3],T1(0)[3],T2(0)[3],T3(0)[3],T4(0)[3],T5(0)[3],T6(0)[3],T7(0)[3],T8(0)[3],M0(0)[9],M1(0)[9],M2(0)[9],M3(0)[9],M4(0)[9],M5(0)[9],M6(0)[9],M7(0)[9],M8(0)[9],H0(1)[2],H1(1)[2],H2(1)[2],H3(1)[2],H4(1)[2],H5(1)[2],H6(1)[2],H7(1)[2],H8(1)[2]
+37 Assigned: frameNo(0),H0(0),H1(0),H2(0),H3(0),H4(0),H5(0),H6(0),H7(0),H8(0),T0(0),T1(0),T2(0),T3(0),T4(0),T5(0),T6(0),T7(0),T8(0),M0(0),M1(0),M2(0),M3(0),M4(0),M5(0),M6(0),M7(0),M8(0),H0(1),H1(1),H2(1),H3(1),H4(1),H5(1),H6(1),H7(1),H8(1)
+37 Assigned Sorted: frameNo(0)[23],H0(0)[2],T0(0)[3],H1(0)[2],T1(0)[3],H2(0)[2],T2(0)[3],H3(0)[2],T3(0)[3],H4(0)[2],T4(0)[3],H5(0)[2],T5(0)[3],H6(0)[2],T6(0)[3],H7(0)[2],T7(0)[3],H8(0)[2],T8(0)[3],M0(0)[9],M1(0)[9],M2(0)[9],M3(0)[9],M4(0)[9],M5(0)[9],M6(0)[9],M7(0)[9],M8(0)[9],H0(1)[2],H1(1)[2],H2(1)[2],H3(1)[2],H4(1)[2],H5(1)[2],H6(1)[2],H7(1)[2],H8(1)[2]
+37 Dispositions: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+37 Assigned Prob: frameNo(0),H0(0),H1(0),H2(0),H3(0),H4(0),H5(0),H6(0),H7(0),H8(0),T0(0),T1(0),T2(0),T3(0),T4(0),T5(0),T6(0),T7(0),T8(0),M0(0),M1(0),M2(0),M3(0),M4(0),M5(0),M6(0),M7(0),M8(0),H0(1),H1(1),H2(1),H3(1),H4(1),H5(1),H6(1),H7(1),H8(1)
 0 Cum Assigned Prob: 
 0 Union Incomming Seps: 
 0 Unassigned Iterated: 
 0 Cumulative Unassigned: 
-9 Hidden/Hashable: H0(0)[2],H1(0)[2],H2(0)[2],M0(0)[3],M1(0)[3],M2(0)[3],H0(1)[2],H1(1)[2],H2(1)[2]
+27 Hidden/Hashable: H0(0)[2],H1(0)[2],H2(0)[2],H3(0)[2],H4(0)[2],H5(0)[2],H6(0)[2],H7(0)[2],H8(0)[2],M0(0)[9],M1(0)[9],M2(0)[9],M3(0)[9],M4(0)[9],M5(0)[9],M6(0)[9],M7(0)[9],M8(0)[9],H0(1)[2],H1(1)[2],H2(1)[2],H3(1)[2],H4(1)[2],H5(1)[2],H6(1)[2],H7(1)[2],H8(1)[2]
 0 Clique Neighbors: 
 0 Clique Children: 
 0 Receive Seps: 
@@ -29,17 +29,17 @@ Number of separators = 0
 === Clique Information ===
 Number of cliques = 1
 == Clique number: 0, root/right-interface clique, root/right-interface clique, leaf/left-interface clique
-Clique information: 12 packed bits, 1 unsigned words (0 splits), weight = 1.806180, jt_weight = 1.000000
-13 Nodes: frameNo(1)[6],H0(1)[2],H1(1)[2],H2(1)[2],T0(1)[3],T1(1)[3],T2(1)[3],M0(1)[3],M1(1)[3],M2(1)[3],H0(2)[2],H1(2)[2],H2(2)[2]
-10 Assigned: frameNo(1),T0(1),T1(1),T2(1),M0(1),M1(1),M2(1),H0(2),H1(2),H2(2)
-10 Assigned Sorted: frameNo(1)[6],T0(1)[3],T1(1)[3],T2(1)[3],M0(1)[3],M1(1)[3],M2(1)[3],H0(2)[2],H1(2)[2],H2(2)[2]
-10 Dispositions: 0 0 0 0 0 0 0 0 0 0
-10 Assigned Prob: frameNo(1),T0(1),T1(1),T2(1),M0(1),M1(1),M2(1),H0(2),H1(2),H2(2)
-13 Cum Assigned Prob: frameNo(0),H0(0),H1(0),H2(0),T0(0),T1(0),T2(0),M0(0),M1(0),M2(0),H0(1),H1(1),H2(1)
-3 Union Incomming Seps: H0(1),H1(1),H2(1)
+Clique information: 54 packed bits, 2 unsigned words (0 splits), weight = 5.418540, jt_weight = 1.000000
+37 Nodes: frameNo(1)[23],H0(1)[2],H1(1)[2],H2(1)[2],H3(1)[2],H4(1)[2],H5(1)[2],H6(1)[2],H7(1)[2],H8(1)[2],T0(1)[3],T1(1)[3],T2(1)[3],T3(1)[3],T4(1)[3],T5(1)[3],T6(1)[3],T7(1)[3],T8(1)[3],M0(1)[9],M1(1)[9],M2(1)[9],M3(1)[9],M4(1)[9],M5(1)[9],M6(1)[9],M7(1)[9],M8(1)[9],H0(2)[2],H1(2)[2],H2(2)[2],H3(2)[2],H4(2)[2],H5(2)[2],H6(2)[2],H7(2)[2],H8(2)[2]
+28 Assigned: frameNo(1),T0(1),T1(1),T2(1),T3(1),T4(1),T5(1),T6(1),T7(1),T8(1),M0(1),M1(1),M2(1),M3(1),M4(1),M5(1),M6(1),M7(1),M8(1),H0(2),H1(2),H2(2),H3(2),H4(2),H5(2),H6(2),H7(2),H8(2)
+28 Assigned Sorted: frameNo(1)[23],T0(1)[3],T1(1)[3],T2(1)[3],T3(1)[3],T4(1)[3],T5(1)[3],T6(1)[3],T7(1)[3],T8(1)[3],M0(1)[9],M1(1)[9],M2(1)[9],M3(1)[9],M4(1)[9],M5(1)[9],M6(1)[9],M7(1)[9],M8(1)[9],H0(2)[2],H1(2)[2],H2(2)[2],H3(2)[2],H4(2)[2],H5(2)[2],H6(2)[2],H7(2)[2],H8(2)[2]
+28 Dispositions: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+28 Assigned Prob: frameNo(1),T0(1),T1(1),T2(1),T3(1),T4(1),T5(1),T6(1),T7(1),T8(1),M0(1),M1(1),M2(1),M3(1),M4(1),M5(1),M6(1),M7(1),M8(1),H0(2),H1(2),H2(2),H3(2),H4(2),H5(2),H6(2),H7(2),H8(2)
+37 Cum Assigned Prob: frameNo(0),H0(0),H1(0),H2(0),H3(0),H4(0),H5(0),H6(0),H7(0),H8(0),T0(0),T1(0),T2(0),T3(0),T4(0),T5(0),T6(0),T7(0),T8(0),M0(0),M1(0),M2(0),M3(0),M4(0),M5(0),M6(0),M7(0),M8(0),H0(1),H1(1),H2(1),H3(1),H4(1),H5(1),H6(1),H7(1),H8(1)
+9 Union Incomming Seps: H0(1),H1(1),H2(1),H3(1),H4(1),H5(1),H6(1),H7(1),H8(1)
 0 Unassigned Iterated: 
 0 Cumulative Unassigned: 
-9 Hidden/Hashable: H0(1)[2],H1(1)[2],H2(1)[2],M0(1)[3],M1(1)[3],M2(1)[3],H0(2)[2],H1(2)[2],H2(2)[2]
+27 Hidden/Hashable: H0(1)[2],H1(1)[2],H2(1)[2],H3(1)[2],H4(1)[2],H5(1)[2],H6(1)[2],H7(1)[2],H8(1)[2],M0(1)[9],M1(1)[9],M2(1)[9],M3(1)[9],M4(1)[9],M5(1)[9],M6(1)[9],M7(1)[9],M8(1)[9],H0(2)[2],H1(2)[2],H2(2)[2],H3(2)[2],H4(2)[2],H5(2)[2],H6(2)[2],H7(2)[2],H8(2)[2]
 0 Clique Neighbors: 
 0 Clique Children: 
 1 Receive Seps: 0,
@@ -49,12 +49,12 @@ Send Sep: -1
 === Separator Information ===
 Number of separators = 1
 == Separator number: 0
-Separator information: 0 acc packed bits (0 words, 0 splits), 3 rem packed bits (1 words, 0 splits)
-3 Nodes: H0(1)[2],H1(1)[2],H2(1)[2]
+Separator information: 0 acc packed bits (0 words, 0 splits), 9 rem packed bits (1 words, 0 splits)
+9 Nodes: H0(1)[2],H1(1)[2],H2(1)[2],H3(1)[2],H4(1)[2],H5(1)[2],H6(1)[2],H7(1)[2],H8(1)[2]
 0 Acc Inter: 
 0 Hid Acc Inter: 
-3 remainder: H0(1),H1(1),H2(1)
-3 hRemainder: H0(1),H1(1),H2(1)
+9 remainder: H0(1),H1(1),H2(1),H3(1),H4(1),H5(1),H6(1),H7(1),H8(1)
+9 hRemainder: H0(1),H1(1),H2(1),H3(1),H4(1),H5(1),H6(1),H7(1),H8(1)
 
 
 ===============================
@@ -62,17 +62,17 @@ Separator information: 0 acc packed bits (0 words, 0 splits), 3 rem packed bits 
 === Clique Information ===
 Number of cliques = 1
 == Clique number: 0, root/right-interface clique, root clique, leaf/left-interface clique
-Clique information: 9 packed bits, 1 unsigned words (0 splits), weight = 0.903090, jt_weight = 1.000000
-10 Nodes: frameNo(2)[6],H0(2)[2],H1(2)[2],H2(2)[2],T0(2)[3],T1(2)[3],T2(2)[3],M0(2)[3],M1(2)[3],M2(2)[3]
-7 Assigned: frameNo(2),T0(2),T1(2),T2(2),M0(2),M1(2),M2(2)
-7 Assigned Sorted: frameNo(2)[6],T0(2)[3],T1(2)[3],T2(2)[3],M0(2)[3],M1(2)[3],M2(2)[3]
-7 Dispositions: 0 0 0 0 0 0 0
-7 Assigned Prob: frameNo(2),T0(2),T1(2),T2(2),M0(2),M1(2),M2(2)
-23 Cum Assigned Prob: frameNo(0),H0(0),H1(0),H2(0),T0(0),T1(0),T2(0),M0(0),M1(0),M2(0),frameNo(1),H0(1),H1(1),H2(1),T0(1),T1(1),T2(1),M0(1),M1(1),M2(1),H0(2),H1(2),H2(2)
-3 Union Incomming Seps: H0(2),H1(2),H2(2)
+Clique information: 45 packed bits, 2 unsigned words (0 splits), weight = 2.709270, jt_weight = 1.000000
+28 Nodes: frameNo(2)[23],H0(2)[2],H1(2)[2],H2(2)[2],H3(2)[2],H4(2)[2],H5(2)[2],H6(2)[2],H7(2)[2],H8(2)[2],T0(2)[3],T1(2)[3],T2(2)[3],T3(2)[3],T4(2)[3],T5(2)[3],T6(2)[3],T7(2)[3],T8(2)[3],M0(2)[9],M1(2)[9],M2(2)[9],M3(2)[9],M4(2)[9],M5(2)[9],M6(2)[9],M7(2)[9],M8(2)[9]
+19 Assigned: frameNo(2),T0(2),T1(2),T2(2),T3(2),T4(2),T5(2),T6(2),T7(2),T8(2),M0(2),M1(2),M2(2),M3(2),M4(2),M5(2),M6(2),M7(2),M8(2)
+19 Assigned Sorted: frameNo(2)[23],T0(2)[3],T1(2)[3],T2(2)[3],T3(2)[3],T4(2)[3],T5(2)[3],T6(2)[3],T7(2)[3],T8(2)[3],M0(2)[9],M1(2)[9],M2(2)[9],M3(2)[9],M4(2)[9],M5(2)[9],M6(2)[9],M7(2)[9],M8(2)[9]
+19 Dispositions: 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+19 Assigned Prob: frameNo(2),T0(2),T1(2),T2(2),T3(2),T4(2),T5(2),T6(2),T7(2),T8(2),M0(2),M1(2),M2(2),M3(2),M4(2),M5(2),M6(2),M7(2),M8(2)
+65 Cum Assigned Prob: frameNo(0),H0(0),H1(0),H2(0),H3(0),H4(0),H5(0),H6(0),H7(0),H8(0),T0(0),T1(0),T2(0),T3(0),T4(0),T5(0),T6(0),T7(0),T8(0),M0(0),M1(0),M2(0),M3(0),M4(0),M5(0),M6(0),M7(0),M8(0),frameNo(1),H0(1),H1(1),H2(1),H3(1),H4(1),H5(1),H6(1),H7(1),H8(1),T0(1),T1(1),T2(1),T3(1),T4(1),T5(1),T6(1),T7(1),T8(1),M0(1),M1(1),M2(1),M3(1),M4(1),M5(1),M6(1),M7(1),M8(1),H0(2),H1(2),H2(2),H3(2),H4(2),H5(2),H6(2),H7(2),H8(2)
+9 Union Incomming Seps: H0(2),H1(2),H2(2),H3(2),H4(2),H5(2),H6(2),H7(2),H8(2)
 0 Unassigned Iterated: 
 0 Cumulative Unassigned: 
-6 Hidden/Hashable: H0(2)[2],H1(2)[2],H2(2)[2],M0(2)[3],M1(2)[3],M2(2)[3]
+18 Hidden/Hashable: H0(2)[2],H1(2)[2],H2(2)[2],H3(2)[2],H4(2)[2],H5(2)[2],H6(2)[2],H7(2)[2],H8(2)[2],M0(2)[9],M1(2)[9],M2(2)[9],M3(2)[9],M4(2)[9],M5(2)[9],M6(2)[9],M7(2)[9],M8(2)[9]
 0 Clique Neighbors: 
 0 Clique Children: 
 1 Receive Seps: 0,
@@ -82,12 +82,12 @@ Send Sep: -1
 === Separator Information ===
 Number of separators = 1
 == Separator number: 0
-Separator information: 0 acc packed bits (0 words, 0 splits), 3 rem packed bits (1 words, 0 splits)
-3 Nodes: H0(2)[2],H1(2)[2],H2(2)[2]
+Separator information: 0 acc packed bits (0 words, 0 splits), 9 rem packed bits (1 words, 0 splits)
+9 Nodes: H0(2)[2],H1(2)[2],H2(2)[2],H3(2)[2],H4(2)[2],H5(2)[2],H6(2)[2],H7(2)[2],H8(2)[2]
 0 Acc Inter: 
 0 Hid Acc Inter: 
-3 remainder: H0(2),H1(2),H2(2)
-3 hRemainder: H0(2),H1(2),H2(2)
+9 remainder: H0(2),H1(2),H2(2),H3(2),H4(2),H5(2),H6(2),H7(2),H8(2)
+9 hRemainder: H0(2),H1(2),H2(2),H3(2),H4(2),H5(2),H6(2),H7(2),H8(2)
 
 
 ===============================

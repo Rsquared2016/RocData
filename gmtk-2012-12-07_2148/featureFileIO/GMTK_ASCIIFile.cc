@@ -154,12 +154,12 @@ ASCIIFile::openSegment(unsigned seg) {
     lineNum++;
     for (unsigned n = 0; n < _numContinuousFeatures; n+=1) {
       if (fscanf(curDataFile,"%e", (float *)(dest++)) != 1) {
-	error("ERROR: ASCIIFile::openSegment: couldn't read %u'th item in frame %u\n",n,s);
+  error("ERROR: ASCIIFile::openSegment: [%s] couldn't read %u'th item in frame %u\n",fname,n,s);
       }
     }
     for (unsigned n = 0; n < _numDiscreteFeatures; n+=1) {
       if (fscanf(curDataFile,"%d", (Int32 *)(dest++)) != 1) {
-	error("ERROR: ASCIIFile::openSegment: couldn't read %u'th item in frame %u\n",n,s);
+  error("ERROR: ASCIIFile::openSegment: [%s] couldn't read %u'th item in frame %u\n",fname,n,s);
       }
     }
   }
