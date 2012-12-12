@@ -15,7 +15,10 @@ echo "NUM_USERS = $NUM_USERS"
 echo "NUM_TIME_STEPS = $NUM_TIME_STEPS"
 echo "OBSERVATION_CARDINALITY = $OBSERVATION_CARDINALITY"
 
-python generate_obs_toy.py $NUM_USERS $NUM_TIME_STEPS $OBSERVATION_CARDINALITY
+# ./run.sh 4 3 6 3
+#python generate_obs_toy.py $NUM_USERS $NUM_TIME_STEPS $OBSERVATION_CARDINALITY
+
+../features/run.sh
 
 if [ $? -eq 1 ]; then
 	exit 1
