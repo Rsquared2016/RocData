@@ -18,9 +18,10 @@ if [ -z "$1" ]
  	exit
  fi
 
-gmtkEMtrain -strFile dbn.str -triFile dbn.str.trifile -inputMasterFile dbn.master -inputTrainableParameters dbn_init.params -outputTrainableParameters dbn_trained.params -of1 train.txt -fmt1 ascii -nf1 0 -ni1 $NUM_OBSERVATIONS -dirichletPriors T -maxE $iters -lldp $thresh -objsNotToTrain dbn_notrain.params -allocateDenseCpts 2 -random F
+CMD="gmtkEMtrain -strFile dbn.str -triFile dbn.str.trifile -inputMasterFile dbn.master -inputTrainableParameters dbn_init.params -outputTrainableParameters dbn_trained.params -of1 train.txt -fmt1 ascii -nf1 0 -ni1 $NUM_OBSERVATIONS -dirichletPriors T -maxE $iters -lldp $thresh -objsNotToTrain dbn_notrain.params -allocateDenseCpts 2 -random F"
 
-
+echo $CMD
+$CMD
 
 # if [ -z "$1" ]
 # then

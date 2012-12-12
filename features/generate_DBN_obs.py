@@ -19,8 +19,7 @@ def writeDTs(usersList, meetings, numTimeSteps, numUsers, twitterIdtoDBNid):
 meeting_%d_DT
 %d
 0 %d %s default %% query on parent 0 (frameNo), make %d splits
-%s
- -1 -1
+%s -1 0
 """
 	numMeetings = 0
 	for user in usersList:
@@ -223,8 +222,8 @@ meeting_%d_DT
 	cpts = ""
 	for i in xrange(0,numUsers):
 		trees += template_tree % (i, i, i)
-		cpts += template_cpt % (i, i, 'NUM_HIDDEN_STATES ' * (numUsers-1), i)
-	foutMaster.write(template_main % (numUsers+1, trees, numUsers, numUsers+1, cpts, numUsers, 'NUM_HIDDEN_STATES ' * (numUsers-1)))
+		cpts += template_cpt % (i, i, ('%d ' % numHiddenStates)*(numUsers-1), i)
+	foutMaster.write(template_main % (numUsers+1, trees, numUsers, numUsers+1, cpts, numUsers, ('%d ' % numHiddenStates)*(numUsers-1)))
 	foutMaster.close()
 
 
@@ -253,7 +252,7 @@ def writeHeaderFile(numTimeSteps, numUsers):
 %% Number of time slices (used for "private" decision trees)
 #define NUM_TIMESTEPS %d
 
-%% Number of parents of the meetings nodes (NUM_INDIVIDUALS + 1 (frameNo))
+%% Number of parents of the meetings nodes (NUM_INDIVIDUALS -1 + 1 (frameNo))
 #define NUM_MEETING_NODE_PARENTS %d
 
 #endif
@@ -270,11 +269,11 @@ def writeHealthObs(usersList, health, numTimeSteps):
 	# Write true labels here
 	#foutLabels = open('../epiDBN/data/dbn_train_%d_true_labels.txt' % numTimeSteps, 'w')
 
-	# Header
-	fout.write('%% TIME_STEP ')
-	for (newID, origID) in enumerate(usersList):
-		fout.write('%d(%s) ' % (newID, origID))
-	fout.write('\n')
+	# Header - gmtk does not want comments in the data files
+	#fout.write('%% TIME_STEP ')
+	#for (newID, origID) in enumerate(usersList):
+	#	fout.write('%d(%s) ' % (newID, origID))
+	#fout.write('\n')
 
 	# Observations: TIME_STEP + user health states (1=user tweeted something sick on a given day, 0=all his tweets were healthy during the day, 2=no tweet)
 	for (t, (_, dic)) in enumerate(sorted(health.items())):
@@ -311,11 +310,12 @@ for dic in health.values():
 	users.update(dic.keys())
 print 'Found %d users.' % len(users)
 
-# Organized users
+# Organized users and collect cardinalities
 usersList = sorted(list(users))
 numUsers = len(usersList)
 numTimeSteps = len(health.keys())
 assert(numTimeSteps==len(meetings.keys()))
+numHiddenStates = 2 # sick or healthy
 
 # Write parameters to be used by DBN shell scripts
 with open('../epiDBN/param_NUM_TIME_STEPS.txt', 'w') as ofile:
