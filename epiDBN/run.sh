@@ -16,9 +16,9 @@ echo "Running feature extraction..."
 # ./run.sh 4 3 6 3
 #python generate_obs_toy.py $NUM_USERS $NUM_TIME_STEPS $OBSERVATION_CARDINALITY
 
-cd ../features
-./run.sh
-cd ../epiDBN
+#cd ../features
+#./run.sh
+#cd ../epiDBN
 
 echo
 echo "Decision tree processing..."
