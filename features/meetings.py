@@ -10,6 +10,7 @@ import cPickle as pickle
 from datetime import datetime, timedelta
 import logging
 import pprint
+from rtree import index
 import sys
 import math
 
@@ -39,6 +40,14 @@ def new_meeting(a, b, meetings):
         return True
     return not ((b in meetings[a]) and (a in meetings[b]))
 
+def getTweetsNearGPSbyTimeWindow(date, point):
+    try:
+        dX, dY = degreesX, degreesY
+        intersect = slice_indices[date].intersection((point[1] - dX, point[0] - dY, point[1] + dX, point[0] + dY), objects=True)
+        return [n.object for n in intersect]
+    except KeyError:
+        return []
+
 """ start logging module """
 logging.basicConfig(filename = 'meetings.log', level = logging.DEBUG, filemode = 'w', format='%(message)s')
 
@@ -51,11 +60,14 @@ dt = [int(d) for d in sys.argv[5].split('-')]
 start_date = datetime(dt[0], dt[1], dt[2])
 dt = [int(d) for d in sys.argv[6].split('-')]
 end_date = datetime(dt[0], dt[1], dt[2])
+degreesY = (space_slack * 1000) * 0.00000900507679  # this many degrees make up 1 meter at NYC latitude
+degreesX = (space_slack * 1000) * 0.00001183569359
 
-slice_table = {}
 time_slices = set()
 meetings = {}
 users = set()
+slice_indices = {}
+slice_table = {}
 
 """ initialize couchdb """
 couch = couchdb.Server('http://dev.fount.in:5984')
@@ -68,61 +80,56 @@ logging.debug("Querying \"Tweet/meetings\" and slicing...")
 print "Tweets read from view: %d" % len(results)
 logging.debug("Got %s rows." % len(results))
 for row in results:
-    key, value, doc = row.key, row.value, row.doc
+    key, value, doc = row.key, long(row.value), row.doc
     date = datetime(key[1], key[2], key[3])
-    stamp = couch_key_to_slice_key(key)
-    time_slices.add(stamp)
+    #stamp = couch_key_to_slice_key(key)
+    #time_slices.add(stamp)
     if doc['created_at'] == None or doc['geo'] == None or date < start_date or date > end_date:
         continue
-    if not stamp in slice_table:
-        slice_table[stamp] = []
-        meetings[stamp] = {}
-    if not value in users:
+    if not date in time_slices:
+        #slice_table[stamp] = []
+        time_slices.add(date)
+        slice_indices[date] = index.Index()
+        slice_table[date] = {}
+        meetings[date] = {}
+    if value not in users:
         users |= set([value])
-    slice_table[stamp].append((value, doc['created_at'], doc['geo']))
+    #slice_table[stamp].append((value, doc['created_at'], doc['geo']))
+    lat, lng = doc['geo']['coordinates']
+    slice_indices[date].insert(value, (lng, lat, lng, lat), obj = (value, doc['created_at'], doc['geo']))
+    slice_table[date][value] = (value, doc['created_at'], doc['geo'])
     logging.debug("\t[%s] <- (%s, %s, %s)" % (date, value, doc['created_at'], doc['geo']))
 
-
-if (end_date-start_date).days+1 > len(time_slices):
+if (end_date - start_date).days + 1 > len(time_slices):
     print 'Not all requested days found in db.'
     exit(-1)
 
 print "Users: %s" % len(users)
 """ sort tweets across all slices, infer meetings """
-logging.debug("\nSorting all slices and finding meetings...")
-for (stamp, entries) in slice_table.items():
-    # if we sort the list by time of tweet, we can reduce time significantly
-    # ex: if timediff between (a = (..., noon, ...), b = (..., 3pm, ...)) is too great,
-    # no need to check further than b for a meetings
-    entries.sort(key = lambda entry: key_created_at(entry[1]))
-    samples = [entry[1] for entry in entries[:3]]
-    logging.debug("\tSorted entries by time.")
-    if len(samples) >= 3:
-        logging.debug("sample: %s, %s, %s, ...)" % (samples[0], samples[1], samples[2]))
-    for i in range(len(entries)):
-        for j in range(i, len(entries)):
-            a, b = int(entries[i][0]), int(entries[j][0])
-            if a == b:
+logging.debug("\nFinding meetings across all time slices...")
+for (date, slice_users) in slice_table.items():
+    for (user, utup) in slice_users.items():
+        uId, uCreated, uGeo = utup
+        nearby_tweets = getTweetsNearGPSbyTimeWindow(date, uGeo['coordinates'])
+        logging.debug("\t%s @ %s: %d nearby tweets. %s"% (user, date, len(nearby_tweets), uGeo['coordinates']))
+        for nearby_tweet in nearby_tweets:
+            nId, nCreated, nGeo = nearby_tweet
+            if uId == nId:
                 continue
-            time_diff = time_difference(entries[i][1], entries[j][1])
-            space_diff = calcDistanceOptimized(entries[i][2], entries[j][2])
-            # output meeting and log if meeting hasn't already been added
-            if time_diff <= time_slack and space_diff <= space_slack:
-                if new_meeting(a, b, meetings[stamp]):
-                    logging.debug("\t(%s, %s): [time: %.3f hr, space: %.3f km] -> YES!" % (a, b, time_diff, space_diff))
-                    if not a in meetings[stamp]:
-                        meetings[stamp][a] = set()
-                    if not b in meetings[stamp]:
-                        meetings[stamp][b] = set()
-                    meetings[stamp][a] |= set([b])
-                    meetings[stamp][b] |= set([a])
+            time_diff = time_difference(uCreated, nCreated)
+            if time_diff <= time_slack:
+                if new_meeting(uId, nId, meetings[date]):
+                    logging.debug("\t(%s, %s): [time: %.3f hr] -> YES!" % (uId, nId, time_diff))
+                    if not uId in meetings[date]:
+                        meetings[date][uId] = set()
+                    if not nId in meetings[date]:
+                        meetings[date][nId] = set()
+                    meetings[date][uId] |= set([nId])
+                    meetings[date][nId] |= set([uId])
                 else:
-                    logging.debug("\t(%s, %s): [time: %.3f hr, space: %.3f km] -> SKIP!" % (a, b, time_diff, space_diff))
+                    logging.debug("\t(%s, %s): [time: %.3f hr] -> SKIP!" % (uId, nId, time_diff))
             else:
-                logging.debug("\t(%s, %s): [time: %.3f hr, space: %.3f km] -> NO!" % (a, b, time_diff, space_diff))
-            # break if time slack exceeded
-            if time_diff > time_slack:
-                break
+                logging.debug("\t(%s, %s): [time: %.3f hr] -> NO!" % (uId, nId, time_diff))
 
 """ dump results to pickle """
 logging.debug("\nDumping to file %s using cPickle." % file_name)

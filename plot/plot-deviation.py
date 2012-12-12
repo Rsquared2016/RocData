@@ -51,6 +51,7 @@ if start >= finish:
 region_map = {}
 gft_keys,   gft_values,   gft_sum,   gft_count   = {}, {}, 0, 0
 couch_keys, couch_values, couch_sum, couch_count = {}, {}, 0, 0
+total_keys, total_values, total_sum, total_count = {}, {}, 0, 0
 
 """ init couchdb stuff """
 couch = couchdb.Server('http://dev.fount.in:5984')
@@ -67,6 +68,8 @@ with open('airport-to-city.txt', 'r') as rmap_file:
         gft_values[code] = []
         couch_keys[code] = [offset_to_key(start, i * 7) for i in range((finish - start).days / 7 + 1)]
         couch_values[code] = [0.0 for i in range((finish - start).days / 7 + 1)]
+        total_keys[code] = [offset_to_key(start, i * 7) for i in range((finish - start).days / 7 + 1)]
+        total_values[code] = [0.0 for i in range((finish - start).days / 7 + 1)]
         line = rmap_file.readline()
 
 """ retrieve stats from google flu trends csv """
@@ -113,21 +116,50 @@ for row in results:
 # also account for collection start here
 couch_count = (finish - max(start, collect_start)).days + 1
 
+""" retrieve # tweets stats from couch db """
+start_key = [airport, start.year, start.month, start.day]
+end_key = [airport, finish.year, finish.month, finish.day]
+print "startkey: %s" % start_key
+print "endkey: %s" % end_key
+results = db_airports.view(
+    "Tweet/by_airport",
+    reduce = True,
+    group = True,
+    startkey = start_key,
+    endkey = end_key)
+for row in results:
+    print "%s: %s" % (row.key, row.value)
+    result_day = key_to_datetime(row.key)
+    index = (result_day - start).days / 7
+    # weight sum properly if this result was between collection start and the next sunday
+    if result_day >= collect_start and result_day < collect_start + timedelta(days = 1):
+        print "next_week: %s" % (collect_start + timedelta(days = 1))
+        total_values[airport][index] += float(row.value) / 1
+    else:
+        total_values[airport][index] += float(row.value) / 7
+    total_sum += row.value
+# also account for collection start here
+total_count = (finish - max(start, collect_start)).days + 1
+
 """ create lists for percent deviations """
-gft_avg, couch_avg = float(gft_sum) / gft_count, float(couch_sum) / couch_count
+gft_avg, couch_avg, total_avg = float(gft_sum) / gft_count, float(couch_sum) / couch_count, float(total_sum) / total_count
 print "Flu trends... sum: %s, count: %s, average: %s" % (gft_sum, gft_count, gft_avg)
-print "Couch... sum: %s, count: %s, average: %s" % (couch_sum, couch_count, couch_avg)
-print "Couch vals: %s" % couch_values[airport]
+print "Airports (sick)... sum: %s, count: %s, average: %s" % (couch_sum, couch_count, couch_avg)
+print "Airports (total)... sum: %s, count: %s, average: %s" % (total_sum, total_count, total_avg)
+#print "Couch vals: %s" % couch_values[airport]
 gft_pct = [dev_percent(v, gft_avg) for v in gft_values[airport]]
 couch_pct = [dev_percent(v, couch_avg) for v in couch_values[airport]]
+total_pct = [dev_percent(v, total_avg) for v in total_values[airport]]
 
 """ create histogram buckets for each dataset, then pdf """
 figure = plt.figure()
 axes = figure.add_subplot(111)
 gft_times = [key_to_datetime(key) for key in gft_keys[airport]]
 couch_times = [key_to_datetime(key) for key in couch_keys[airport]]
+total_times = [key_to_datetime(key) for key in total_keys[airport]]
 gft_line = axes.plot_date(gft_times, gft_pct, 'r-', linewidth = 1)
 couch_line = axes.plot_date(couch_times, couch_pct, 'b-', linewidth = 1)
+total_line = axes.plot_date(couch_times, total_pct, 'b--', linewidth = 1)
 
 """ plot styling """
 axes.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday = 6))
