@@ -42,7 +42,7 @@ numTweets = 0
 results = db.view('Tweet/by_day_all_geo',
     reduce = False,
     include_docs = True,
-    startkey = [2012, 11, 1],
+    startkey = [2012, 11, 3],
     endkey = [2012, 11, 9])
 print "Grabbing NYC and SF..."
 for row in results:
@@ -50,7 +50,7 @@ for row in results:
     closest = find_closest_city(doc)
     if closest == "NYC" or closest == "SF":
         try:
-            db_dev.save(doc)
+            db_dev.save(doc, batch = 'ok')
             numTweets += 1
             if numTweets % 50 == 0:
                 print "%s tweets read." % numTweets
