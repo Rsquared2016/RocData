@@ -20,6 +20,7 @@ meeting_%d_DT
 %s
  -1 -1
 """
+	numMeetings = 0
 	for user in usersList:
 		foutDT = open('../epiDBN/dts/meetings_%d_DT.dts' % twitterIdtoDBNid[user], 'w+')
 		foutDT.write('1 %% number of decision trees in this file\n\n')
@@ -40,6 +41,7 @@ meeting_%d_DT
 				leaves += '{'
 				for userMet in usersMetTransformed:
 					leaves += 'p%d+' % userMet
+					numMeetings += 1
 				leaves = leaves[0:-1] # remove last +
 				leaves += '}\n'
 			except KeyError: # No met users
@@ -47,6 +49,7 @@ meeting_%d_DT
 				continue
 		foutDT.write(template % (twitterIdtoDBNid[user], numUsers, numTimeSteps+1, splits, numTimeSteps+1, leaves))
 		foutDT.close()
+	print 'Meetings used %d (double counted)' % numMeetings
 
 
 def writeStrFile(numUsers):
@@ -303,6 +306,14 @@ usersList = sorted(list(users))
 numUsers = len(usersList)
 numTimeSteps = len(health.keys())
 assert(numTimeSteps==len(meetings.keys()))
+
+# Write parameters to be used by DBN shell scripts
+with open('../epiDBN/param_NUM_TIME_STEPS.txt', 'w') as ofile:
+	ofile.write('%d\n' % numTimeSteps)
+with open('../epiDBN/param_NUM_USERS.txt', 'w') as ofile:
+	ofile.write('%d\n' % numUsers)
+with open('../epiDBN/param_NUM_OBSERVATIONS.txt', 'w') as ofile:
+	ofile.write('%d\n' % 3)
 
 # Induce mapping twitterID -> DBNuserID (0 ... NUM_USERS-1)
 twitterIdtoDBNid = {}
