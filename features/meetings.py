@@ -1,5 +1,8 @@
 """
-    meetings.py <file-path> [<distance-slack> <time-slack>]
+    meetings.py <db-name> <file-path> <distance-slack-km> <time-slack-hours> <start-date> <end-date>
+
+    example:
+        python meetings.py airport_toy meetings_toy.pickle 0.1 1 2012-11-17 2012-12-9
 """
 
 import couchdb
@@ -10,14 +13,8 @@ import pprint
 import sys
 import math
 
-def couch_key_to_slice_key(couch_key):
-    return "%s %04d-%02d-%02d" % (couch_key[0], couch_key[1], couch_key[2], couch_key[3])
-
 def key_created_at(created_at):
     return datetime.strptime(created_at, '%a, %d %b %Y %H:%M:%S +0000')
-
-def datetime_to_stamp(date):
-    return date.strftime('%Y-%m-%d %H:%M:%S')
 
 def time_difference(a, b):
     a_time, b_time = key_created_at(a), key_created_at(b)
@@ -40,45 +37,57 @@ def new_meeting(a, b, meetings):
     return not (b in meetings[a] and a in meetings[b])
 
 """ start logging module """
-logging.basicConfig(filename = 'meetings.log', level = logging.DEBUG, filemode = 'w')
+logging.basicConfig(filename = 'meetings.log', level = logging.DEBUG, filemode = 'w', format='%(message)s')
 
 """ grab cmdline args and initialize parameters """
-file_name = sys.argv[1]
-space_slack = float(sys.argv[2]) if len(sys.argv) >= 3 else 0.1
-time_slack = float(sys.argv[3]) if len(sys.argv) >= 4 else 1.0
-collect_start = datetime(2012, 11, 17)
+db_name = sys.argv[1]
+file_name = sys.argv[2]
+space_slack = float(sys.argv[3])
+time_slack = float(sys.argv[4])
+dt = [int(d) for d in sys.argv[5].split('-')]
+start_date = datetime(dt[0], dt[1], dt[2])
+dt = [int(d) for d in sys.argv[6].split('-')]
+end_date = datetime(dt[0], dt[1], dt[2])
+
 slice_table = {}
+time_slices = set()
 meetings = {}
 users = set()
 
 """ initialize couchdb """
 couch = couchdb.Server('http://dev.fount.in:5984')
 couch.resource.credentials = ('admin', 'admin')
-db_airports = couch['airport_tweets']
+db = couch[db_name]
 
 """ grab all rows, place them in slicess """
-results = db_airports.view("Tweet/meetings", include_docs = True, stale = 'update_after')
+results = db.view("Tweet/meetings", include_docs = True)
+print "Tweets read from view: %d" % len(results)
 logging.debug("Querying \"Tweet/meetings\" and slicing...")
 for row in results:
     key, value, doc = row.key, row.value, row.doc
-    stamp = couch_key_to_slice_key(key)
-    if doc['created_at'] == None or doc['geo'] == None or key_created_at(doc['created_at']) < collect_start:
+    date = datetime(key[1], key[2], key[3])
+    time_slices.add(date)
+    if doc['created_at'] == None or doc['geo'] == None or date < start_date or date > end_date:
         continue
-    if not stamp in slice_table:
-        slice_table[stamp] = []
-        meetings[stamp] = {}
+    if not date in slice_table:
+        slice_table[date] = []
+        meetings[date] = {}
     if not value in users:
         users = users | set([value])
-    slice_table[stamp].append((value, doc['created_at'], doc['geo']))
-    logging.debug("\t[%s] <- (%s, %s, %s)" % (stamp, value, doc['created_at'], doc['geo']))
+    slice_table[date].append((value, doc['created_at'], doc['geo']))
+    logging.debug("\t[%s] <- (%s, %s, %s)" % (date, value, doc['created_at'], doc['geo']))
 
 logging.debug("Got %s rows." % len(results))
 print "Got %s rows." % len(results)
 
+if (end_date-start_date).days+1 != len(time_slices):
+    print 'Not all requested days found in db.'
+    exit(-1)
+
 print "Users: %s" % len(users)
 """ sort tweets across all slices, infer meetings """
 logging.debug("\nSorting all slices and finding meetings...")
-for (stamp, entries) in slice_table.items():
+for (date, entries) in slice_table.items():
     # if we sort the list by time of tweet, we can reduce time significantly
     # ex: if timediff between (a = (..., noon, ...), b = (..., 3pm, ...)) is too great,
     # no need to check further than b for a meetings
@@ -89,21 +98,21 @@ for (stamp, entries) in slice_table.items():
         logging.debug("sample: %s, %s, %s, ...)" % (samples[0], samples[1], samples[2]))
     for i in range(len(entries)):
         for j in range(i, len(entries)):
-            a, b = entries[i][0], entries[j][0]
+            a, b = int(entries[i][0]), int(entries[j][0])
             if a == b:
                 continue
             time_diff = time_difference(entries[i][1], entries[j][1])
             space_diff = calcDistanceOptimized(entries[i][2], entries[j][2])
             # output meeting and log if meeting hasn't already been added
             if time_diff <= time_slack and space_diff <= space_slack:
-                if new_meeting(a, b, meetings[stamp]):
+                if new_meeting(a, b, meetings[date]):
                     logging.debug("\t(%s, %s): [time: %.3f hr, space: %.3f km] -> YES!" % (a, b, time_diff, space_diff))
-                    if not a in meetings[stamp]:
-                        meetings[stamp][a] = []
-                    if not b in meetings[stamp]:
-                        meetings[stamp][b] = []
-                    meetings[stamp][a].append(b)
-                    meetings[stamp][b].append(a)
+                    if not a in meetings[date]:
+                        meetings[date][a] = []
+                    if not b in meetings[date]:
+                        meetings[date][b] = []
+                    meetings[date][a].append(b)
+                    meetings[date][b].append(a)
                 else:
                     logging.debug("\t(%s, %s): [time: %.3f hr, space: %.3f km] -> SKIP!" % (a, b, time_diff, space_diff))
             else:
@@ -114,8 +123,8 @@ for (stamp, entries) in slice_table.items():
 
 """ dump results to pickle """
 logging.debug("\nDumping to file %s using cPickle." % file_name)
-with open(file_name, 'w+') as pfile:
-    pickle.dump(meetings, pfile)
+with open(file_name, 'wb') as pfile:
+    pickle.dump(meetings, pfile, -1)
 # for debugging!
 #with open(file_name + 'p', 'w+') as pfile:
 #    pp = pprint.PrettyPrinter(indent = 4, stream = pfile)
