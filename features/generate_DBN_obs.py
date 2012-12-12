@@ -21,8 +21,18 @@ meeting_%d_DT
 0 %d %s default %% query on parent 0 (frameNo), make %d splits
 %s -1 0
 """
+
+	template_always_0_tree = \
+"""
+0
+meeting_%d_DT
+0
+ -1 0
+"""
+
 	numMeetings = 0
 	for user in usersList:
+		print twitterIdtoDBNid[user]
 		foutDT = open('../epiDBN/dts/meetings_%d_DT.dts' % twitterIdtoDBNid[user], 'w+')
 		foutDT.write('1 %% number of decision trees in this file\n\n')
 		foutDT.write('%% Conditioned on a given time step, this decision tree returns the sum of select parents that represent encountered people (=the estimated number of distinct sick people met)\n')
@@ -42,6 +52,7 @@ meeting_%d_DT
 				leaves += '{'
 				for userMet in usersMetTransformed:
 					leaves += 'p%d+' % userMet
+					print '%d meets %d' % (twitterIdtoDBNid[user], userMet)
 					numMeetings += 1
 				leaves = leaves[0:-1] # remove last +
 				leaves += '}\n'
@@ -288,7 +299,7 @@ def writeInitialParams(numUsers):
 	filledInFileName = os.path.splitext(fileName)[0]
 	filestring = open(fileName, 'r').read()
 	pH_given_H_M = ''
-	for p in np.linspace(1, 0, 2*numUsers):
+	for p in np.linspace(0.99, 0.01, 2*numUsers):
 		pH_given_H_M += '%.6f %.6f\n' % (p, 1-p)
 	with open(filledInFileName, 'w') as ofile:
 		ofile.write(filestring % (pH_given_H_M))

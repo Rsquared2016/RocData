@@ -12,10 +12,6 @@ echo "OBSERVATION_CARDINALITY = $OBSERVATION_CARDINALITY"
 echo "NUM_OBSERVATIONS = $NUM_OBSERVATIONS"
 
 echo
-echo "Deleting old decision trees..."
-rm -f dts/*
-
-echo
 echo "Running feature extraction..."
 # ./run.sh 4 3 6 3
 #python generate_obs_toy.py $NUM_USERS $NUM_TIME_STEPS $OBSERVATION_CARDINALITY
