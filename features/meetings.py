@@ -35,9 +35,9 @@ def calcDistanceOptimized(a, b):
     return distance * 1.85200088832
 
 def new_meeting(a, b, meetings):
-    if not a in meetings or not b in meetings:
+    if (a not in meetings) or (b not in meetings):
         return True
-    return not (b in meetings[a] and a in meetings[b])
+    return not ((b in meetings[a]) and (a in meetings[b]))
 
 """ start logging module """
 logging.basicConfig(filename = 'meetings.log', level = logging.DEBUG, filemode = 'w', format='%(message)s')
@@ -64,9 +64,9 @@ db = couch[db_name]
 
 """ grab all rows, place them in slicess """
 results = db.view("Tweet/meetings", include_docs = True)
+logging.debug("Querying \"Tweet/meetings\" and slicing...")
 print "Tweets read from view: %d" % len(results)
 logging.debug("Got %s rows." % len(results))
-logging.debug("Querying \"Tweet/meetings\" and slicing...")
 for row in results:
     key, value, doc = row.key, row.value, row.doc
     date = datetime(key[1], key[2], key[3])
@@ -78,7 +78,7 @@ for row in results:
         slice_table[stamp] = []
         meetings[stamp] = {}
     if not value in users:
-        users = users | set([value])
+        users |= set([value])
     slice_table[stamp].append((value, doc['created_at'], doc['geo']))
     logging.debug("\t[%s] <- (%s, %s, %s)" % (date, value, doc['created_at'], doc['geo']))
 
@@ -111,11 +111,11 @@ for (stamp, entries) in slice_table.items():
                 if new_meeting(a, b, meetings[stamp]):
                     logging.debug("\t(%s, %s): [time: %.3f hr, space: %.3f km] -> YES!" % (a, b, time_diff, space_diff))
                     if not a in meetings[stamp]:
-                        meetings[stamp][a] = []
+                        meetings[stamp][a] = set()
                     if not b in meetings[stamp]:
-                        meetings[stamp][b] = []
-                    meetings[stamp][a].append(b)
-                    meetings[stamp][b].append(a)
+                        meetings[stamp][b] = set()
+                    meetings[stamp][a] |= set([b])
+                    meetings[stamp][b] |= set([a])
                 else:
                     logging.debug("\t(%s, %s): [time: %.3f hr, space: %.3f km] -> SKIP!" % (a, b, time_diff, space_diff))
             else:
