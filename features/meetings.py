@@ -62,6 +62,7 @@ db = couch[db_name]
 """ grab all rows, place them in slicess """
 results = db.view("Tweet/meetings", include_docs = True)
 print "Tweets read from view: %d" % len(results)
+logging.debug("Got %s rows." % len(results))
 logging.debug("Querying \"Tweet/meetings\" and slicing...")
 for row in results:
     key, value, doc = row.key, row.value, row.doc
@@ -77,8 +78,6 @@ for row in results:
     slice_table[date].append((value, doc['created_at'], doc['geo']))
     logging.debug("\t[%s] <- (%s, %s, %s)" % (date, value, doc['created_at'], doc['geo']))
 
-logging.debug("Got %s rows." % len(results))
-print "Got %s rows." % len(results)
 
 if (end_date-start_date).days+1 != len(time_slices):
     print 'Not all requested days found in db.'
