@@ -8,6 +8,8 @@
 """
 
 import cPickle as pickle
+import numpy as np
+import os
 import sys
 
 def writeDTs(usersList, meetings, numTimeSteps, numUsers, twitterIdtoDBNid):
@@ -282,7 +284,15 @@ def writeHealthObs(usersList, health, numTimeSteps):
 		fout.write('\n')
 	fout.close()
 
-
+def writeInitialParams(numUsers):
+	fileName = '../epiDBN/dbn_init.params.template'
+	filledInFileName = os.path.splitext(fileName)[0]
+	filestring = open(fileName, 'r').read()
+	pH_given_H_M = ''
+	for p in np.linspace(1, 0, 2*numUsers):
+		pH_given_H_M += '%.6f %.6f\n' % (p, 1-p)
+	with open(filledInFileName, 'w') as ofile:
+		ofile.write(filestring % (pH_given_H_M))
 
 
 ########################################################################################################################
@@ -313,7 +323,7 @@ with open('../epiDBN/param_NUM_TIME_STEPS.txt', 'w') as ofile:
 with open('../epiDBN/param_NUM_USERS.txt', 'w') as ofile:
 	ofile.write('%d\n' % numUsers)
 with open('../epiDBN/param_NUM_OBSERVATIONS.txt', 'w') as ofile:
-	ofile.write('%d\n' % 3)
+	ofile.write('%d\n' % (numUsers+1))
 
 # Induce mapping twitterID -> DBNuserID (0 ... NUM_USERS-1)
 twitterIdtoDBNid = {}
@@ -327,4 +337,5 @@ writeDTs(usersList, meetings, numTimeSteps, numUsers, twitterIdtoDBNid)
 writeStrFile(numUsers)
 writeMasterFile(numUsers)
 writeHeaderFile(numTimeSteps, numUsers)
+writeInitialParams(numUsers)
 

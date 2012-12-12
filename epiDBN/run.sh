@@ -9,6 +9,7 @@ OBSERVATION_CARDINALITY=3
 echo "NUM_USERS = $NUM_USERS"
 echo "NUM_TIME_STEPS = $NUM_TIME_STEPS"
 echo "OBSERVATION_CARDINALITY = $OBSERVATION_CARDINALITY"
+echo "NUM_OBSERVATIONS = $NUM_OBSERVATIONS"
 
 echo
 echo "Deleting old decision trees..."
@@ -24,18 +25,18 @@ cd ../features
 cd ../epiDBN
 
 echo
-echo "Triangulating..."
-rm -rf dbn.str.trifile
-gmtkTriangulate -strFile dbn.str -inputMasterFile dbn.master
+echo "Decision tree processing..."
+rm -f dts/*.dts.index
+gmtkDTindex -inputMasterFile dbn.master
 
 if [ $? -eq 1 ]; then
 	exit 1
 fi
 
 echo
-echo "Decision tree processing..."
-rm -f dts/*.dts.index
-gmtkDTindex -inputMasterFile dbn.master
+echo "Triangulating..."
+rm -rf dbn.str.trifile
+gmtkTriangulate -strFile dbn.str -inputMasterFile dbn.master
 
 if [ $? -eq 1 ]; then
 	exit 1
