@@ -2,10 +2,10 @@
 #define COMMON_PARAMS
 
 % Total number of people in the dateset
-#define NUM_INDIVIDUALS 342
+#define NUM_INDIVIDUALS 7230
 
 % Max number of people one can meet
-#define NUM_INDIVIDUALS_MINUS_ONE 341
+#define NUM_INDIVIDUALS_MINUS_ONE 7229
 
 % Number of buckets to divide meetings into (e.g., [less than 10 meetings, 10 and more])
 #define NUM_BUCKETS 3
@@ -20,6 +20,6 @@
 #define NUM_TIMESTEPS 23
 
 % Number of parents of the meetings nodes (NUM_INDIVIDUALS + 1 (frameNo))
-#define NUM_MEETING_NODE_PARENTS 342
+#define NUM_MEETING_NODE_PARENTS 7230
 
 #endif
