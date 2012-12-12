@@ -13,6 +13,9 @@ import pprint
 import sys
 import math
 
+def couch_key_to_slice_key(couch_key):
+    return "%s %04d-%02d-%02d" % (couch_key[0], couch_key[1], couch_key[2], couch_key[3])
+
 def key_created_at(created_at):
     return datetime.strptime(created_at, '%a, %d %b %Y %H:%M:%S +0000')
 
@@ -67,26 +70,27 @@ logging.debug("Querying \"Tweet/meetings\" and slicing...")
 for row in results:
     key, value, doc = row.key, row.value, row.doc
     date = datetime(key[1], key[2], key[3])
-    time_slices.add(date)
+    stamp = couch_key_to_slice_key(key)
+    time_slices.add(stamp)
     if doc['created_at'] == None or doc['geo'] == None or date < start_date or date > end_date:
         continue
-    if not date in slice_table:
-        slice_table[date] = []
-        meetings[date] = {}
+    if not stamp in slice_table:
+        slice_table[stamp] = []
+        meetings[stamp] = {}
     if not value in users:
         users = users | set([value])
-    slice_table[date].append((value, doc['created_at'], doc['geo']))
+    slice_table[stamp].append((value, doc['created_at'], doc['geo']))
     logging.debug("\t[%s] <- (%s, %s, %s)" % (date, value, doc['created_at'], doc['geo']))
 
 
-if (end_date-start_date).days+1 != len(time_slices):
+if (end_date-start_date).days+1 > len(time_slices):
     print 'Not all requested days found in db.'
     exit(-1)
 
 print "Users: %s" % len(users)
 """ sort tweets across all slices, infer meetings """
 logging.debug("\nSorting all slices and finding meetings...")
-for (date, entries) in slice_table.items():
+for (stamp, entries) in slice_table.items():
     # if we sort the list by time of tweet, we can reduce time significantly
     # ex: if timediff between (a = (..., noon, ...), b = (..., 3pm, ...)) is too great,
     # no need to check further than b for a meetings
@@ -104,14 +108,14 @@ for (date, entries) in slice_table.items():
             space_diff = calcDistanceOptimized(entries[i][2], entries[j][2])
             # output meeting and log if meeting hasn't already been added
             if time_diff <= time_slack and space_diff <= space_slack:
-                if new_meeting(a, b, meetings[date]):
+                if new_meeting(a, b, meetings[stamp]):
                     logging.debug("\t(%s, %s): [time: %.3f hr, space: %.3f km] -> YES!" % (a, b, time_diff, space_diff))
-                    if not a in meetings[date]:
-                        meetings[date][a] = []
-                    if not b in meetings[date]:
-                        meetings[date][b] = []
-                    meetings[date][a].append(b)
-                    meetings[date][b].append(a)
+                    if not a in meetings[stamp]:
+                        meetings[stamp][a] = []
+                    if not b in meetings[stamp]:
+                        meetings[stamp][b] = []
+                    meetings[stamp][a].append(b)
+                    meetings[stamp][b].append(a)
                 else:
                     logging.debug("\t(%s, %s): [time: %.3f hr, space: %.3f km] -> SKIP!" % (a, b, time_diff, space_diff))
             else:
