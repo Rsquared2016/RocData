@@ -62,6 +62,7 @@ dt = [int(d) for d in sys.argv[6].split('-')]
 end_date = datetime(dt[0], dt[1], dt[2])
 degreesY = (space_slack * 1000) * 0.00000900507679  # this many degrees make up 1 meter at NYC latitude
 degreesX = (space_slack * 1000) * 0.00001183569359
+numMeetings = 0
 
 time_slices = set()
 meetings = {}
@@ -105,13 +106,16 @@ if (end_date - start_date).days + 1 > len(time_slices):
     exit(-1)
 
 print "Users: %s" % len(users)
+logging.debug("\n%s users over %s time slices." % (len(users), len(time_slices)))
 """ sort tweets across all slices, infer meetings """
 logging.debug("\nFinding meetings across all time slices...")
 for (date, slice_users) in slice_table.items():
     for (user, utup) in slice_users.items():
         uId, uCreated, uGeo = utup
         nearby_tweets = getTweetsNearGPSbyTimeWindow(date, uGeo['coordinates'])
-        logging.debug("\t%s @ %s: %d nearby tweets. %s"% (user, date, len(nearby_tweets), uGeo['coordinates']))
+        next_slice_tweets = getTweetsNearGPSbyTimeWindow(date + timedelta(days = 1), uGeo['coordinates'])
+        nearby_tweets.extend(next_slice_tweets)
+        logging.debug("\t%s @ %s: %d nearby tweets. %s" % (user, date, len(nearby_tweets), uGeo['coordinates']))
         for nearby_tweet in nearby_tweets:
             nId, nCreated, nGeo = nearby_tweet
             if uId == nId:
@@ -126,10 +130,13 @@ for (date, slice_users) in slice_table.items():
                         meetings[date][nId] = set()
                     meetings[date][uId] |= set([nId])
                     meetings[date][nId] |= set([uId])
+                    numMeetings += 1
                 else:
                     logging.debug("\t(%s, %s): [time: %.3f hr] -> SKIP!" % (uId, nId, time_diff))
             else:
                 logging.debug("\t(%s, %s): [time: %.3f hr] -> NO!" % (uId, nId, time_diff))
+print "%s meetings found." % numMeetings
+logging.debug("%s meetings found." % numMeetings)
 
 """ dump results to pickle """
 logging.debug("\nDumping to file %s using cPickle." % file_name)
