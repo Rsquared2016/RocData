@@ -13,6 +13,7 @@ import datetime
 import re
 import atexit
 import smtplib
+import logging
 
 """
     Overview:
@@ -42,21 +43,21 @@ class DbManager:
             self.db.save(doc, batch='ok')
             return True
         except AttributeError:
-            print('Database instance for "%s" has not been opened or created.' % self.name)
+            logging.exception('Database instance for "%s" has not been opened or created.' % self.name)
             return False
         except couchdb.http.ResourceConflict:
-            print('Document %s in database conflicted during update.' % doc['_id'])
-            print('Server revision: [%s], client revision: [%s]' % self.db[doc['_id']]['_rev'], doc['_rev'])
+            logging.exception('Document %s in database conflicted during update.' % doc['_id'])
+            logging.exception('Server revision: [%s], client revision: [%s]' % self.db[doc['_id']]['_rev'], doc['_rev'])
             return False
         except (socket.error, couchdb.http.ServerError):
-            print 'Caught error on db.save(), ignoring.'
+            logging.exception('Caught error on db.save(), ignoring.')
             return False
 
     def get(self, id):
         try:
             return self.db.get(id)
         except AttributeError:
-            print('Database instance for "%s" has not been opened or created.' % self.name)
+            logging.exception('Database instance for "%s" has not been opened or created.' % self.name)
             return False
 
     def update_field(self, id, field, value):
@@ -66,7 +67,7 @@ class DbManager:
             self.save(doc)
             return True
         except AttributeError:
-            print('Database instance for "%s" has not been opened or created.' % self.name)
+            logging.exception('Database instance for "%s" has not been opened or created.' % self.name)
             return False
 
 def emailAlert():
@@ -134,7 +135,7 @@ def updateVitals(db, name, numPeople, numInteresting, currentUser):
     try:
         db.save(status)
     except (socket.error, couchdb.http.ServerError) as e:
-        print "Couldn't write status to server: %s" % e
+        logging.exception("Couldn't write status to server")
         sys.stdout.flush()
         sys.exit()
 
@@ -172,17 +173,20 @@ def backoff():
     current_time = int(datetime.datetime.utcnow().strftime("%s"))
     current_delta = current_time - last_time
     refresh_delta = refresh_time - current_delta + 1
-    print "Sleeping for %s seconds..." % refresh_delta
+    logging.debug("Sleeping for %s seconds..." % refresh_delta)
     time.sleep(refresh_delta)
 
 # Catch ctrl+C
 def signal_handler(signal, frame):
-    print "Stopping execution, updating vitals..."
+    logging.debug("Stopping execution, updating vitals...")
     updateVitals(db_status)
-    print "num_tweets: %s, last_id: %s" % (numTweets, lastId)
+    logging.debug("num_tweets: %s, last_id: %s" % (numTweets, lastId))
     sys.stdout.flush()
     sys.exit(0)
 signal.signal(signal.SIGINT, signal_handler)
+
+""" start logging module """
+logging.basicConfig(filename = 'interesting.log', level = logging.DEBUG, filemode = 'w', format='%(message)s')
 
 """ initialize cmdline args and other parameters """
 pause_time = float(sys.argv[1])
@@ -249,8 +253,8 @@ if __name__ == "__main__":
             if len(value) > 1:
                 interestingPeople.append(key)
 
-        print "People: %d" % numPeople
-        print "Interesting people: %s" % len(interestingPeople)
+        logging.debug("People: %d" % numPeople)
+        logging.debug("Interesting people: %s" % len(interestingPeople))
         lastId = None
         updateVitals(db_status, dbname, numPeople, len(interestingPeople), None)
 
@@ -271,14 +275,14 @@ if __name__ == "__main__":
                 except (TypeError, KeyError) as e:
                     pass
 
-                print "[%s]: %d tweets" % (uid, len(tweets))
+                logging.debug("[%s]: %d tweets" % (uid, len(tweets)))
                 for tweet in tweets:
                     # prep data slightly
                     tweet = rest2search(tweet)
                     tweet['text'] = re.sub(pNewLine, ' ', tweet['text']).encode("utf-8")
                     # classify the health
                     tweet['health'] = classifyTweetPython(tweet['text'], p, WORDStoID, model)
-                    print "[%s]: says %s" % (uid, tweet['text'])
+                    logging.debug("[%s]: says %s" % (uid, tweet['text']))
                     # Extract GPS: try 'geo' tag, fallback to 'location' tag
                     if not('geo' in tweet) and tweet['location'] != None:
                          match = rexLatLon.search(tweet['location'])
@@ -307,10 +311,10 @@ if __name__ == "__main__":
                     last_time = int(datetime.datetime.utcnow().strftime("%s"))
             updateVitals(db_status, dbname, numPeople, len(interestingPeople), None)
         except KeyError as e:
-            print "%s" % e
+            logging.exception("Key error in collection, whoops")
             continue
         except Exception as e:
-            print "Uh oh, something bad happened..."
+            logging.debug("Uh oh, something bad happened...")
             emailAlert()
             printException()
             sys.stdout.flush()

@@ -108,16 +108,16 @@ for row in results:
 # also account for collection start here
 couch_count = (finish - start).days + 1
 # trim leading zeros (some cities started collecting later than others)
-while len(couch_values[area]) > 0 and couch_values[area][0] == 0.0:
-    couch_values[area].pop(0)
-    couch_keys[area].pop(0)
-    couch_count -= 1
+#while len(couch_values[area]) > 0 and couch_values[area][0] == 0.0:
+#    couch_values[area].pop(0)
+#    couch_keys[area].pop(0)
+#    couch_count -= 1
 
 """ create lists for percent deviations """
 gft_avg, couch_avg = float(gft_sum) / gft_count, float(couch_sum) / couch_count
 print "Flu trends... sum: %s, count: %s, average: %s" % (gft_sum, gft_count, gft_avg)
 print "Couch... sum: %s, count: %s, average: %s" % (couch_sum, couch_count, couch_avg)
-print "Couch vals: %s" % couch_values[area]
+#print "Couch vals: %s" % couch_values[area]
 gft_pct = [dev_percent(v, gft_avg) for v in gft_values[area]]
 couch_pct = [dev_percent(v, couch_avg) for v in couch_values[area]]
 
@@ -126,17 +126,27 @@ figure = plt.figure()
 axes = figure.add_subplot(111)
 gft_times = [key_to_datetime(key) for key in gft_keys[area]]
 couch_times = [key_to_datetime(key) for key in couch_keys[area]]
-gft_line = axes.plot_date(gft_times, gft_pct, 'r-', linewidth = 1)
-couch_line = axes.plot_date(couch_times, couch_pct, 'b-', linewidth = 1)
+gft_line = axes.plot_date(gft_times, gft_pct, 'r-', linewidth = 1, label = 'Google Flu Trends')
+couch_line = axes.plot_date(couch_times, couch_pct, 'b-', linewidth = 1, label = 'TwitterHealth Regional')
+
+""" generate correlation coefficient for lines """
+# just print it out for now
+correlation = np.corrcoef(gft_values[area], couch_values[area])
+print "Correlation: %f" % correlation[0][1]
 
 """ plot styling """
+figure.suptitle("Sick Individuals in %s" % region_map[area], fontsize = 20)
 axes.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday = 6))
 axes.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
 axes.xaxis.set_minor_locator(mdates.DayLocator())
-axes.set_xlabel('Day')
+figure.autofmt_xdate(rotation = 45)
+axes.set_xlabel("Correlation: %f" % correlation[0][1])
 axes.set_ylabel('% Deviation from Average')
-axes.set_xlim(start, finish)
+axes.set_xlim(start, finish - timedelta(days = 7))
 axes.set_ylim(min(-100.0, min_union(gft_pct, couch_pct)), max(100.0, max_union(gft_pct, couch_pct)))
+handles, labels = axes.get_legend_handles_labels()
+axes.legend(handles, labels, loc = 2, prop = { 'size': 8 })
 axes.grid(True)
 
-plt.savefig("figures/%s_mob.png" % area,  dpi=200, bbox_inches='tight', pad_inches=0, transparent=False)
+todate = datetime.utcnow().strftime("%Y-%m-%d")
+plt.savefig("figures/%s_mob_%s.png" % (area, todate), dpi=200, bbox_inches='tight', pad_inches=0.5, transparent=False)

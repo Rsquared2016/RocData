@@ -16,11 +16,18 @@ from datetime import datetime, timedelta
 import re
 
 def key_to_datetime(key):
-    return datetime(*key[1:])
+    return datetime(key[1], key[2], key[3])
 
 def offset_to_key(origin, day_diff):
     d = origin + timedelta(days = day_diff)
     return [airport, d.year, d.month, d.day]
+
+def parse_created_at(created_at):
+    # apparently there are two different created_at formats? wtf?
+    try:
+        return datetime.strptime(created_at, '%a %b %d %H:%M:%S +0000 %Y')
+    except ValueError as e:
+        return datetime.strptime(created_at, '%a, %d %b %Y %H:%M:%S +0000')
 
 def min_union(a, b):
     return min(set(a) | set(b))
@@ -34,7 +41,7 @@ def dev_percent(val, avg):
 """ init cmdline args and whatnot """
 airport = sys.argv[1]
 start, finish = None, None
-start_str = sys.argv[2] if len(sys.argv) >= 3 else "2012-11-11"
+start_str = sys.argv[2] if len(sys.argv) >= 3 else "2012-11-18"
 finish_str = sys.argv[3] if len(sys.argv) >= 4 else datetime.utcnow().strftime("%Y-%m-%d")
 start, finish = datetime.strptime(start_str, "%Y-%m-%d"), datetime.strptime(finish_str, "%Y-%m-%d")
 # we need to keep track of this so the statistics for the first week of collection aren't skewed
@@ -98,38 +105,40 @@ end_key = [airport, finish.year, finish.month, finish.day]
 query_later = []
 query_for = {}
 query_days = {}
+exclude = set()
 print "startkey: %s" % start_key
 print "endkey: %s" % end_key
 results = db_airports.view(
     "Tweet/by_airport",
+    reduce = False,
     startkey = start_key,
     endkey = end_key,
-    include_doc = True)
+    include_docs = True)
 for row in results:
     key, value, doc = row.key, row.value, row.doc
     #print "%s: %s" % (row.key, row.value)
     result_day = key_to_datetime(key)
     index = (result_day - start).days / 7
     # if this tweet indicates sickness, do standard thing
-    if doc.health >= health_threshold:
+    if doc['health'] >= health_threshold:
         # weight sum properly if this result was between collection start and the next sunday
         if result_day >= collect_start and result_day < collect_start + timedelta(days = 1):
             print "next_week: %s" % (collect_start + timedelta(days = 1))
             couch_values[airport][index] += 1.0 / 1
         else:
             couch_values[airport][index] += 1.0 / 7
-        couch_sum += 1.0
+        couch_sum += row.value
+        exclude |= set([doc['_id']])
     # else append the from_user_id_str to list to query later
     else:
-        query_later.append(doc.from_user_id_str)
-        if not(doc.from_user_id_str in query_for):
-            query_for[doc.from_user_id_str] = []
-        query_for[doc.from_user_id_str].append(result_day)
-        query_days[doc.from_user_id_str] = []
+        query_later.append(doc['from_user_id_str'])
+        if not(doc['from_user_id_str'] in query_for):
+            query_for[doc['from_user_id_str']] = []
+        query_for[doc['from_user_id_str']].append(result_day)
+        query_days[doc['from_user_id_str']] = set()
     # count total number of users as well
     # weight sum properly if this result was between collection start and the next sunday
     if result_day >= collect_start and result_day < collect_start + timedelta(days = 1):
-        print "next_week: %s" % (collect_start + timedelta(days = 1))
         total_values[airport][index] += 1.0 / 1
     else:
         total_values[airport][index] += 1.0 / 7
@@ -141,33 +150,40 @@ for row in results:
 query_later.sort()
 step = 100
 for i in range(0, len(query_later), step):
-    start, finish = query_later[i], query_later[min(i + step, len(query_later))]
-    print "Querying from user %s to user %s" % (start, finish)
-    results = db_airports.view("Tweet/by_user_id", startkey = start, endkey = finish, include_doc = True)
+    start_user, finish_user = query_later[i], query_later[min(i + step, len(query_later) - 1)]
+    print "Querying from user %s to user %s" % (start_user, finish_user)
+    results = db_airports.view("Tweet/by_user_id", startkey = start_user, endkey = finish_user, include_docs = True)
     for row in results:
         key, value, doc = row.key, row.value, row.doc
         if key in query_later:
             # if health is above threshold, add previous two days and next two days
-            if doc.health >= health_threshold:
-                print "\tFound sick tweet from user %s at time %s" % (doc.from_user_id_str, doc.created_at)
-                sick_day = datetime.strptime(doc.created_at, '%a %b %d %H:%M:%S +0000 %Y %Z')
-                for risk_day in (sick_day + timedelta(days = n) for n in range(-2, 3)):
-                    if not(risk_day in query_days[doc.from_user_id_str]):
-                        query_days[doc.from_user_id_str].append(risk_day)
+            if doc['_id'] not in exclude and doc['health'] >= health_threshold:
+                print "\tFound sick tweet from user %s at time %s" % (doc['from_user_id_str'], doc['created_at'])
+                sick_day = parse_created_at(doc['created_at'])
+                for risk_day in [sick_day + timedelta(days = n) for n in range(-2, 3)]:
+                    query_days[doc['from_user_id_str']] |= set([risk_day])
+print "\nQuery days: %s" % query_days
 # now that querying is complete, check whether users were actually sick on those days
+print "\nMerging backtracking results with naive results..."
 for user in query_later:
-    for day in query_for[user]:
-        if day in query_days[user]:
-            index = (result_day - start).days / 7
-            # weight sum properly if this result was between collection start and the next sunday
-            if day >= collect_start and day < collect_start + timedelta(days = 1):
-                couch_values[airport][index] += 1.0 / 1
-            else:
-                couch_values[airport][index] += 1.0 / 7
-            couch_sum += 1.0
+    for day in query_days[user]:
+        # skip if this risk day was not specifically queried for earlier
+        if day not in query_for[user]:
+            continue
+        print "\tUser %s presented health risk on %s!" % (user, day)
+        index = (day - start).days / 7
+        # weight sum properly if this result was between collection start and the next sunday
+        if day >= collect_start and day < collect_start + timedelta(days = 1):
+            couch_values[airport][index] += 1.0 / 1
+        else:
+            couch_values[airport][index] += 1.0 / 7
+        couch_sum += 1
 
 # also account for collection start here
-couch_count = (finish - max(start, collect_start)).days + 1
+if start >= collect_start:
+    couch_count = total_count = (finish - start).days + 1
+else:
+    couch_count = total_count = (finish - collect_start).days + 1
 
 """ create lists for percent deviations """
 gft_avg, couch_avg, total_avg = float(gft_sum) / gft_count, float(couch_sum) / couch_count, float(total_sum) / total_count

@@ -13,6 +13,7 @@ import datetime
 import re
 import atexit
 import smtplib
+import logging
 
 class Airport:
     def __init__(self, name, code, lat, lon):
@@ -40,10 +41,10 @@ def saveObjectToCouch(db, o):
         db.save(o, batch='ok')
         return True
     except couchdb.http.ResourceConflict:
-        print('Object with _id %s already in db; continuing...' % o['_id'])
+        logging.exception('Object with _id %s already in db; continuing...' % o['_id'])
         return False
     except (socket.error, couchdb.http.ServerError):
-        print 'Caught error on db.save(), sleeping for a while...'
+        logging.exception('Caught error on db.save(), sleeping for a while...')
         time.sleep(60) # hope db comes back up
         return False
 
@@ -130,9 +131,9 @@ input.close()
 
 # Catch ctrl+C
 def signal_handler(signal, frame):
-        print 'Terminating, flushing file %s' % fileName
+        logging.debug('Terminating, flushing file %s' % fileName)
         log.close()
-        print "Tweets logged: %d" % numTweets
+        logging.debug("Tweets logged: %d" % numTweets)
         updateVitals(db_status)
         sys.stdout.flush()
         sys.exit(0)
@@ -141,6 +142,9 @@ signal.signal(signal.SIGINT, signal_handler)
 #Geo_area = "34.05,-118.25,150km" # Los Angeles
 #geo_area = "43.165556,-77.611389,80km" # Rochester, NY
 #geo_area = "40.716667,-74.00,100km" # NYC
+
+""" start logging module """
+logging.basicConfig(filename = 'airports.log', level = logging.DEBUG, filemode = 'w', format='%(message)s')
 
 dbName = 'airport_tweets'
 lastID = []
@@ -161,7 +165,7 @@ pauseTime = float(sys.argv[3]) # minutes
 geoOrAll = sys.argv[4].strip().lower()
 words_file = sys.argv[5]
 svm_file = sys.argv[6]
-print 'Collecting airports %d through %d' % (begin, end)
+logging.debug('Collecting airports %d through %d' % (begin, end))
 
 ip_addr = urllib2.urlopen("http://automation.whatismyip.com/n09230945.asp").read()
 instance_id = '%s (%s) @ %s' % (dbName, geoOrAll, ip_addr)
@@ -197,7 +201,7 @@ while True:
         try:
             search_results = twitter.searchTwitter(q="", rpp="100", lang="en", geocode=geo_area, since_id=str(lastID[i]), result_type="recent")
         except: # catch all problems
-            print 'Error caught, continuing after %d seconds' % (waitTime*60)
+            logging.debug('Error caught, continuing after %d seconds' % (waitTime*60))
             print i, a
             emailAlert()
             printException()
@@ -208,8 +212,8 @@ while True:
         #print search_results
         try:
             e = search_results['error']
-            print 'Error caught: %s' % e
-            print 'Waiting for %d minutes' % waitTime
+            logging.debug('Error caught: %s' % e)
+            logging.debug('Waiting for %d minutes' % waitTime)
             time.sleep(waitTime)
             continue
         except KeyError:
@@ -217,8 +221,8 @@ while True:
 
         # stall if no results key came back
         if not(search_results.has_key("results")):
-            log('Error caught: no "results" key')
-            log('  Waiting for %d seconds' % waitTime)
+            logging.debug('Error caught: no "results" key')
+            logging.debug('  Waiting for %d seconds' % waitTime)
             time.sleep(waitTime)
             twitter = Twython()
             continue
@@ -252,7 +256,7 @@ while True:
             if geoOrAll == 'all' or tweet['geo'] != None:
                 saveObjectToCouch(db, tweet)
 
-            print '%s: %s' % (airport.code, tweet["text"])
+            logging.debug('%s: %s' % (airport.code, tweet["text"]))
             if numTweets % 500 == 0:
                 updateVitals(db_status)
         sys.stdout.flush()
