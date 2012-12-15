@@ -48,8 +48,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-build_triplet = x86_64-apple-darwin12.2.0
-host_triplet = x86_64-apple-darwin12.2.0
+build_triplet = x86_64-apple-darwin10.8.0
+host_triplet = x86_64-apple-darwin10.8.0
 #am__append_1 = -DNDEBUG
 #am__append_2 = -DNMODELCHECK
 check_PROGRAMS = ieeeTest$(EXEEXT)
@@ -77,7 +77,7 @@ am__v_AR_1 =
 libIEEEsupport_a_AR = $(AR) $(ARFLAGS)
 libIEEEsupport_a_LIBADD =
 nodist_libIEEEsupport_a_OBJECTS =  \
-	libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.$(OBJEXT)
+	libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.$(OBJEXT)
 libIEEEsupport_a_OBJECTS = $(nodist_libIEEEsupport_a_OBJECTS)
 am_ieeeTest_OBJECTS = ieeeTest.$(OBJEXT)
 ieeeTest_OBJECTS = $(am_ieeeTest_OBJECTS)
@@ -162,15 +162,15 @@ AR = ar
 AUTOCONF = ${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/IEEEFloatingpoint/missing --run autoconf
 AUTOHEADER = ${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/IEEEFloatingpoint/missing --run autoheader
 AUTOMAKE = ${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/IEEEFloatingpoint/missing --run automake-1.12
-AWK = awk
+AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -m64
+CFLAGS = -g -O2
 CPP = gcc -E
 CPPFLAGS = 
 CXX = g++
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -m64
+CXXFLAGS = 
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -186,7 +186,7 @@ INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-LDFLAGS = -m64
+LDFLAGS = 
 LIBOBJS = 
 LIBS = 
 LN_S = ln -s
@@ -220,10 +220,10 @@ am__quote =
 am__tar = $${TAR-tar} chof - "$$tardir"
 am__untar = $${TAR-tar} xf -
 bindir = ${exec_prefix}/bin
-build = x86_64-apple-darwin12.2.0
+build = x86_64-apple-darwin10.8.0
 build_alias = 
 build_cpu = x86_64
-build_os = darwin12.2.0
+build_os = darwin10.8.0
 build_vendor = apple
 builddir = .
 datadir = ${datarootdir}
@@ -231,10 +231,10 @@ datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
-host = x86_64-apple-darwin12.2.0
+host = x86_64-apple-darwin10.8.0
 host_alias = 
 host_cpu = x86_64
-host_os = darwin12.2.0
+host_os = darwin10.8.0
 host_vendor = apple
 htmldir = ${docdir}
 includedir = ${prefix}/include
@@ -279,8 +279,8 @@ noinst_LIBRARIES = libIEEEsupport.a
 # the CPU (FPU) and OS, which are identified by autoconf
 nodist_libIEEEsupport_a_SOURCES = \
 ieeeFPsetup.h \
-ieeeFPsetup_x86_64_darwin12.2.0.h \
-ieeeFPsetup_x86_64_darwin12.2.0.cc
+ieeeFPsetup_x86_64_darwin10.8.0.h \
+ieeeFPsetup_x86_64_darwin10.8.0.cc
 
 
 # The clients want to include ieeeFPsetup.h wihtout caring
@@ -288,7 +288,7 @@ ieeeFPsetup_x86_64_darwin12.2.0.cc
 # header to create it.
 BUILT_SOURCES = ieeeFPsetup.h
 CLEANFILES = ieeeFPsetup.h 
-#DISTCLEANFILES = ieeeFPsetup_x86_64_darwin12.2.0.h ieeeFPsetup_x86_64_darwin12.2.0.cc
+#DISTCLEANFILES = ieeeFPsetup_x86_64_darwin10.8.0.h ieeeFPsetup_x86_64_darwin10.8.0.cc
 
 # Compilation flags for IEEEsupport library objects (user's CXXFLAGS will
 # be appended)
@@ -394,7 +394,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 include ./$(DEPDIR)/ieeeTest.Po
-include ./$(DEPDIR)/libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.Po
+include ./$(DEPDIR)/libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.Po
 
 .cc.o:
 	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -410,19 +410,19 @@ include ./$(DEPDIR)/libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.Po
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
 
-libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.o: ieeeFPsetup_x86_64_darwin12.2.0.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libIEEEsupport_a_CXXFLAGS) $(CXXFLAGS) -MT libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.o -MD -MP -MF $(DEPDIR)/libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.Tpo -c -o libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.o `test -f 'ieeeFPsetup_x86_64_darwin12.2.0.cc' || echo '$(srcdir)/'`ieeeFPsetup_x86_64_darwin12.2.0.cc
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.Tpo $(DEPDIR)/libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.Po
-#	$(AM_V_CXX)source='ieeeFPsetup_x86_64_darwin12.2.0.cc' object='libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.o' libtool=no \
+libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.o: ieeeFPsetup_x86_64_darwin10.8.0.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libIEEEsupport_a_CXXFLAGS) $(CXXFLAGS) -MT libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.o -MD -MP -MF $(DEPDIR)/libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.Tpo -c -o libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.o `test -f 'ieeeFPsetup_x86_64_darwin10.8.0.cc' || echo '$(srcdir)/'`ieeeFPsetup_x86_64_darwin10.8.0.cc
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.Tpo $(DEPDIR)/libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.Po
+#	$(AM_V_CXX)source='ieeeFPsetup_x86_64_darwin10.8.0.cc' object='libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libIEEEsupport_a_CXXFLAGS) $(CXXFLAGS) -c -o libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.o `test -f 'ieeeFPsetup_x86_64_darwin12.2.0.cc' || echo '$(srcdir)/'`ieeeFPsetup_x86_64_darwin12.2.0.cc
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libIEEEsupport_a_CXXFLAGS) $(CXXFLAGS) -c -o libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.o `test -f 'ieeeFPsetup_x86_64_darwin10.8.0.cc' || echo '$(srcdir)/'`ieeeFPsetup_x86_64_darwin10.8.0.cc
 
-libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.obj: ieeeFPsetup_x86_64_darwin12.2.0.cc
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libIEEEsupport_a_CXXFLAGS) $(CXXFLAGS) -MT libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.obj -MD -MP -MF $(DEPDIR)/libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.Tpo -c -o libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.obj `if test -f 'ieeeFPsetup_x86_64_darwin12.2.0.cc'; then $(CYGPATH_W) 'ieeeFPsetup_x86_64_darwin12.2.0.cc'; else $(CYGPATH_W) '$(srcdir)/ieeeFPsetup_x86_64_darwin12.2.0.cc'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.Tpo $(DEPDIR)/libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.Po
-#	$(AM_V_CXX)source='ieeeFPsetup_x86_64_darwin12.2.0.cc' object='libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.obj' libtool=no \
+libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.obj: ieeeFPsetup_x86_64_darwin10.8.0.cc
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libIEEEsupport_a_CXXFLAGS) $(CXXFLAGS) -MT libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.obj -MD -MP -MF $(DEPDIR)/libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.Tpo -c -o libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.obj `if test -f 'ieeeFPsetup_x86_64_darwin10.8.0.cc'; then $(CYGPATH_W) 'ieeeFPsetup_x86_64_darwin10.8.0.cc'; else $(CYGPATH_W) '$(srcdir)/ieeeFPsetup_x86_64_darwin10.8.0.cc'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.Tpo $(DEPDIR)/libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.Po
+#	$(AM_V_CXX)source='ieeeFPsetup_x86_64_darwin10.8.0.cc' object='libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libIEEEsupport_a_CXXFLAGS) $(CXXFLAGS) -c -o libIEEEsupport_a-ieeeFPsetup_x86_64_darwin12.2.0.obj `if test -f 'ieeeFPsetup_x86_64_darwin12.2.0.cc'; then $(CYGPATH_W) 'ieeeFPsetup_x86_64_darwin12.2.0.cc'; else $(CYGPATH_W) '$(srcdir)/ieeeFPsetup_x86_64_darwin12.2.0.cc'; fi`
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libIEEEsupport_a_CXXFLAGS) $(CXXFLAGS) -c -o libIEEEsupport_a-ieeeFPsetup_x86_64_darwin10.8.0.obj `if test -f 'ieeeFPsetup_x86_64_darwin10.8.0.cc'; then $(CYGPATH_W) 'ieeeFPsetup_x86_64_darwin10.8.0.cc'; else $(CYGPATH_W) '$(srcdir)/ieeeFPsetup_x86_64_darwin10.8.0.cc'; fi`
 
 ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
 	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
@@ -788,11 +788,11 @@ uninstall-am:
 	ps ps-am tags uninstall uninstall-am
 
 
-ieeeFPsetup.h: ieeeFPsetup_x86_64_darwin12.2.0.h
-	$(AM_V_GEN)if test -f $(top_srcdir)/ieeeFPsetup_x86_64_darwin12.2.0.h; then \
-	 $(LN_S) $(top_srcdir)/ieeeFPsetup_x86_64_darwin12.2.0.h ieeeFPsetup.h; \
+ieeeFPsetup.h: ieeeFPsetup_x86_64_darwin10.8.0.h
+	$(AM_V_GEN)if test -f $(top_srcdir)/ieeeFPsetup_x86_64_darwin10.8.0.h; then \
+	 $(LN_S) $(top_srcdir)/ieeeFPsetup_x86_64_darwin10.8.0.h ieeeFPsetup.h; \
 	else \
-	 $(LN_S) ieeeFPsetup_x86_64_darwin12.2.0.h ieeeFPsetup.h; \
+	 $(LN_S) ieeeFPsetup_x86_64_darwin10.8.0.h ieeeFPsetup.h; \
 	fi
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
