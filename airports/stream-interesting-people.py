@@ -260,7 +260,7 @@ if __name__ == "__main__":
             for uid in interestingPeople:
                 # grab user timeline
                 currentIteration += 1
-                tweets = twitter.getUserTimeline(user_id=uid, limit = 100)
+                tweets = twitter.getUserTimeline(user_id=uid, count = 100)
                 # check for rate limit, back off if so
                 try:
                     response = tweets['error']
