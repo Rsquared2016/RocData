@@ -41,7 +41,7 @@ dt = [int(d) for d in sys.argv[4].split('-')]
 start_date = datetime(dt[0], dt[1], dt[2])
 dt = [int(d) for d in sys.argv[5].split('-')]
 end_date = datetime(dt[0], dt[1], dt[2])
-min_tweet_count = 14 # don't include users who tweeted fewer times than min_tweet_count
+min_tweet_count = 5 # don't include users who tweeted fewer times than min_tweet_count
 
 time_slices = set()
 users = set()
@@ -75,7 +75,7 @@ for (userID, numTweets) in sorted(userToNumTweets.iteritems(), key=operator.item
     activeUsers.add(userID)
     logging.debug('%d: %d' % (userID, numTweets))
 
-if (end_date-start_date).days+1 != len(time_slices):
+if (end_date-start_date).days+1 > len(time_slices):
     print 'Not all requested days found in db.'
     exit(-1)
 

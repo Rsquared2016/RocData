@@ -51,6 +51,7 @@ if start >= finish:
 region_map = {}
 gft_keys,   gft_values,   gft_sum,   gft_count   = {}, {}, 0, 0
 couch_keys, couch_values, couch_sum, couch_count = {}, {}, 0, 0
+total_keys, total_values, total_sum, total_count = {}, {}, 0, 0
 health_threshold = 0.8
 
 """ init couchdb stuff """
@@ -68,6 +69,8 @@ with open('airport-to-city.txt', 'r') as rmap_file:
         gft_values[code] = []
         couch_keys[code] = [offset_to_key(start, i * 7) for i in range((finish - start).days / 7 + 1)]
         couch_values[code] = [0.0 for i in range((finish - start).days / 7 + 1)]
+        total_keys[code] = [offset_to_key(start, i * 7) for i in range((finish - start).days / 7 + 1)]
+        total_values[code] = [0.0 for i in range((finish - start).days / 7 + 1)]
         line = rmap_file.readline()
 
 """ retrieve stats from google flu trends csv """
@@ -106,9 +109,9 @@ for row in results:
     key, value, doc = row.key, row.value, row.doc
     #print "%s: %s" % (row.key, row.value)
     result_day = key_to_datetime(key)
+    index = (result_day - start).days / 7
     # if this tweet indicates sickness, do standard thing
     if doc.health >= health_threshold:
-        index = (result_day - start).days / 7
         # weight sum properly if this result was between collection start and the next sunday
         if result_day >= collect_start and result_day < collect_start + timedelta(days = 1):
             print "next_week: %s" % (collect_start + timedelta(days = 1))
@@ -123,6 +126,14 @@ for row in results:
             query_for[doc.from_user_id_str] = []
         query_for[doc.from_user_id_str].append(result_day)
         query_days[doc.from_user_id_str] = []
+    # count total number of users as well
+    # weight sum properly if this result was between collection start and the next sunday
+    if result_day >= collect_start and result_day < collect_start + timedelta(days = 1):
+        print "next_week: %s" % (collect_start + timedelta(days = 1))
+        total_values[airport][index] += 1.0 / 1
+    else:
+        total_values[airport][index] += 1.0 / 7
+    total_sum += 1
 
 """ query across all users who MIGHT be sick """
 # do several large queries instead of many many smaller ones
@@ -159,20 +170,23 @@ for user in query_later:
 couch_count = (finish - max(start, collect_start)).days + 1
 
 """ create lists for percent deviations """
-gft_avg, couch_avg = float(gft_sum) / gft_count, float(couch_sum) / couch_count
+gft_avg, couch_avg, total_avg = float(gft_sum) / gft_count, float(couch_sum) / couch_count, float(total_sum) / total_count
 print "Flu trends... sum: %s, count: %s, average: %s" % (gft_sum, gft_count, gft_avg)
-print "Couch... sum: %s, count: %s, average: %s" % (couch_sum, couch_count, couch_avg)
-print "Couch vals: %s" % couch_values[airport]
+print "Airports (sick)... sum: %s, count: %s, average: %s" % (couch_sum, couch_count, couch_avg)
+print "Airports (total)... sum: %s, count: %s, average: %s" % (total_sum, total_count, total_avg)
 gft_pct = [dev_percent(v, gft_avg) for v in gft_values[airport]]
 couch_pct = [dev_percent(v, couch_avg) for v in couch_values[airport]]
+total_pct = [dev_percent(v, total_avg) for v in total_values[airport]]
 
 """ create histogram buckets for each dataset, then pdf """
 figure = plt.figure()
 axes = figure.add_subplot(111)
 gft_times = [key_to_datetime(key) for key in gft_keys[airport]]
 couch_times = [key_to_datetime(key) for key in couch_keys[airport]]
+total_times = [key_to_datetime(key) for key in total_keys[airport]]
 gft_line = axes.plot_date(gft_times, gft_pct, 'r-', linewidth = 1)
 couch_line = axes.plot_date(couch_times, couch_pct, 'b-', linewidth = 1)
+total_line = axes.plot_date(couch_times, total_pct, 'b--', linewidth = 1)
 
 """ plot styling """
 axes.xaxis.set_major_locator(mdates.WeekdayLocator(byweekday = 6))
