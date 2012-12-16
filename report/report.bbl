@@ -1,0 +1,29 @@
+\begin{thebibliography}{1}
+
+\bibitem{brockmann}
+D.~Brockmann, L.~Hufnagel, and T.~Geisel.
+\newblock {The scaling laws of human travel}.
+\newblock {\em Nature}, 439:462--465, January 2006.
+
+\bibitem{colizza}
+V.~Colizza, A.~Vespignani, and E.F. Hardy.
+\newblock Impact of air travel on global spread of infectious diseases, 2007.
+
+\bibitem{foxwell}
+A.R. Foxwell, L.~Roberts, K.~Lokuge, and P.M. Kelly.
+\newblock Transmission of influenza-like illness on international flights.
+\newblock {\em Emerging Infectious Diseases}, May 2009.
+
+\bibitem{moser}
+M.R. Moser, T.R. Bender, H.S. Margolis, G.R. Noble, A.P. Kendal, and D.G.
+  Ritter.
+\newblock An outbreak of influenza aboard a commercial airliner.
+\newblock {\em American Journal of Epidemiology}, 110:1--6, July 1979.
+
+\bibitem{sadilek}
+A.~Sadilek, H.~Kautz, and V.~Silenzio.
+\newblock Modeling spread of disease from social interactions.
+\newblock In {\em Sixth AAAI International Conference on Weblogs and Social
+  Media (ICWSM)}, 2012.
+
+\end{thebibliography}
