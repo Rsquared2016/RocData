@@ -314,7 +314,7 @@ if __name__ == "__main__":
             logging.exception("Key error in collection, whoops")
             continue
         except Exception as e:
-            logging.debug("Uh oh, something bad happened...")
+            logging.exception("Uh oh, something bad happened...")
             emailAlert()
             printException()
             sys.stdout.flush()
