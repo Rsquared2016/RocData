@@ -216,7 +216,7 @@ total_line = axes.plot_date(couch_times, total_pct, 'b--', linewidth = 1, label 
 
 """ generate correlation coefficient for lines """
 # just print it out for now
-correlation = np.corrcoef(gft_values[area], couch_values[area])
+correlation = np.corrcoef(gft_values[airport], couch_values[airport])
 print "Correlation: %f" % correlation[0][1]
 
 """ plot styling """
@@ -234,4 +234,4 @@ axes.legend(handles, labels, loc = 2, prop = { 'size': 8 })
 axes.grid(True)
 
 todate = datetime.utcnow().strftime("%Y-%m-%d")
-plt.savefig("figures/%s_idev_%s.png" % (airport, todate),  dpi=200, bbox_inches='tight', pad_inches=0, transparent=False)
+plt.savefig("figures/%s_idev_%s.png" % (airport, todate),  dpi=200, bbox_inches='tight', pad_inches=0.5, transparent=False)

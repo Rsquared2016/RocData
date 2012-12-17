@@ -178,6 +178,13 @@ with open(file_name, 'wb') as pfile:
 # for debugging!
 with open(file_name + 'p', 'w') as pfile:
     pp = pprint.PrettyPrinter(indent = 4, stream = pfile)
-    pp.pprint(flux_table)
-    pp.pprint(flight_table)
+    # remap flux_table: only emit entries with nonzero values
+    flux_remap = {}
+    for (date, table) in flux_table.items():
+        flux_remap[date] = {}
+        for (airport, flux) in table.items():
+            if flux > 0.0:
+                flux_remap[date][airport] = flux
+    pp.pprint(flux_remap)
+    #pp.pprint(flight_table)
 logging.debug("\nDone! Exiting...")
