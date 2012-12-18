@@ -18,6 +18,13 @@ if [ $? -ne 0 ]; then
 fi
 
 echo
+echo "Checking meetings consistency..."
+python check_consistency.py meetings_toy.pickle check_consistency.dump > /dev/null
+if [ $? -ne 0 ]; then
+	exit 1
+fi
+
+echo
 echo "Deleting old decision trees..."
 rm -f ../epiDBN/dts/*
 
@@ -27,3 +34,5 @@ python generate_DBN_obs.py health_toy.pickle meetings_toy.pickle
 if [ $? -ne 0 ]; then
 	exit 1
 fi
+
+exit 0

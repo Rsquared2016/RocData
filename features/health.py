@@ -41,13 +41,13 @@ dt = [int(d) for d in sys.argv[4].split('-')]
 start_date = datetime(dt[0], dt[1], dt[2])
 dt = [int(d) for d in sys.argv[5].split('-')]
 end_date = datetime(dt[0], dt[1], dt[2])
-min_tweet_count = 5 # don't include users who tweeted fewer times than min_tweet_count
+min_tweet_count = 9 # don't include users who tweeted fewer times than min_tweet_count
 
 time_slices = set()
 users = set()
 activeUsers = set()
 userToNumTweets = {}
-userToDailyHealth = {} # { (userID, datetime): maxHealthScoreOverDatetime, ... } 
+userToDailyHealth = {} # { (userID, datetime): maxHealthScoreOverDatetime, ... }
 
 """ initialize couchdb """
 couch = couchdb.Server('http://dev.fount.in:5984')
@@ -66,7 +66,7 @@ for row in results:
     updateDic(user, 1, userToNumTweets)
     users.add(user)
     time_slices.add(date)
-    
+
 """ Print histogram of tweet count over users """
 logging.debug('Active users: (id: count)')
 for (userID, numTweets) in sorted(userToNumTweets.iteritems(), key=operator.itemgetter(1), reverse=True):

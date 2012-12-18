@@ -13,12 +13,12 @@ echo "NUM_OBSERVATIONS = $NUM_OBSERVATIONS"
 
 echo
 echo "Running feature extraction..."
-# ./run.sh 4 3 6 3
-#python generate_obs_toy.py $NUM_USERS $NUM_TIME_STEPS $OBSERVATION_CARDINALITY
-
-#cd ../features
-#./run.sh
-#cd ../epiDBN
+cd ../features
+./run.sh
+if [ $? -ne 0 ]; then
+	exit 1
+fi
+cd ../epiDBN
 
 echo
 echo "Decision tree processing..."
@@ -40,7 +40,7 @@ fi
 if [ $? -ne 0 ]; then
 	exit 1
 fi
-./test_cmd.sh $NUM_OBSERVATIONS data/dbn_train_${NUM_TIME_STEPS}.txt 
+./test_cmd.sh $NUM_OBSERVATIONS data/dbn_train_${NUM_TIME_STEPS}.txt
 if [ $? -ne 0 ]; then
 	exit 1
 fi
