@@ -275,6 +275,13 @@ if __name__ == "__main__":
                 except (TypeError, KeyError) as e:
                     pass
 
+                if isinstance(tweets, dict):
+                    logging.debug("Caught exception from Twitter APIs...")
+                    logging.debug("%s" % tweets)
+                    backoff()
+                    last_time = int(datetime.datetime.utcnow().strftime("%s"))
+                    continue
+
                 logging.debug("[%s]: %d tweets" % (uid, len(tweets)))
                 for tweet in tweets:
                     # prep data slightly
