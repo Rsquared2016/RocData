@@ -14,6 +14,9 @@ from rtree import index
 import sys
 import math
 
+def toUnix(dt):
+    return int(dt.strftime('%s'))
+
 def couch_key_to_slice_key(couch_key):
     return "%s %04d-%02d-%02d" % (couch_key[0], couch_key[1], couch_key[2], couch_key[3])
 
@@ -22,7 +25,7 @@ def key_created_at(created_at):
 
 def time_difference(a, b):
     a_time, b_time = key_created_at(a), key_created_at(b)
-    sec_diff = abs((a_time - b_time).total_seconds())
+    sec_diff = abs(toUnix(a_time) - toUnix(b_time))
     return float(sec_diff) / (60 ** 2)
 
 """ distance in kilometers """

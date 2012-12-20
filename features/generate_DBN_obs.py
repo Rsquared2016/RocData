@@ -36,18 +36,18 @@ meeting_%d_DT
 		foutDT = open('../epiDBN/dts/meetings_%d_DT.dts' % twitterIdtoDBNid[user], 'w+')
 		foutDT.write('1 %% number of decision trees in this file\n\n')
 		foutDT.write('%% Conditioned on a given time step, this decision tree returns the sum of select parents that represent encountered people (=the estimated number of distinct sick people met)\n')
-		
+
 		# Generate all possible time slice values (0 ... NUM_TIMESTEPS-1)
 		splits = ''
 		for i in xrange(0, numTimeSteps):
 			splits += '%d ' % i
-		
+
 		leaves = ''
 		for (t, (_, dic)) in enumerate(sorted(meetings.items())):
 			leaves += ' -1 '
 			try:
-				usersMet = dic[user]							
-				# There is at least one person who met $user	
+				usersMet = dic[user]
+				# There is at least one person who met $user
 				usersMetTransformed = [twitterIdtoDBNid[u] for u in usersMet]
 				leaves += '{'
 				for userMet in usersMetTransformed:
@@ -118,7 +118,7 @@ variable : frameNo {
 
 chunk 1:1;
 """
-	
+
 	template_pH = \
 """\
 variable : H%d {
@@ -208,7 +208,7 @@ DETERMINISTIC_CPT_IN_FILE inline
 meeting_buckets
 NUM_MEETING_NODE_PARENTS
 %% cardinalities of parents (frameNo & health states) + number of buckets
-NUM_TIMESTEPS %s NUM_BUCKETS 
+NUM_TIMESTEPS %s NUM_BUCKETS
 isMoreThan_10_DT %% name of DT that implements this table
 """
 
@@ -225,7 +225,7 @@ dts/meetings_%d_DT.dts
 %d
 meeting_%d
 NUM_MEETING_NODE_PARENTS
-NUM_TIMESTEPS %s NUM_INDIVIDUALS 
+NUM_TIMESTEPS %s NUM_INDIVIDUALS
 meeting_%d_DT
 
 """
@@ -245,7 +245,7 @@ def writeHeaderFile(numTimeSteps, numUsers):
 #ifndef COMMON_PARAMS
 #define COMMON_PARAMS
 
-%% Total number of people in the dateset
+%% Total number of people in the dataset
 #define NUM_INDIVIDUALS %d
 
 %% Max number of people one can meet

@@ -4,7 +4,7 @@
     check_consistency.py <pickle-file-path> <inconsistencies-dump>
 
     example:
-        python check_consistency.py meetings_toy.pickle
+        python check_consistency.py meetings_toy.pickle check_consistency.dump > /dev/null
 """
 
 import cPickle as pickle
