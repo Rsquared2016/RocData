@@ -5,14 +5,14 @@ END="2012-12-9"
 
 echo
 echo "Getting health data from couch..."
-#python health.py airport_toy health_toy.pickle 0.8 $START $END
+python health.py airport_toy health_toy.pickle 0.8 $START $END
 if [ $? -ne 0 ]; then
 	exit 1
 fi
 
 echo
 echo "Getting meetings from couch..."
-#python meetings.py airport_toy meetings_toy.pickle 0.1 1 $START $END
+python meetings.py airport_toy meetings_toy.pickle 0.1 1 $START $END
 if [ $? -ne 0 ]; then
 	exit 1
 fi
