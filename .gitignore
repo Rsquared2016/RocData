@@ -9,5 +9,5 @@
 *.Tpo
 nohup.out
 *.log
-*.trifile
+dbn.str.trifile
 *.dts.index

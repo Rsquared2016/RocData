@@ -3,7 +3,7 @@
 %% Conditioned on a given time step, this decision tree returns the sum of select parents that represent encountered people (=the estimated number of distinct sick people met)
 
 0
-meeting_8_DT
+meeting_11_DT
 24
 0 24 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22  default % query on parent 0 (frameNo), make 24 splits
  -1 0
