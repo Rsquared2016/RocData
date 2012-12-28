@@ -31,6 +31,7 @@ meeting_%d_DT
 """
 
 	numMeetings = 0
+	print twitterIdtoDBNid
 	for user in usersList:
 		print twitterIdtoDBNid[user]
 		foutDT = open('../epiDBN/dts/meetings_%d_DT.dts' % twitterIdtoDBNid[user], 'w+')
@@ -43,22 +44,31 @@ meeting_%d_DT
 			splits += '%d ' % i
 
 		leaves = ''
-		for (t, (_, dic)) in enumerate(sorted(meetings.items())):
+		for (date, user_meetings) in sorted(meetings.items()):
 			leaves += ' -1 '
 			try:
-				usersMet = dic[user]
-				# There is at least one person who met $user
-				usersMetTransformed = [twitterIdtoDBNid[u] for u in usersMet]
-				leaves += '{'
-				for userMet in usersMetTransformed:
-					leaves += 'p%d+' % userMet
-					print '%d meets %d' % (twitterIdtoDBNid[user], userMet)
-					numMeetings += 1
-				leaves = leaves[0:-1] # remove last +
-				leaves += '}\n'
+				usersMet = user_meetings[user]
 			except KeyError: # No met users
 				leaves += '0\n'
 				continue
+			# There is at least one person who met $user, we need to check if he is interesting
+			usersMetTransformed = []
+			for u in usersMet:
+				try:
+					usersMetTransformed.append(twitterIdtoDBNid[u])
+				except KeyError:
+					continue
+			if len(usersMetTransformed)==0:
+				leaves += '0\n'
+				continue
+			# There is at least one INTERESTING person who met $user
+			leaves += '{'
+			for userMet in usersMetTransformed:
+				leaves += 'p%d+' % userMet
+				print '\t%d meets %d' % (twitterIdtoDBNid[user], userMet)
+				numMeetings += 1
+			leaves = leaves[0:-1] # remove last +
+			leaves += '}\n'
 		foutDT.write(template % (twitterIdtoDBNid[user], numUsers, numTimeSteps+1, splits, numTimeSteps+1, leaves))
 		foutDT.close()
 	print 'Meetings used %d (double counted)' % numMeetings
