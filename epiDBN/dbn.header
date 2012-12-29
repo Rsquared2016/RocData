@@ -2,10 +2,10 @@
 #define COMMON_PARAMS
 
 % Total number of people in the dataset
-#define NUM_INDIVIDUALS 16
+#define NUM_INDIVIDUALS 14
 
 % Max number of people one can meet
-#define NUM_INDIVIDUALS_MINUS_ONE 15
+#define NUM_INDIVIDUALS_MINUS_ONE 13
 
 % Number of buckets to divide meetings into (e.g., [less than 10 meetings, 10 and more])
 #define NUM_BUCKETS 3
@@ -17,9 +17,9 @@
 #define NUM_OBSERVED_STATES 3
 
 % Number of time slices (used for "private" decision trees)
-#define NUM_TIMESTEPS 23
+#define NUM_TIMESTEPS 18
 
 % Number of parents of the meetings nodes (NUM_INDIVIDUALS -1 + 1 (frameNo))
-#define NUM_MEETING_NODE_PARENTS 16
+#define NUM_MEETING_NODE_PARENTS 14
 
 #endif
