@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# [-random bool]                         Randomize the parameters {F}
-# -allocateDenseCpts integer]           Automatically allocate undefined CPTs. (-1) = don't read params, (0) = don't allocate, (1) = use random initial CPT values, (2) = use uniform values {0}
-
 NUM_OBSERVATIONS=$1
 TRAIN=$2
 echo $TRAIN > train.txt
@@ -22,19 +19,3 @@ CMD="gmtkEMtrain -strFile dbn.str -cmbeam 0.5 -triFile dbn.str.trifile -inputMas
 
 echo $CMD
 $CMD
-
-# if [ -z "$1" ]
-# then
-#     echo "No num supplied, defaulting to training data with 1500 samples"
-#     TRAIN="data/hmm_train_1500data.txt"
-#     NUM="1500"
-# else
-#     NUM="$1"
-#     TRAIN="data/hmm_train_${NUM}data.txt"
-#     if [ ! -e "$TRAIN" ]
-#     then
-#     echo "Num not 900,1500, defaulting to training data with 1500 samples"
-#     TRAIN="data/hmm_train_1500data.txt"
-#     NUM="1500"
-#     fi
-# fi
