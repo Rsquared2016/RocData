@@ -13,8 +13,6 @@ class tweetReader:
         self.problems = 0
         self.f = open(filename, 'r')
         self.rexLatLon = re.compile(r'(?P<lat>[-]*[0-9]+\.[0-9]+)[^0-9-]+(?P<lon>[-]*[0-9]+\.[0-9]+)')
-        self.rexCreated = re.compile('([A-Z][a-z][a-z]), ([0-9][0-9]) (...) ([0-9]{4}) ([0-9]{2}):([0-9]{2}):([0-9]{2})')
-	self.months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
 
     def getNextTweet(self):
         tweet = Tweet()
@@ -57,9 +55,8 @@ class tweetReader:
         tweet.createdAt = o['created_at']
         tweet.profile_image = o['profile_image_url']
         tweet.msgID = int(o['id'])
-        tweet.json = line.strip()
-	datematch = self.rexCreated.match(o['created_at']).groups()
-	tweet.datetime = datetime.strptime(tweet.createdAt, "%a, %d %b %Y %H:%M:%S +0000")
+        #tweet.json = line.strip()
+    	tweet.datetime = datetime.strptime(tweet.createdAt, "%a, %d %b %Y %H:%M:%S +0000")
         return (tweet, line)
 
         

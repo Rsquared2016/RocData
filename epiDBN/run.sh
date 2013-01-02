@@ -31,7 +31,7 @@ fi
 echo
 echo "Triangulating..."
 rm -rf dbn.str.trifile
-gmtkTriangulate -strFile dbn.str -inputMasterFile dbn.master
+gmtkTriangulate -rePartition T -triangulationHeuristic WS -printResults T -verbosity all=100 -longStrCheck T -strFile dbn.str -inputMasterFile dbn.master
 if [ $? -ne 0 ]; then
 	exit 1
 fi
