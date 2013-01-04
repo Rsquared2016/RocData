@@ -41,7 +41,7 @@
 #define HAVE_FSEEKO 1
 
 /* Define to 1 if you have the `getline' function. */
-/* #undef HAVE_GETLINE */
+#define HAVE_GETLINE 1
 
 /* Distributed Mercurial revision id header available? */
 #define HAVE_HG_H 1

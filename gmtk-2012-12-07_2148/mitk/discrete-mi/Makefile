@@ -148,15 +148,15 @@ AR = ar
 AUTOCONF = ${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk/discrete-mi/missing --run autoconf
 AUTOHEADER = ${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk/discrete-mi/missing --run autoheader
 AUTOMAKE = ${SHELL} /Users/adam/code/TwitterHealth2.0/gmtk-2012-12-07_2148/mitk/discrete-mi/missing --run automake-1.12
-AWK = gawk
+AWK = awk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
+CFLAGS = -m64
 CPP = gcc -E
 CPPFLAGS = 
 CXX = g++
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = 
+CXXFLAGS = -m64
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -171,7 +171,7 @@ INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-LDFLAGS = 
+LDFLAGS = -m64
 LIBOBJS =  ${LIBOBJDIR}error$U.o
 LIBS = -lm 
 LTLIBOBJS =  ${LIBOBJDIR}error$U.lo
