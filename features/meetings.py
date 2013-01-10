@@ -85,7 +85,11 @@ print "Tweets read from view: %d" % len(results)
 logging.debug("Got %s rows." % len(results))
 for row in results:
     key, value, doc = row.key, long(row.value), row.doc
-    date = datetime(key[1], key[2], key[3])
+    date = None
+    if db_name == "nyc_one_month":
+        date = datetime(key[0], key[1], key[2])
+    else:
+        date = datetime(key[1], key[2], key[3])
     #stamp = couch_key_to_slice_key(key)
     #time_slices.add(stamp)
     if doc['created_at'] == None or doc['geo'] == None or date < start_date or date > end_date:
