@@ -6,7 +6,7 @@ echo $TRAIN > train.txt
 
 echo
 echo "Training..."
-iters=5 #1000
+iters=1000
 thresh=0.000001
 
 if [ -z "$1" ]
