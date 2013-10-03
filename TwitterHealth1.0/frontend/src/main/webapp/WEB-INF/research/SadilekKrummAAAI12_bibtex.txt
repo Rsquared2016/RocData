@@ -1,0 +1,6 @@
+@inproceedings{sadilek2012far_out,
+  title={Far Out: Predicting Long-Term Human Mobility},
+  author={Adam Sadilek and John Krumm},
+  booktitle={Twenty-Sixth AAAI Conference on Artificial Intelligence},
+  year={2012}
+}

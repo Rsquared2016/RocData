@@ -1,0 +1,1 @@
+function(doc) { if(doc.geo!=null && doc.health > .5) {emit(null, doc._id)} }

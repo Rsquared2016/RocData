@@ -1,0 +1,35 @@
+<div id="<%= tweet._id %>" class="list-view-component list-view-tweet">
+	<div class="tweet-component tweet-profile-image-div pull-left">
+		<img class="tweet-profile-image" src="<%= tweet.profile_image %>" />
+		<div class="tweet-health-marker">
+			<img src="<%= _.imageForHealth(tweet.health) %>"/>
+		</div>
+	</div>
+	<div class="tweet-component tweet-content pull-right">
+		<div class="tweet-text pull-left">
+			<div class="tweet-text-inner">
+				<div class="tweet-user">
+					<span>@<%= tweet.from_user %></span>
+				</div>
+				<div class="tweet-body">
+					<%= tweet.text %>
+				</div>
+				<div class="tweet-footer">
+					<%= new Date(tweet.created_at).toLocaleString() %>
+				</div>
+			</div>
+		</div>
+		<div class="tweet-buttons pull-right">
+			<div class="feedback-button yes_button"></div>
+			<div class="feedback-button maybe_button"></div>
+			<div class="feedback-button no_button"></div>
+		</div>
+	</div>
+	<div class="tweet-component tweet-rating">
+	   <% if(tweet.location) { %>
+	   <!-- <span>Is this person sick?</span> -->
+	   <% } else { %>
+	   <span>Not geotagged.</span>
+	   <% } %>
+	</div>
+</div>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groups xmlns="http://www.isdc.ro/wro">
+
+    <group name='global'>
+        <css>/css/choropleth.css</css>
+        <css>/css/styles/bootstrap.css</css>
+        <css>/css/styles/bootstrap-responsive.css</css>
+        <css>/css/style.css</css>
+        <css>/css/jquery-ui.custom.css</css>
+        <css>/css/common.css</css>
+    </group>
+
+    <group name="paledot">
+        <css>/css/paledot.css</css>
+    </group>
+
+    <group name='mobile'>
+        <css>/css/styles/jquery-ui-1.8.23.custom.css</css>
+        <css>/css/styles/bootstrap.css</css>
+        <css>/css/styles/bootstrap-responsive.css</css>
+        <css>/css/styles/mobile.css</css>
+        <js>/js/lib/jquery-ui-1.8.23.custom.min.js</js>
+        <js>/js/lib/underscore.js</js>
+        <js>/js/lib/date.js</js>
+        <js>/js/lib/jquery.event.swipe.js</js>
+        <js>/js/lib/jquery.ui.touch-punch.min.js</js>
+        <js>/js/lib/jquery.cookies.2.2.0.js</js>
+        <js>/js/lib/bootstrap.js</js>
+    </group>
+
+    <group name="about">
+        <css>/css/bootstrap.css</css>
+        <css>/css/bootstrap-responsive.css</css>
+    </group>
+
+</groups>

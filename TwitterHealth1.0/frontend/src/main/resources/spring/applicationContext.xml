@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:couchdb="http://www.ektorp.org/schema/couchdb"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util-3.1.xsd
+		http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+		http://www.ektorp.org/schema/couchdb
+        http://www.ektorp.org/schema/couchdb/couchdb.xsd">
+
+    <context:property-placeholder />
+
+    <!-- Scans within the base package of the application for @Components 
+        to configure as beans -->
+    <context:component-scan base-package="in.fount.service" />
+
+    <util:properties id="couchdbProperties" location="classpath:/couchdb.properties" />
+    <bean id="httpClient" class="org.ektorp.spring.HttpClientFactoryBean">
+        <property name="url" value="${couchdb.url}" />
+        <property name="properties" ref="couchdbProperties" />
+    </bean>
+
+    <bean id="stdObjectMapperFactoryWrapper" class="in.fount.util.StdObjectMapperFactoryWrapper">
+        <property name="factory">
+            <bean class="org.ektorp.impl.StdObjectMapperFactory" />
+        </property>
+        <property name="failOnUnknownProperties" value="false" />
+    </bean>
+
+    <bean id="couchdbInstance" class="org.ektorp.impl.StdCouchDbInstance">
+        <constructor-arg ref="httpClient" />
+        <constructor-arg ref="stdObjectMapperFactoryWrapper" />
+    </bean>
+
+    <bean id="abstractCouchdbConnector" class="in.fount.util.StdCouchdbFactoryBean"
+        abstract="true">
+        <property name="couchDbInstance" ref="couchdbInstance" />
+        <property name="objectMapperFactory" ref="stdObjectMapperFactoryWrapper" />
+    </bean>
+
+    <!-- CouchDbConnector list -->
+    <bean id="oauth" parent="abstractCouchdbConnector">
+        <property name="databaseName" value="oauth" />
+    </bean>
+
+    <bean id="all_sick_healthy_rack" parent="abstractCouchdbConnector">
+        <property name="databaseName" value="all_sick_healthy_rack" />
+    </bean>
+
+    <bean id="google_places_park" parent="abstractCouchdbConnector">
+        <property name="databaseName" value="google_places_park" />
+    </bean>
+
+    <bean id="google_places_gym" parent="abstractCouchdbConnector">
+        <property name="databaseName" value="google_places_gym" />
+    </bean>
+
+    <!-- Repositories for individual cities -->
+    <bean id="nyc_one_month" parent="abstractCouchdbConnector">
+        <property name="databaseName" value="nyc_one_month" />
+    </bean>
+
+    <!-- Google Places park repository -->
+    <bean id="parkRepository" class="in.fount.service.GooglePlacesRepository">
+        <constructor-arg name="type" value="in.fount.model.GPlace" />
+        <constructor-arg name="db" ref="google_places_park" />
+    </bean>
+
+    <!-- Google Places gym repository -->
+    <bean id="gymRepository" class="in.fount.service.GooglePlacesRepository">
+        <constructor-arg name="type" value="in.fount.model.GPlace" />
+        <constructor-arg name="db" ref="google_places_gym" />
+    </bean>
+
+    <!-- This ObjectMapper will always ignore unknown JSON properties. -->
+    <bean id="objectMapper" class="in.fount.util.ObjectMapperFactoryBean">
+        <property name="failOnUnknownProperties" value="false" />
+    </bean>
+
+    <bean id="jacksonHttpMessageConverter"
+        class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <property name="objectMapper" ref="objectMapper" />
+    </bean>
+
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <property name="messageConverters">
+            <list>
+                <ref local="jacksonHttpMessageConverter" />
+                <bean
+                    class="org.springframework.http.converter.StringHttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="tweetMRepository" class="in.fount.service.mobile.TweetMRepository">
+        <property name="serverUrl" value="${mobile.daemon.url}" />
+    </bean>
+
+    <bean id="twitterFactory" class="in.fount.util.TwitterFactoryWrapper">
+        <property name="oAuthConsumerKey" value="${oauth.consumerKey}" />
+        <property name="oAuthConsumerSecret" value="${oauth.consumerSecret}" />
+    </bean>
+
+</beans>

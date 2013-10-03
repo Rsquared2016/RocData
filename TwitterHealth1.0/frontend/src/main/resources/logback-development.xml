@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+
+<configuration>
+
+    <timestamp key="byMinute" datePattern="yyyyMMdd_HHmm" />
+    <property name="log.targetDir" value="./logs" />
+    <property name="log.prefix" value="fountin-development-${byMinute}" />
+    <property name="log.suffix" value="log" />
+
+    <!-- Appenders -->
+
+    <appender name="file"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+        <file>${log.targetDir}/${log.prefix}.${log.suffix}</file>
+
+        <rollingPolicy
+            class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${log.targetDir}/${log.prefix}.%i.${log.suffix}.zip
+            </fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>9999</maxIndex>
+        </rollingPolicy>
+
+        <triggeringPolicy
+            class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>150MB</maxFileSize>
+        </triggeringPolicy>
+
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{50} - %msg%n
+            </pattern>
+        </encoder>
+
+    </appender>
+
+    <!-- Application Loggers -->
+    <logger name="in.fount" level="info" />
+    <logger name="in.fount.service" level="info" />
+    <logger name="in.fount.util" level="info" />
+
+    <!-- 3rdparty Loggers -->
+
+    <logger name="org.ektorp" level="info" />
+    <logger name="org.springframework" level="info" />
+    <logger name="org.springframework.core" level="info" />
+    <logger name="org.springframework.core.env" level="info" />
+    <logger name="org.springframework.beans" level="info" />
+    <logger name="org.springframework.context" level="info" />
+
+    <!-- DEBUG: DispatcherServlet; TRACE: HTTP requests -->
+    <logger name="org.springframework.web" level="info" />
+
+    <!-- Root Logger -->
+    <root level="info">
+        <appender-ref ref="file" />
+    </root>
+
+</configuration>

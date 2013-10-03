@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+
+<!-- This is a default fallback logback configuration file. It logs to stdout 
+    only. -->
+
+<configuration>
+
+    <!-- Appenders -->
+
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d [%thread] %-5level %logger{50} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- Application Loggers -->
+    <logger name="in.fount" level="info" />
+    <logger name="in.fount.service" level="info" />
+    <logger name="in.fount.util" level="info" />
+
+    <!-- 3rdparty Loggers -->
+
+    <logger name="org.ektorp" level="info" />
+    <logger name="org.springframework" level="info" />
+    <logger name="org.springframework.core" level="info" />
+    <logger name="org.springframework.core.env" level="info" />
+    <logger name="org.springframework.beans" level="info" />
+    <logger name="org.springframework.context" level="info" />
+
+    <!-- DEBUG: DispatcherServlet; TRACE: HTTP requests -->
+    <logger name="org.springframework.web" level="info" />
+
+    <!-- Root Logger -->
+    <root level="info">
+        <appender-ref ref="stdout" />
+    </root>
+
+</configuration>

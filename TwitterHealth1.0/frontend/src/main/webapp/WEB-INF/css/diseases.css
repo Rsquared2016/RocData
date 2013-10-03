@@ -1,0 +1,186 @@
+body {
+	background: #2F3135
+}
+
+ul {
+	display: inline
+}
+
+li {
+	text-shadow: #555 1px 0px;
+	list-style: none;
+	padding: 10px;
+	float: left;
+	width: 30%
+}
+
+.month {
+	float: left;
+	clear: both;
+	text-align: center;
+	margin: auto 10px;
+	width: 100%
+}
+
+.month>li {
+	border: solid 1px white;
+	border-top: solid 2px white;
+	border-bottom: solid 2px white;
+	font-size: 20px;
+	color: white;
+	font-family: helvetica;
+	width: 50px;
+	text-align: center;
+	display: inline-block;
+	padding: 4px;
+}
+
+.month>li:hover {
+	background-color: #666
+}
+
+.month>li>a {;
+	font-size: 20px;
+	color: white
+}
+
+.month>li.monthli {
+	width: 45px
+}
+
+.snippets {
+	width: 100%;
+	height: 320px;
+	text-shadow: none
+}
+
+.snippets>div {
+	width: 100%;
+	min-height: 0px;
+	max-height: 80px
+}
+
+.snippets>div .snippet {
+	color: #CCCCCC;
+	border: none;
+	font-size: 14px
+}
+
+.snippets>div .snippet .timeStamp {
+	color: #BBBBBB
+}
+
+a {
+	font-size: x-large
+}
+
+a.Anthrax {
+	color: #0000FE !important;
+}
+
+a.Cholera {
+	color: #FC0008 !important;
+}
+
+a.Common-Cold {
+	color: #1EFF09 !important;
+}
+
+a.Dengue {
+	color: #FC00A9 !important;
+}
+
+a.Diphtheria {
+	color: #FECC0B !important;
+}
+
+a.Gastroenteritis {
+	color: #084702 !important;
+}
+
+a.Influenza {
+	color: #7068FE !important;
+}
+
+a.Legionnaires-Disease {
+	color: #8B3C35 !important;
+}
+
+a.Malaria {
+	color: #1EFFB4 !important;
+}
+
+a.Measles {
+	color: #0D7083 !important;
+}
+
+a.Meningitis {
+	color: #000067 !important;
+}
+
+a.Mosquito-Borne-Disease {
+	color: #85CE3F !important;
+}
+
+a.Mumps {
+	color: #F287D2 !important;
+}
+
+a.Pertussis {
+	color: #C600FE !important;
+}
+
+a.Pneumonia {
+	color: #670656 !important;
+}
+
+a.Polio {
+	color: #F1004E !important;
+}
+
+a.STD {
+	color: #FEB470 !important;
+}
+
+a.Rabies {
+	color: #7A9868 !important;
+}
+
+a.Tuberculosis {
+	color: #F16E0C !important;
+}
+
+a.Tetanus {
+	color: #706005 !important;
+}
+
+a.Diptheria {
+	color: #64F5FF !important;
+}
+
+a.Smallpox {
+	color: #8DB1FF !important;
+}
+
+a.Tick-Borne-Disease {
+	color: #5E4C68 !important;
+}
+
+a.Typhoid {
+	color: #0FA6C5 !important;
+}
+
+a.Varicella {
+	color: #0949FE !important;
+}
+
+.form {
+	float: left;
+	clear: both;
+	width: 100%
+}
+
+.chart rect {
+	stroke: white;
+	fill: steelblue;
+}

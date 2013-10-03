@@ -1,0 +1,425 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+html, body {
+  height: 100%;
+}
+
+#content {
+  clear: both;
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin-bottom: -50px;
+}
+#content #content-footer {
+  height: 50px;
+}
+
+footer {
+  clear: both;
+  position: relative;
+  height: 50px;
+}
+
+@font-face {
+  font-family: "Neo Sans";
+  src: url('fonts/neosanswebfont.eot');
+  src: url('fonts/neosanswebfont-iefix.eot') format('eot'), url('fonts/neosans-webfont.ttf') format('truetype'), url('fonts/neosans-webfont.woff') format('woff');
+}
+
+/*********************/
+/*    Typography     */
+/*********************/
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Neo Sans", "HelveticaNeue", "Helvetica Neue", "HelveticaNeueRoman", "HelveticaNeue-Roman", "Helvetica Neue Roman", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+  font-weight: 400;
+  font-stretch: normal;
+  color: #7a7a7a;
+}
+
+h1 {
+  font-size: 4.3em;
+}
+
+b {
+    font-weight:900;    
+}
+
+legend {
+  font-size: 2.2em;
+}
+
+h2, label, input, textarea {
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.6em;
+  font-weight: bold;
+}
+
+nav li a {
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+h2 {
+  line-height: 1.2em;
+}
+
+p {
+  font-size: 1.8em;
+  line-height: 1.2em;
+  margin-bottom: 1em;
+}
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.blue_button, footer, p, label, input, textarea, #about li span {
+  font-family: "HelveticaNeueLight", "HelveticaNeue-Light", "Helvetica Neue Light", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosRegular', "Helvetica", "Tahoma", "Geneva", "Arial", sans-serif;
+  font-weight: 300;
+  font-stretch: normal;
+}
+
+#about h2, #about h3, #about li {
+  font-family: "HelveticaNeueBlack", "HelveticaNeue-Black", "Helvetica Neue Black", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosBold', "Arial Black", sans-serif;
+  font-weight: 800;
+  font-stretch: normal;
+}
+#about h1 {
+  font-size: 6.6em;
+  line-height: 1.2em;
+}
+#about h2 {
+  font-size: 2.2em;
+  line-height: 1.2em;
+  font-family: "HelveticaNeueBlack", "HelveticaNeue-Black", "Helvetica Neue Black", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosBold', "Arial Black", sans-serif;
+  font-weight: 800;
+  font-stretch: normal;
+}
+#about h3 {
+  font-size: 2.2em;
+}
+#about li {
+  font-size: 1.8em;
+  line-height: 1.2em;
+}
+
+/*********************/
+/*      Layout       */
+/*********************/
+#content, footer {
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#content nav {
+  padding-top: 1.5em;
+  padding-bottom: 2em;
+  width: 100%;
+  display: inline-block;
+}
+#content nav img {
+  padding-top: 14px;
+}
+#content nav ul {
+  padding-top: 32px;
+  float: right;
+}
+#content nav ul li {
+  list-style-type: none;
+  display: inline;
+  padding-left: 2.0em;
+}
+
+footer #footer_content {
+  border-top-style: solid;
+  border-top-width: 1px;
+  text-align: center;
+  padding-top: 10px;
+}
+
+#index h1 {
+  text-align: center;
+  padding-top: 0.75em;
+  padding-bottom: 0.5em;
+  margin-bottom: 0.5em;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+#index h2 span {
+  display: block;
+}
+#index #description h3 {
+  margin-bottom: 0.5em;
+}
+#index .thin_hr {
+  margin-top: 2em;
+  margin-bottom: 2em;
+  border-top-style: solid;
+  border-top-width: 1px;
+  width: 98%;
+}
+#index section {
+  width: 45%;
+}
+#index section#description {
+  float: left;
+}
+#index section#description img {
+  max-width: 90%;
+  margin-top: 2em;
+  margin-bottom: 3em;
+}
+#index section#icon_list {
+  margin-top: 7em;
+  float: right;
+}
+#index section#icon_list li {
+  width: 49%;
+  display: inline-block;
+  list-style-type: none;
+}
+#index section#icon_list li h3 {
+  display: block;
+  text-align: center;
+}
+#index section#icon_list li img {
+  height: 100px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+#index section#icon_list li a {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 50%;
+  padding: 0.3em 0.5em;
+  margin-left: 22%;
+}
+
+#about #header_bar {
+  height: 310px;
+  background-image: url(/resources/images/us_map_header.png);
+  background-position: center;
+  margin-bottom: 2.5em;
+}
+#about #header_bar h1 {
+  padding: 0;
+  margin: 0;
+}
+#about #header_background {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 85px;
+  height: 310px;
+  z-index: -1;
+}
+#about section#description {
+  float: left;
+  width: 60%;
+}
+#about section#team {
+  float: right;
+  width: 33%;
+}
+#about section#team h3 {
+  margin-bottom: 1em;
+}
+#about section#team li {
+  margin-bottom: 1em;
+}
+#about section#team li span {
+  display: block;
+}
+#about p {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+#contact h1 {
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+#contact input, #contact label, #contact textarea {
+  display: block;
+}
+#contact input, #contact textarea {
+  max-width: 400px;
+  width: 90%;
+  border-style: solid;
+  border-width: 1px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
+}
+#contact h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.1em;
+}
+#contact legend {
+  padding-bottom: 1.5em;
+}
+#contact input, #contact textarea {
+  margin-bottom: 1em;
+}
+#contact textarea {
+  height: 6em;
+}
+#contact input[type='submit'] {
+  width: 120px;
+}
+
+/*********************/
+/*       Color       */
+/*********************/
+a {
+  color: #0d4e6c;
+}
+a:active {
+  color: #20a1dd;
+}
+
+.blue_button {
+  font-size: 16px;
+  padding: 0.3em 1.5em;
+  display: inline-block;
+  cursor: pointer;
+  line-height: 1.5;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #0b99c2;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0b99c2), color-stop(100%, #087392));
+  background: -webkit-linear-gradient(#0b99c2, #087392);
+  background: -moz-linear-gradient(#0b99c2, #087392);
+  background: -o-linear-gradient(#0b99c2, #087392);
+  background: -ms-linear-gradient(#0b99c2, #087392);
+  background: linear-gradient(#0b99c2, #087392);
+  -moz-box-shadow: #27c5f3 0 1px 0 inset;
+  -webkit-box-shadow: #27c5f3 0 1px 0 inset;
+  -o-box-shadow: #27c5f3 0 1px 0 inset;
+  box-shadow: #27c5f3 0 1px 0 inset;
+  border: 1px solid #07607a;
+  color: white;
+  text-shadow: #043645 0 -1px 0;
+  text-decoration: none;
+}
+.blue_button:hover {
+  background-color: #07607a;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0a86aa), color-stop(100%, #07607a));
+  background: -webkit-linear-gradient(#0a86aa, #07607a);
+  background: -moz-linear-gradient(#0a86aa, #07607a);
+  background: -o-linear-gradient(#0a86aa, #07607a);
+  background: -ms-linear-gradient(#0a86aa, #07607a);
+  background: linear-gradient(#0a86aa, #07607a);
+}
+.blue_button:active {
+  -moz-box-shadow: #06546b 0 1px 2px inset;
+  -webkit-box-shadow: #06546b 0 1px 2px inset;
+  -o-box-shadow: #06546b 0 1px 2px inset;
+  box-shadow: #06546b 0 1px 2px inset;
+}
+
+.thin_hr {
+  color: #cac9c9;
+}
+
+#footer_content, nav, #index h1, #contact h1 {
+  border-color: #cac9c9;
+}
+
+#about h1 {
+  color: white;
+}
+#about #header_background {
+  background-color: #3E4146;
+}
+#about h2, #about p {
+  color: #20a1dd;
+}
+
+#contact input, #contact textarea {
+  border-color: #cac9c9;
+}
+
+/* Localized */

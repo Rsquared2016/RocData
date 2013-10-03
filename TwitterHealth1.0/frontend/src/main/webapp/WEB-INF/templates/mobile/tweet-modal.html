@@ -1,0 +1,36 @@
+<div id="modal_<%= tweet._id %>">
+  <div class="modal-tweet">
+    <div class="modal-tweet-profile-image pull-left">
+      <img src="<%= tweet.profile_image %>" />
+    </div>
+    <div class="modal-tweet-content pull-right">
+      <div class="modal-tweet-text pull-left">
+        <div class="modal-tweet-text-inner">
+          <div class="modal-tweet-user pull-left">
+            <span >@<%= tweet.from_user %></span>
+          </div>
+          <div class="modal-tweet-close-button pull-right">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-tweet-body">
+            <%= tweet.text %>
+          </div>
+          <div class="modal-tweet-footer">
+            <%= new Date(tweet.created_at).toLocaleString() %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-tweet-response">
+    <div class="modal-hr"></div>
+    <div class="modal-prompt-text pull-left">Is this person sick?</div>
+    <div class="modal-tweet-buttons pull-right">
+      <div class="modal-tweet-buttons-inner pull-right">
+        <div class="modal-feedback-button yes_button"></div>
+        <div class="modal-feedback-button maybe_button"></div>
+        <div class="modal-feedback-button no_button"></div>
+      </div>
+    </div>
+  </div>
+</div>

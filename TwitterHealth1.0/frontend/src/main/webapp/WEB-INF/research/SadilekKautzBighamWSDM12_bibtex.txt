@@ -1,0 +1,7 @@
+@inproceedings{sadilek2012following,
+  title={Finding Your Friends and Following Them to Where You Are},
+  author={Adam Sadilek and Henry Kautz and Jeffrey P. Bigham},
+  booktitle={Fifth ACM International Conference on Web Search and Data Mining},
+  year={2012},
+  note={(Best Paper Award)}
+}

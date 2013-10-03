@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Folder>
+	<name>All NOX Facilities</name>
+	<visibility>0</visibility>
+	<open>1</open>
+	<Document>
+		<name>Electricity Generation via Combustion</name>
+		<visibility>0</visibility>
+		<Style id="B">
+			<IconStyle>
+				<scale>0.5</scale>
+				<Icon>
+					<href>http://maps.google.com/mapfiles/kml/paddle/blu-diamond.png</href>
+				</Icon>
+			</IconStyle>
+			<LabelStyle>
+				<scale>0</scale>
+			</LabelStyle>
+		</Style>
+		<ScreenOverlay>
+			<visibility>0</visibility>
+			<Icon>
+				<href>http://www.epa.gov/mxplorer/blu-diamond.png</href>
+			</Icon>
+			<overlayXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+			<screenXY x="0" y="1" xunits="fraction" yunits="fraction"/>
+			<rotationXY x="0" y="0" xunits="fraction" yunits="fraction"/>
+			<size x="32" y="32" xunits="pixels" yunits="pixels"/>
+		</ScreenOverlay>
+		<ScreenOverlay>
+			<visibility>0</visibility>
+			<Icon>
+				<href>http://www.epa.gov/mxplorer/EGU.png</href>
+			</Icon>
+			<overlayXY x="0.04" y="1" xunits="fraction" yunits="fraction"/>
+			<screenXY x="0.04" y="1" xunits="fraction" yunits="fraction"/>
+			<rotationXY x="0" y="0" xunits="fraction" yunits="fraction"/>
+			<size x="440" y="32" xunits="pixels" yunits="pixels"/>
+		</ScreenOverlay>
+<Placemark>
+			<name>GWF ENERGY, LLC - TRACY PEAKER POWER PLANT:&lt;br&gt;&lt;/br&gt; 14950 W SCHULTE RD TRACY CA 00000</name>
+			<visibility>0</visibility>
+			<description><![CDATA[<p>NAICS: 221111      <br />
+Hydroelectric Power Generation                                                                                                                                                                                                                                 </p>
+<img src="http://www.epa.gov/cgi-bin/broker?_service=data&_program=dataprog.dw_emisplot_epad8_facility_caps_2008.sas&year1=2008&year2=2008&debug=0&site=10009011"width="460" height="360">
+Placeholder]]></description>
+			<styleUrl>#B</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<coordinates>-121.49386,37.72165,2.4225545377</coordinates>
+			</Point>
+		</Placemark>
+<Placemark>
+			<name>GWF ENERGY, LLC - TRACY PEAKER POWER PLANT:&lt;br&gt;&lt;/br&gt; 14950 W SCHULTE RD TRACY CA 00000</name>
+			<visibility>0</visibility>
+			<description><![CDATA[<p>NAICS: 221111      <br />
+Hydroelectric Power Generation                                                                                                                                                                                                                                 </p>
+<img src="http://www.epa.gov/cgi-bin/broker?_service=data&_program=dataprog.dw_emisplot_epad8_facility_caps_2008.sas&year1=2008&year2=2008&debug=0&site=10009011"width="460" height="360">
+Placeholder]]></description>
+			<styleUrl>#B</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<coordinates>-74,40,2.4225545377</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark>
+			<name>GWF ENERGY, LLC - TRACY PEAKER POWER PLANT:&lt;br&gt;&lt;/br&gt; 14950 W SCHULTE RD TRACY CA 00000</name>
+			<visibility>0</visibility>
+			<description><![CDATA[<p>NAICS: 221111      <br />
+Hydroelectric Power Generation                                                                                                                                                                                                                                 </p>
+<img src="http://www.epa.gov/cgi-bin/broker?_service=data&_program=dataprog.dw_emisplot_epad8_facility_caps_2008.sas&year1=2008&year2=2008&debug=0&site=10009011"width="460" height="360">
+Placeholder]]></description>
+			<styleUrl>#B</styleUrl>
+			<Point>
+				<extrude>1</extrude>
+				<altitudeMode>relativeToGround</altitudeMode>
+				<coordinates>-121.49386,37.72165,2.4225545377</coordinates>
+			</Point>
+		</Placemark>
+
+	</Document>
+</Folder>
+</kml>
