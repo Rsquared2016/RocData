@@ -1,9 +1,12 @@
 # Fountin
 
 ## Backend Data Collection 
-The backend daemon runs automatically after reboot (see `crontab -l` for explanation of what happens).
+The backend daemon runs automatically after reboot.
+
+(see `crontab -l` for explanation of what happens).
+
 It is safe to log-off after the deamon is running, as we are using nohup.
-The status of the backend can be checked with: backend/check_status.sh
+The status of the backend can be checked with: `backend/check_status.sh`
 
 ## Frontend Web Interface
 To compile and run the frontend: 
