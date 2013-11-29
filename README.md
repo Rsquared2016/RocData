@@ -1,3 +1,10 @@
+RocData
+=======
+
+Prof. Henry Kautz at University of Rochester's Research Group Repository
+
+
+
 Get data:
 ```bash 
 cd ./process-tweets
@@ -37,3 +44,4 @@ to compile with DBN structure visualization (gmtkViz), run this first (throws co
 brew install wxmac --devel
 which wx-config  # To check the version.
 ```
+
