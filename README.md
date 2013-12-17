@@ -3,7 +3,24 @@ RocData
 
 Prof. Henry Kautz at University of Rochester's Research Group Repository
 
+## Notes
+- There are two database files missing from this repository because of github's
+policy changes. I will add links to them ASAP.
 
+- Each folder in this repository should be a standalone application for now.
+In the future, each project should be self contained in its own repo, and submoduled here.
+
+- The goal for each project is to have 3 commands to build a working environment.
+
+```bash
+make install   # will install all the dependencies for each machine
+make setup     # will setup all the dependencies, seed data, etc.
+make           # should start all the services, output instructions.
+```
+
+- Each repository should have it's own README with instructions.
+
+## TODO : Organize. 
 
 Get data:
 ```bash 
