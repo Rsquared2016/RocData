@@ -10,4 +10,5 @@
 nohup.out
 *.log
 dbn.str.trifile
-*.dts.index
+*.dts.indexdbn.master
+dbn.str
