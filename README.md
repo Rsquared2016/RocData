@@ -35,11 +35,7 @@ python -OO processTweets.py 2000 words.txt log-geo-area_NYC_GPS_sorted_filtered_
 
 Display social graph:
 ```bash 
-# Requires : brew install graphviz
-# Requires : pip intstall networkx matplotlib pygraphviz
-# (creating a nice layout takes a long time for large graphs; large means >2000 nodes)
 cd ./graph-manipulation
-python displaySimpleGraph_demo.py friendship_graph_undirected.dot neato 7
 ```
 
 Render heatmap of twitter flights:
@@ -47,6 +43,7 @@ Render heatmap of twitter flights:
 cd ./heatmap-flights
 python heatmap.py -p twitter_1M.coors.txt -r 5 -o NYC_z14_1M_blue.png -G gradient-adam-blue.png --osm -e 40.8393,-74.2635,40.5,-73.6558 -z 14
 ```
+
 
 Compile gmtk-2012-12-07_2148 on MAC mountain lion x64
 ```bash
