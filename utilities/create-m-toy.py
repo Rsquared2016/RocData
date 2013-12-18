@@ -32,8 +32,8 @@ centers = [
     [37.566,-122.327,"SF"]
 ]
 
-couch = couchdb.Server('http://fount.in:5984')
-couch_dev = couchdb.Server('http://dev.fount.in:5984')
+couch = couchdb.Server('http://192.237.163.178:5984')
+couch_dev = couchdb.Server('http://dev.192.237.163.178:5984')
 couch.resource.credentials = ('admin', 'admin')
 couch_dev.resource.credentials = ('admin', 'admin')
 db = couch['m']

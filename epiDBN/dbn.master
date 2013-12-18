@@ -1,0 +1,173 @@
+#include "dbn.header"
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 			DECISION TREEs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+DT_IN_FILE inline
+
+15 % number of decision trees
+
+0
+meeting_0_DT
+dts/meetings_0_DT.dts
+
+1
+meeting_1_DT
+dts/meetings_1_DT.dts
+
+2
+meeting_2_DT
+dts/meetings_2_DT.dts
+
+3
+meeting_3_DT
+dts/meetings_3_DT.dts
+
+4
+meeting_4_DT
+dts/meetings_4_DT.dts
+
+5
+meeting_5_DT
+dts/meetings_5_DT.dts
+
+6
+meeting_6_DT
+dts/meetings_6_DT.dts
+
+7
+meeting_7_DT
+dts/meetings_7_DT.dts
+
+8
+meeting_8_DT
+dts/meetings_8_DT.dts
+
+9
+meeting_9_DT
+dts/meetings_9_DT.dts
+
+10
+meeting_10_DT
+dts/meetings_10_DT.dts
+
+11
+meeting_11_DT
+dts/meetings_11_DT.dts
+
+12
+meeting_12_DT
+dts/meetings_12_DT.dts
+
+13
+meeting_13_DT
+dts/meetings_13_DT.dts
+
+
+14
+isMoreThan_10_DT
+NUM_MEETING_NODE_PARENTS
+-1 {(p0+p1)>10} % check if sum is >10
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DETERMINISTIC CPTs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+DETERMINISTIC_CPT_IN_FILE inline
+
+15 % number of CPTs
+
+% cardinalities of parents (frameNo & health states) + cardinality of the output of the DT (0...NUM_INDIVIDUALS_MINUS_ONE)
+% TODO: bucket the number of people met
+
+0
+meeting_0
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS 2 2 2 2 2 2 2 2 2 2 2 2 2  NUM_INDIVIDUALS
+meeting_0_DT
+
+1
+meeting_1
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS 2 2 2 2 2 2 2 2 2 2 2 2 2  NUM_INDIVIDUALS
+meeting_1_DT
+
+2
+meeting_2
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS 2 2 2 2 2 2 2 2 2 2 2 2 2  NUM_INDIVIDUALS
+meeting_2_DT
+
+3
+meeting_3
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS 2 2 2 2 2 2 2 2 2 2 2 2 2  NUM_INDIVIDUALS
+meeting_3_DT
+
+4
+meeting_4
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS 2 2 2 2 2 2 2 2 2 2 2 2 2  NUM_INDIVIDUALS
+meeting_4_DT
+
+5
+meeting_5
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS 2 2 2 2 2 2 2 2 2 2 2 2 2  NUM_INDIVIDUALS
+meeting_5_DT
+
+6
+meeting_6
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS 2 2 2 2 2 2 2 2 2 2 2 2 2  NUM_INDIVIDUALS
+meeting_6_DT
+
+7
+meeting_7
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS 2 2 2 2 2 2 2 2 2 2 2 2 2  NUM_INDIVIDUALS
+meeting_7_DT
+
+8
+meeting_8
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS 2 2 2 2 2 2 2 2 2 2 2 2 2  NUM_INDIVIDUALS
+meeting_8_DT
+
+9
+meeting_9
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS 2 2 2 2 2 2 2 2 2 2 2 2 2  NUM_INDIVIDUALS
+meeting_9_DT
+
+10
+meeting_10
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS 2 2 2 2 2 2 2 2 2 2 2 2 2  NUM_INDIVIDUALS
+meeting_10_DT
+
+11
+meeting_11
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS 2 2 2 2 2 2 2 2 2 2 2 2 2  NUM_INDIVIDUALS
+meeting_11_DT
+
+12
+meeting_12
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS 2 2 2 2 2 2 2 2 2 2 2 2 2  NUM_INDIVIDUALS
+meeting_12_DT
+
+13
+meeting_13
+NUM_MEETING_NODE_PARENTS
+NUM_TIMESTEPS 2 2 2 2 2 2 2 2 2 2 2 2 2  NUM_INDIVIDUALS
+meeting_13_DT
+
+
+14
+meeting_buckets
+NUM_MEETING_NODE_PARENTS
+% cardinalities of parents (frameNo & health states) + number of buckets
+NUM_TIMESTEPS 2 2 2 2 2 2 2 2 2 2 2 2 2  NUM_BUCKETS
+isMoreThan_10_DT % name of DT that implements this table

@@ -88,7 +88,7 @@ public class OriginalRevision {
     public static void main(String[] args) {
         try {
             httpClient = new StdHttpClient.Builder().url(
-            		"http://fount.in:5984").build();
+            		"http://192.237.163.178:5984").build();
             
             System.out.println("hi");
             new OriginalRevision();

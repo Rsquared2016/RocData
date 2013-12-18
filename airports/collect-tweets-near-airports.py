@@ -178,7 +178,7 @@ WORDStoID = readUniverseOfWords(words_file)
 model = loadSVM(svm_file)
 
 """ instantiate couchdb connections """
-couch = couchdb.Server('http://dev.fount.in:5984')
+couch = couchdb.Server('http://192.237.163.178:5984')
 couch.resource.credentials = ('admin', 'admin')
 db_status = openOrCreateDb(couch, 'demon_status') 
 db = openOrCreateDb(couch, dbName)

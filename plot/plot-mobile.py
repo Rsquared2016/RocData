@@ -57,7 +57,7 @@ gft_keys,   gft_values,   gft_sum,   gft_count   = {}, {}, 0, 0
 couch_keys, couch_values, couch_sum, couch_count = {}, {}, 0, 0
 
 """ init couchdb stuff """
-couch = couchdb.Server('http://fount.in:5984')
+couch = couchdb.Server('http://192.237.163.178:5984')
 couch.resource.credentials = ('admin', 'admin')
 db_mobile = couch['m']
 

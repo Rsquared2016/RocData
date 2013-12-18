@@ -7,6 +7,6 @@ YEAR=$1
 MONTH=$2
 DAY=$3
 
-URL="http://fount.in:5984/m/_design/Tweet/_view/by_day_all_geo?key=%5B${YEAR},`expr ${MONTH} - 1`,${DAY}%5D&include_docs=True"
+URL="http://192.237.163.178:5984/m/_design/Tweet/_view/by_day_all_geo?key=%5B${YEAR},`expr ${MONTH} - 1`,${DAY}%5D&include_docs=True"
 echo $URL
 curl -X GET $URL
