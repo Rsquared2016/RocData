@@ -35,6 +35,8 @@ python -OO processTweets.py 2000 words.txt log-geo-area_NYC_GPS_sorted_filtered_
 
 Display social graph:
 ```bash 
+# Requires : brew install graphviz
+# Requires : pip intstall networkx matplotlib pygraphviz
 # (creating a nice layout takes a long time for large graphs; large means >2000 nodes)
 cd ./graph-manipulation
 python displaySimpleGraph_demo.py friendship_graph_undirected.dot neato 7
