@@ -55,9 +55,9 @@ The manifest file contains server configurations and looks something like this :
 
 ```puppet
 node 'default' {
-	include developer_keys
-	include git
-	include motd
+	include developer_keys	# Configure developer ssh-keys for all servers
+	include git		# Install git and system wide .gitignore
+	include motd		# Install the greeting for our team
 }
 
 node 'webserver' inherits default{
@@ -84,31 +84,18 @@ that has puppet installed, `/etc/hosts` configured to point to the
 master node, and certificates installed.
 
 ```bash
-
-    # Request authentication from master node
-    [new-server$] puppet agent --server puppet --waitforcert 60 --test
+# Request authentication from master node
+[new-server$] puppet agent --server puppet --waitforcert 60 --test
 	
-    # --> now go to  root@puppet.fount.in to sign certificate
-    # Display certificates awaiting authentications
-    [puppet$] puppet cert --list
+# --> now go to  root@puppet.fount.in to sign certificate
+# Display certificates awaiting authentications
+[puppet$] puppet cert --list
 	
-    # Sign the appropriate server's certificate
-    [puppet$] puppet cert --sign mytestagent.example.com
+# Sign the appropriate server's certificate
+[puppet$] puppet cert --sign mytestagent.example.com
 ```
-
-Known Issues
-=======================================================
--- IP Tables aren't set
-	
-
 
 Currently Deployed Servers
 =======================================================
-
-	[puppet.fount.in] central puppet controller (to be deprecated)
-
-	[fount.in] main website and front facing server
-
-	[dev.fount.in] mirror to fount.in
-	
-	[design.fount.in] dev environment for designers
+It might be a good idea to keep a list of servers that are deployed 
+for reference here.
