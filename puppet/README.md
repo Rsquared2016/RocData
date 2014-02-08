@@ -83,17 +83,18 @@ Here's how to sign certificates after starting a server from an image
 that has puppet installed, `/etc/hosts` configured to point to the 
 master node, and certificates installed.
 
-  # Request authentication from master node
-	[new-server$] puppet agent --server puppet --waitforcert 60 --test
-	
+```bash
 
-	# --> now go to  root@puppet.fount.in to sign certificate
-  # Display certificates awaiting authentications
-  [puppet$] puppet cert --list
+    # Request authentication from master node
+    [new-server$] puppet agent --server puppet --waitforcert 60 --test
 	
-  # Sign the appropriate server's certificate
-	[puppet$] puppet cert --sign mytestagent.example.com
-
+    # --> now go to  root@puppet.fount.in to sign certificate
+    # Display certificates awaiting authentications
+    [puppet$] puppet cert --list
+	
+    # Sign the appropriate server's certificate
+    [puppet$] puppet cert --sign mytestagent.example.com
+```
 
 Known Issues
 =======================================================
