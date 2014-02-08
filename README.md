@@ -10,15 +10,16 @@ policy changes. I will add links to them ASAP.
 - Each folder in this repository should be a standalone application for now.
 In the future, each project should be self contained in its own repo, and submoduled here.
 
+- Each repository should have it's own README with instructions.
+
 - The goal for each project is to have 3 commands to build a working environment.
 
 ```bash
-make install   # will install all the dependencies for each machine
-make setup     # will setup all the dependencies, seed data, etc.
-make           # should start all the services, output instructions.
+configure      # should look through any system and find all dependencies for each machine
+make           # should generate appropriate makefile
+make install   # should compile and install all components necessary
+make run       # should start all the services necessary for the given software.
 ```
-
-- Each repository should have it's own README with instructions.
 
 ## TODO : Organize. 
 
