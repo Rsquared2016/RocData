@@ -11,9 +11,9 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <ektorp.version>1.2.2</ektorp.version>
-        <spring.version>3.1.1.RELEASE</spring.version>
+        <spring.version>4.0.0.RELEASE</spring.version>
         <slf4j.version>1.6.4</slf4j.version>
-        <jettyVersion>7.2.2.v20101205</jettyVersion>
+        <jetty.version>9.1.0.v20131115</jetty.version>
         <!-- Default environment is development. To activate production, 
             one must launch maven build with -Denvironment=production -->
         <environment>development</environment>
@@ -26,7 +26,7 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
-            <version>7.4.5.v20110725</version>
+            <version>${jetty.version}</version>
         </dependency>
 
         <dependency>
@@ -238,10 +238,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
+                <version>3.0</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
 
