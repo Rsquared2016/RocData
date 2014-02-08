@@ -24,7 +24,7 @@ image that had puppet pre-installed, and uploaded any necessary
 certificates. We recommend doing the same.
 
 
-### How to configure stand-alone nodes [  recommended  ]
+### [  recommended  ] How to configure stand-alone nodes
 With standalone servers, all you have to do is download a puppet manifest
 and apply the configuration to the server. One of the most overlooked features 
 in Puppet is the puppet executable. This allows you to both compile and apply 
@@ -34,7 +34,7 @@ This makes puppet a viable tool for application bootstrapping, even on one machi
 
 Executing:
 
-#>puppet mymanifest.pp
+    #>puppet mymanifest.pp
 
 will apply the configuration from the local source file mymanifest.pp to the 
 local host. The puppet executable takes many of the same long options as puppet, namely:
@@ -51,7 +51,7 @@ also the best way to get started with the puppet language, and the best way to
 quickly develop and test new manifests.
 
 
-### How to configure managed nodes     [not recommended]
+### [not recommended] How to configure managed nodes
 Here's how to sign certificates after starting a server from an image
 that has puppet installed, `/etc/hosts` configured to point to the 
 master node, and certificates installed.
