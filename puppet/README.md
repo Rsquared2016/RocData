@@ -1,12 +1,23 @@
-Server Automation
+Automatic Server Configuration
 =======================================================
+These are the puppet configurations we used to autoscale.
 
-These are the puppet configurations we used to autoscale
+```bash
+# NOTE : for now, just ensure puppet is installed on your system.
+./configure               # TODO: Ensure puppet is intsalled on the system
+make                      # NOOP.
+make install              # NOOP.
 
-Before you do anything, here are some good tutorials to get you up to speed. 
-It's important to get a working knowledge of how Puppet works so you can
-maximize your utility of the software and make it easy for others to understand
-and find out what you're doing. 
+puppet manifests/site.pp  # Configures this machine for twitterhealth.
+```
+
+**Note :** before you do anything, I highly recommend reading the [background section](#background--puppet).
+
+Background : Puppet
+=======================================================
+Here are some good tutorials to get you up to speed.  It's important to get a working
+knowledge of how Puppet works so you can maximize your utility of the software and make
+it easy for others to understand and find out what you're doing. 
 
 	http://docs.puppetlabs.com/learning/
 
@@ -19,12 +30,12 @@ and find out what you're doing.
 
 Quick Guide on Server Deployment
 =======================================================
-When Adam and Andrew were working on this, we created a server
-image that had puppet pre-installed, and uploaded any necessary
-certificates. We recommend doing the same.
+When Andrew was working on server automation and autoscaling, he created a server
+image which had puppet pre-installed, uploaded the necessary puppet certificates 
+(for the managed mode, you shouldn't need this in standalone mode).He recommends you do the same.
 
 
-### [  recommended  ] How to configure stand-alone nodes
+### [*recommended*] How to configure Stand-Alone nodes
 With standalone servers, all you have to do is download a puppet manifest
 and apply the configuration to the server. One of the most overlooked features 
 in Puppet is the puppet executable. This allows you to both compile and apply 
