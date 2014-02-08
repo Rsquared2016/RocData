@@ -34,7 +34,7 @@ This makes puppet a viable tool for application bootstrapping, even on one machi
 
 Executing:
 
-    #>puppet mymanifest.pp
+    #>puppet manifests/mymanifest.pp
 
 will apply the configuration from the local source file mymanifest.pp to the 
 local host. The puppet executable takes many of the same long options as puppet, namely:
@@ -50,6 +50,33 @@ Running puppet on a single machine is not only a perfectly valid use case, it is
 also the best way to get started with the puppet language, and the best way to 
 quickly develop and test new manifests.
 
+#### Software Packages and Puppet Architecture
+The manifest file contains server configurations and looks something like this : 
+
+```puppet
+node 'default' {
+	include developer_keys
+	include git
+	include motd
+}
+
+node 'webserver' inherits default{
+	include oracle_java
+	include python_ai
+    include pip
+}
+
+node 'database' inherits webserver{
+	include couchdb
+}
+```
+
+`nodes` are server roles that you define with dependencies.  You can inherit dependencies 
+as shown above, therefore making server deployment an object oriented task.
+
+the `includes` are the `modules` in puppet terminology.  You can look up how the anatomy of a puppet module,
+but this is where you can define all the parameters of the software you want installed or run on a server.
+Feel free to browser the `modules/` directory to see working examples.
 
 ### [not recommended] How to configure managed nodes
 Here's how to sign certificates after starting a server from an image
