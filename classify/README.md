@@ -6,8 +6,10 @@ Data files in this tutorial are placed in `data/`.
 
 #Prerequisites
 We will make use of the following 
-- [ SVMperf ](http://www.cs.cornell.edu/people/tj/svm_light/svm_perf.html)
-
+- [ SVMperf ](http://www.cs.cornell.edu/people/tj/svm_light/svm_perf.html) : SVM library from Cornell
+- [PIP](https://pypi.python.org/pypi/pip)
+  - simplejson
+  
 # Training
 The hardest part in training a classifier is obtaining the training set.
 
