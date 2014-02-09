@@ -29,7 +29,7 @@ reader = tweetReader(sys.argv[2])
 THRESHOLD = float(sys.argv[3])
 
 #fout = open('interpretation.txt', 'w')
-fout_train = open('labeled_sick_%g.txt' % THRESHOLD, 'w')
+fout_train = open('svm_data/labeled_sick_%g.txt' % THRESHOLD, 'w')
 f_sick_users = open('sick_users_%s' % sys.argv[1], 'w')
 sick_users = set()
 
@@ -90,7 +90,7 @@ while True:
 fout_train.close()
 
 import pickle
-pickle.dump( segmentToSick, open( 'segmentToSick_%g-reproduce.pickle' % THRESHOLD, "wb" ) )
+pickle.dump( segmentToSick, open( 'svm_bin/segmentToSick_%g-reproduce.pickle' % THRESHOLD, "wb" ) )
 
 for u in sorted(sick_users):
       f_sick_users.write(u + '\n')

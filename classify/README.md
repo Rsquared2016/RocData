@@ -28,6 +28,20 @@ simple text file where each line follows the following pattern:
 24330120800  notenglish lalalalalalalalalala,no soy pica &lt;3 
 ```
 
+SVMperf will then do the following : 
+### createTrainingDataSVM.py
+This file prepares the model's training data for SVMlight from labeled tweets. It will output two files :
+`model/sys.argv[1].words` this contains all the unique tokens that appear in the training data
+`model/train.dat` each line contains tweet's class, representation of a tweet in the feature space defined by the presence of a token word, #, and the name of the class
+
+```dat
+# model/train.dat
+# For example:
+#  -1 1175:1 1550:1 1859:1 1874:1 2872:1 3104:1 3488:1 3562:1 3853:1 4030:1 5637:1 6295:1 6679:1 6935:1 6942:1 7152:1 9016:1 # no
+
+# Run: 
+# python -OO createTrainingDataSVM.py training_data.txt 1 
+
 # Testing
 Your test file should be comprised of json objects representing tweets. 
 
@@ -83,43 +97,4 @@ All the necessary files are located at `/p/twitter/SadilekAll/TwitterHealth2.0/S
 
     # interpret_results.py 
     python -OO interpret_results.py predictions_svm ../nyc.trim.sort 0.8
-```
-
-
-```bash
-# run.sh
-
-### Process training data and create WORDS file
-echo "Processing training data ..."
-python -OO createTrainingDataSVM.py training_data.txt 1 &&
-
-### Learn SVM
-echo
-echo "Learning SVM ..."
-#svm_perf_learn -w 3 -c 16.533 -l 10 --b 1 -t 0 -p 1 training_data.dat svm &&
-svm_perf_learn -w 3 -c 754 -l 10 --b 1 -t 0 -p 1 training_data.dat svm &&
-
-echo
-echo "SVM features:"
-python inspect_SVM.py WORDS_training_data svm &&
-
-### Process testing data
-echo
-echo "Processing testing data ..."
-python -OO createTestingDataSVM.py ../test_file WORDS_training_data &&
-
-### Classify testing data
-echo
-echo "Classifying ..."
-svm_perf_classify -v 0 testing_data.dat svm predictions_svm &&
-
-### Interpret results
-echo
-echo "Classification results:"
-python -OO interpret_results.py predictions_svm ../test_file 0.8 &&
-
-echo
-echo "Joined lines:"
-paste predictions_svm testing_data.dat | head
-
 ```
