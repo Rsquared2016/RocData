@@ -11,13 +11,32 @@ We will make use of the following
   - simplejson
   
 # Training
-The hardest part in training a classifier is obtaining the training set.
+The hardest part in training a classifier is building the training set.
 
-For the flu model, we have created a text file of training data located at `data/training_data.txt`. 
+For a given model, you have to create , a text file of training data with the following structure.
+
+located at `data/training_data.txt`. 
 This is a simple text file, where each line is comprised of the following : 
-```
-# a tweet id | tweet text
-22690177204    no A Kite in the sky ! Alone n alone ! Have no one to share the pain
+
+```CSV
+#  training_data.txt
+#  tweet id | label |  tweet text
+10708877913 sick   Sick and Tired of being sick and tired 
+4969488000  sick   i think i have freshers flu. which is quite a feat even for me. and makes me want to be back at uni sooo badly...
+23938723201 health ive had a tooth removed its not that pain full :) dont worry about it it will be ok 
+20314009003 health I'm dying of heat stroke 
+26390902605 health Woke up with a freaking headache today... And the biochemistry exam didn't really help to cure it... :( 
+6050366908  health Does this cold,dreary weather affect YOUR joints? What do U do to comfort yourself when cold, stiff & in pain??!? 
+11869412900 health Ian Dury died of cancer WAY before Malcolm Maclaren did. 
+22690177204 no     A Kite in the sky ! Alone n alone ! Have no one to share the pain
+9073622108  no     lithium!! 
+20787350603 no     Wow Flushing smells like straight unwashed ass this morning chick next to me was trying not to gag 
+4798522704  no     should TEACH. And seriously I hate repubs and dems both. I'm just sick of Nobama being canonized because he's a good speaker. 
+17158395602 no     i want more doctor who now 
+10588865414 no     stupid blisters. What are your new shoes? 
+22690177204 no     A Kite in the sky ! Alone n alone ! Have no one to share the pain 
+5362439308  no     so bored, thought i had swine flu last night. Turned out i just ate too much candy 
+24330120800 notenglish lalalalalalalalalala,no soy pica &lt;3 
 ```
 
 # Testing
