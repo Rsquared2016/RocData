@@ -1,5 +1,5 @@
 # Prepares training data for SVMlight from labeled tweets
-# Outputs model/sys.argv[1].words file with all the unique tokens that appear in the training data
+# Outputs svm_model/sys.argv[1].words file with all the unique tokens that appear in the training data
 # Outputs train.dat file, where each line contains tweet's class, representation of a tweet in the feature space defined by the presence of a token word, #, and the name of the class
 # For example:
 #  -1 1175:1 1550:1 1859:1 1874:1 2872:1 3104:1 3488:1 3562:1 3853:1 4030:1 5637:1 6295:1 6679:1 6935:1 6942:1 7152:1 9016:1 # no
@@ -117,7 +117,7 @@ ID = 1
 
 #print WORDS
 
-fout_w = open('model/%s.words' % filePrefix, 'w')
+fout_w = open('svm_model/%s.words' % filePrefix, 'w')
 for w in WORDS:
     fout_w.write(w+'\n')
     WORDStoID[w] = ID
@@ -143,7 +143,7 @@ fout_w.close()
 
 positive = 0
 negative = 0
-fout = open('%s.dat' % filePrefix, 'w')
+fout = open('svm_model/%s.dat' % filePrefix, 'w')
 for (i, tag) in enumerate(tags):
     if i%50000 == 0:
         percent = int(round(float(i)/len(tags)*100))

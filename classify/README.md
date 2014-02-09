@@ -41,6 +41,7 @@ This file prepares the model's training data for SVMlight from labeled tweets. I
 
 # Run: 
 # python -OO createTrainingDataSVM.py training_data.txt 1 
+```
 
 # Testing
 Your test file should be comprised of json objects representing tweets. 
