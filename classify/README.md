@@ -1,14 +1,12 @@
 Building a Classifier
 =======================================
-
-This guide should help you train a classifier, run it against a data set and output labels.
+This guide will help you train a SVM classifier, run it against a data set, and then output labels.
 Data files in this tutorial are placed in `data/`.
 
 
 #Prerequisites
-For this you'll need the svm perf library. The documentation for it is [here](http://www.cs.cornell.edu/people/tj/svm_light/svm_perf.html)
-We are going to use `svm_perf_learn` and `svm_perf_classify` from this library.
-
+We will make use of the following 
+- [ SVMperf ](http://www.cs.cornell.edu/people/tj/svm_light/svm_perf.html)
 
 # Training
 The hardest part in training a classifier is obtaining the training set.
