@@ -24,7 +24,35 @@ This is a simple text file, where each line is comprised of the following :
 Your test file should be comprised of json objects representing tweets. 
 
 ```json
-{"id":"6f3acc1e75c817417f118d44596f33f6","key":"6f3acc1e75c817417f118d44596f33f6","value":{"rev":"1-e1e70bd847ff3a38f0bcc69da542cab8"},"doc":{"_id":"6f3acc1e75c817417f118d44596f33f6","_rev":"1-e1e70bd847ff3a38f0bcc69da542cab8","iso_language_code":"en","text":"@Layce305 bless my people","created_at":"Wed, 19 May 2010 00:40:00 +0000","lon":-73.918209000000004494,"profile_image_url":"http://a3.twimg.com/profile_images/317812083/n1294582050_215_normal.jpg","to_user":"Layce305","source":"&lt;a href=&quot;http://ubertwitter.com&quot; rel=&quot;nofollow&quot;&gt;UberTwitter&lt;/a&gt;","health":-0.10548193000000000152,"location":"ÜT: 40.664879,-73.918209","from_user":"kingraspedro","lat":40.66487899999999911,"from_user_id":16789049,"to_user_id":1542507,"geo":null,"id":14261124214,"metadata":{"result_type":"recent"}}}
+{
+    "id": "6f3acc1e75c817417f118d44596f33f6",
+    "key": "6f3acc1e75c817417f118d44596f33f6",
+    "value": {
+        "rev": "1-e1e70bd847ff3a38f0bcc69da542cab8"
+    },
+    "doc": {
+        "_i     d": "6f3acc1e75c817417f118d44596f33f6",
+        "_rev": "1-e1e70bd847ff3a38f0bcc69da542cab8",
+        "iso_language_code": "en",
+        "text": "@Layce305 bless my people",
+        "cr     eated_at": "Wed, 19 May 2010 00:40:00 +0000",
+        "lon": -73.918209,
+        "profile_image_url": "http://a3.twimg.com/profile_images/317812083/n12945     82050_215_normal.jpg",
+        "to_user": "Layce305",
+        "source": "&lt;a href=&quot;http://ubertwitter.com&quot; rel=&quot;nofollow&quot;&gt;UberTwitter&lt;/a&     gt;",
+        "health": -0.10548193,
+        "location": "ÜT: 40.664879,-73.918209",
+        "from_user": "kingraspedro",
+        "lat": 40.664879,
+        "from_user_id": 16789049,
+        "to_user_id": 1542507,
+        "geo": null,
+        "id": 14261124214,
+        "metadata": {
+            "result_type": "recent"
+        }
+    }
+}
 ```
 
 
@@ -82,9 +110,8 @@ echo
 echo "Classification results:"
 python -OO interpret_results.py predictions_svm ../test_file 0.8 &&
 
-```
-
 echo
 echo "Joined lines:"
 paste predictions_svm testing_data.dat | head
 
+```
