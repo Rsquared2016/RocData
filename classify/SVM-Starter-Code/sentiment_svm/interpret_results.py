@@ -30,7 +30,7 @@ THRESHOLD = float(sys.argv[3])
 
 #fout = open('interpretation.txt', 'w')
 fout_train = open('svm_data/labeled_sick_%g.txt' % THRESHOLD, 'w')
-f_sick_users = open('sick_users_%s' % sys.argv[1], 'w')
+f_sick_users = open('svm_bin/sick_users_%s' % sys.argv[1].split("/")[1], 'w')
 sick_users = set()
 
 # Load predicted scores
