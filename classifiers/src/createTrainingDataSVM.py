@@ -71,6 +71,7 @@ countThreshold = int(sys.argv[2])
 
 log = open(sys.argv[1], 'r')
 filePrefix = os.path.splitext(os.path.basename(sys.argv[1]))[0]
+filePath   = sys.argv[1][ 0 : (len(sys.argv[1]) - len(filePrefix) - 5) ]
 
 ids = []
 tags = []
@@ -117,7 +118,7 @@ ID = 1
 
 #print WORDS
 
-fout_w = open('svm_model/%s.words' % filePrefix, 'w')
+fout_w = open('%s/svm_model/%s.words' % (filePath , filePrefix) , 'w')
 for w in WORDS:
     fout_w.write(w+'\n')
     WORDStoID[w] = ID
@@ -141,9 +142,9 @@ WORDTRIPLES = None
 
 fout_w.close()
 
-positive = 0
+positive = 0 
 negative = 0
-fout = open('svm_model/%s.dat' % filePrefix, 'w')
+fout = open('%s/svm_model/%s.dat' % (filePath , filePrefix) , 'w')
 for (i, tag) in enumerate(tags):
     if i%50000 == 0:
         percent = int(round(float(i)/len(tags)*100))

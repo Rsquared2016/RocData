@@ -8,6 +8,7 @@
 # Example: 
 # python -OO interpret_results.py predictions_svm ../nyc.trim.sort 0.8
 
+import os
 import sys
 import re
 from collections import Counter
@@ -24,13 +25,16 @@ def updateSegmentToSick(segNum, userName):
             
 p3 = re.compile('RT[^a-zA-Z0-9]')
 
+filePrefix = os.path.splitext(os.path.basename(sys.argv[2]))[0]
+filePath   = sys.argv[2][ 0 : - (len(filePrefix ) + 6) ]
+
 f_preds = open(sys.argv[1], 'r')
 reader = tweetReader(sys.argv[2])
 THRESHOLD = float(sys.argv[3])
 
 #fout = open('interpretation.txt', 'w')
-fout_train = open('svm_data/labeled_sick_%g.txt' % THRESHOLD, 'w')
-f_sick_users = open('svm_bin/sick_users_%s' % sys.argv[1].split("/")[1], 'w')
+fout_train = open('%s/svm_data/labeled_sick_%g.txt' % (filePath, THRESHOLD), 'w')
+f_sick_users = open('%s/svm_bin/sick_users_%s' % (filePath, sys.argv[1].split("/")[1]), 'w')
 sick_users = set()
 
 # Load predicted scores
@@ -90,7 +94,7 @@ while True:
 fout_train.close()
 
 import pickle
-pickle.dump( segmentToSick, open( 'svm_bin/segmentToSick_%g-reproduce.pickle' % THRESHOLD, "wb" ) )
+pickle.dump( segmentToSick, open( '%s/svm_bin/segmentToSick_%g-reproduce.pickle' % (filePath, THRESHOLD), "wb" ) )
 
 for u in sorted(sick_users):
       f_sick_users.write(u + '\n')

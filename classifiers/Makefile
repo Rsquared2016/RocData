@@ -1,11 +1,12 @@
 model_bin = $(model_dir)/svm_bin
+model_dat = $(model_dir)/svm_data
 model_mod = $(model_dir)/svm_model
 model_dir = SVMs/$(model)
 
 all: train
 
 train: 
-	mkdir -p $(model_bin) $(model_mod)
+	mkdir -p $(model_bin) $(model_mod) $(model_dat)
 	
 	# Process training data and create a .words file
 	@echo "\n Processing training data ..."
@@ -22,7 +23,7 @@ train:
 	
 	# Process testing data
 	@echo "\n Processing testing data ..."
-	python -OO src/createTestingDataSVM.py ../nyc.trim.sort $(model_mod)/training_data.words
+	python -OO src/createTestingDataSVM.py $(model_dir)/nyc.trim.sort $(model_mod)/training_data.words
 	
 	# Classify testing data
 	@echo "\n Classifying ..."
@@ -30,7 +31,7 @@ train:
 	
 	# Interpret results
 	@echo "\n Classification results:"
-	python -OO src/interpret_results.py $(model_bin)/predictions_svm ../nyc.trim.sort 0.8
+	python -OO src/interpret_results.py $(model_bin)/predictions_svm $(model_dir)/nyc.trim.sort 0.8
 	
 	@echo "\n Joined lines:"
 	paste predictions_svm $(model_mod)/testing_data.dat | head
