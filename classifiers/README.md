@@ -8,17 +8,15 @@ We will make use of the following:
   - simplejson
   
 #Directory Structure
-```
+
     |-- README.md
     |-- Makefile
     |   |-- src           # Contains source code for training a classifier
-    |       |-- repositories
-    |   |-- svm_perf      # Contains source code for Cornell's [ SVMperf ](http://www.cs.cornell.edu/people/tj/svm_light/svm_perf.html)
+    |   |-- svm_perf      # Contains source code for Cornell's SVMperf
     |   |-- SVMs          # Contains the different classifiers
-    |       |-- training_data.txt  # input for creatTrainingDataSVM.py [follows this](#training)
+    |       |-- training_data.txt  # input for creatTrainingDataSVM.py
     |       |-- model/             # contains .dat for the SVM
     |       |-- bin/               # contains binary data needed for SVM
-```
 
 # Training
 We begin building our SVM by supplying the model with training data. We will use a simple 
@@ -38,31 +36,30 @@ simple text file where each line follows the following pattern:
 24330120800  notenglish lalalalalalalalalala,no soy pica &lt;3 
 ```
 
-SVMperf will then do the following : 
-### createTrainingDataSVM.py
-This file prepares the model's training data for SVMlight from labeled tweets. It will output two files :
-`model/sys.argv[1].words` this contains all the unique tokens that appear in the training data
-`model/train.dat` each line contains tweet's class, representation of a tweet in the feature space defined by the presence of a token word, #, and the name of the class
-
-```dat
-# model/train.dat
-# For example:
-#  -1 1175:1 1550:1 1859:1 1874:1 2872:1 3104:1 3488:1 3562:1 3853:1 4030:1 5637:1 6295:1 6679:1 6935:1 6942:1 7152:1 9016:1 # no
-
-# Run: 
-# python -OO createTrainingDataSVM.py training_data.txt 1 
-```
-
 # Testing
 TODO:
+
+
+# Under the Hood
+TODO: document the pipeline.
+
+```bash
+# Running : 
+python -OO src/createTrainingDataSVM.py SVMs/flu/training_data.txt 1 
+```
+Prepares the model's training data for SVMlight from the labeled tweets, outputting 2 files :
+  - `model/<classifier_name>.words` : a file listing all unique tokens appearing in the training data
+  - `model/train.dat`               : each line contains tweet's class, representation in the feature space ( defined by the presence of a token word ) , #, and the name of the class
+
+```
+# example line of model/train.dat : 
+#  -1 1175:1 1550:1 1859:1 1874:1 2872:1 3104:1 3488:1 3562:1 3853:1 4030:1 5637:1 6295:1 6679:1 6935:1 6942:1 7152:1 9016:1 # no
+```
+
 
 # Miscellaneous info
 An old copy of all these files are located at `/p/twitter/SadilekAll/TwitterHealth2.0/SVM-starter-code`.
 ```
-    # Outputs train.dat file, where each line contains tweet's class, representation of a tweet in the feature space defined by the presence of a token word, #, and the name of the class
-    # Outputs WORDS_sys.argv[1] file with all the unique tokens that appear in the training data
-    python -OO createTrainingDataSVM.py training_data.txt 1
-  
     inspect_SVM.py  
 
     # contains json objects to create testing data for SVM
