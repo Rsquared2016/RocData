@@ -21,4 +21,4 @@ strict graph {
 ## Output.
 This script outputs a graph like so : 
 
-![Sample Output](https://raw.github.com/HenryKautz/RocData/master/graph-manipulation/screenie.png?token=747630__eyJzY29wZSI6IlJhd0Jsb2I6SGVucnlLYXV0ei9Sb2NEYXRhL21hc3Rlci9ncmFwaC1tYW5pcHVsYXRpb24vc2NyZWVuaWUucG5nIiwiZXhwaXJlcyI6MTM4Nzk4Nzk5NX0%3D--57cb1cca151d89d41cbee5ab1ddac075d4f55ebf)
+![Sample Output](screenie.png)
