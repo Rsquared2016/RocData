@@ -1,6 +1,17 @@
-Building a Classifier
+Building Classifiers
 =======================================
-This guide will help you train a SVM classifier, run it against a data set, and then output labels for data.
+
+```bash
+make train model=<SVM-NAME> # this builds an SVM against data provided.
+-------------------------------------------------------------------------------
+# TODO: configure      # TODO: should look through any system and find all dependencies for each machine
+# TODO: make           # TODO: should generate appropriate makefile
+# TODO: make install   # TODO: should compile and install all components necessary
+# TODO: make run       # TODO: start all the services necessary for the given software.
+```
+
+
+This guide will help you train a SVM, run it against a data set, and then output labels for data.
 
 #Prerequisites
 We will make use of the following:
@@ -14,30 +25,45 @@ We will make use of the following:
     |   |-- src           # Contains source code for training a classifier
     |   |-- svm_perf      # Contains source code for Cornell's SVMperf
     |   |-- SVMs          # Contains the different classifiers
-    |       |-- training_data.txt  # input for creatTrainingDataSVM.py
-    |       |-- model/             # contains .dat for the SVM
-    |       |-- bin/               # contains binary data needed for SVM
+    |       |-- <model-1> # Folder that your SVM will live in
+    |         |-- training_data.txt  # input for creatTrainingDataSVM.py
+    |         |-- model/             # contains .dat for the SVM
+    |         |-- bin/               # contains binary data needed for SVM
+    |         |-- data/
+    |       |-- <model-2>
+    |         |-- training_data.txt 
+    |         |-- model/            
+    |         |-- bin/              
+    |         |-- data/
 
 # Training
-We begin building our SVM by supplying the model with training data. We will use a simple 
-simple text file where each line follows the following pattern:
+The first step in training a classifier is supplying the SVM classifier with training data. 
+You will use a simple text file constructed like so:
 
 ```CSV
-#  training_data.txt
-# tweet id | label |  tweet text
-10708877913  sick   Sick and Tired of being sick and tired 
-4969488000   sick   i think i have freshers flu. which is quite a feat even for me. and makes me want to be back at uni sooo badly...
-6050366908   health Does this cold,dreary weather affect YOUR joints? What do U do to comfort yourself when cold, stiff & in pain??!? 
-11869412900  health Ian Dury died of cancer WAY before Malcolm Maclaren did. 
-4798522704   no     should TEACH. And seriously I hate repubs and dems both. I'm just sick of Nobama being canonized because he's a good speaker. 
-17158395602  no     i want more doctor who now 
-10588865414  no     stupid blisters. What are your new shoes? 
-22690177204  no     A Kite in the sky ! Alone n alone ! Have no one to share the pain 
+# model/training_data.txt
+#
+# tweet id | label | tweet text
+10708877913  sick    Sick and Tired of being sick and tired 
+4969488000   sick    i think i have freshers flu. which is quite a feat even for me. and makes me want to be back at uni sooo badly...
+6050366908   health  Does this cold,dreary weather affect YOUR joints? What do U do to comfort yourself when cold, stiff & in pain??!? 
+11869412900  health  Ian Dury died of cancer WAY before Malcolm Maclaren did. 
+4798522704   no      should TEACH. And seriously I hate repubs and dems both. I'm just sick of Nobama being canonized because he's a good speaker. 
+17158395602  no      i want more doctor who now 
+10588865414  no      stupid blisters. What are your new shoes? 
+22690177204  no      A Kite in the sky ! Alone n alone ! Have no one to share the pain 
 24330120800  notenglish lalalalalalalalalala,no soy pica &lt;3 
 ```
 
-# Testing
-TODO:
+# Output
+You will be returned a flat file that looks like this.
+
+```bash
+# Output will look like this : 
+# Score     | class | tokens                                |#| text
+-0.30509016     0     797:1   6479:1 12609:1                 #  @Layce305 bless my people
+-0.26440957     0     5735:1  7842:1 14426:1 14872:1 15766:1 #  #Nowplaying Kings of Leon- Use somebody
+```
 
 
 # Under the Hood
