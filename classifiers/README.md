@@ -59,15 +59,3 @@ Prepares the model's training data for SVMlight from the labeled tweets, outputt
 
 # Miscellaneous info
 An old copy of all these files are located at `/p/twitter/SadilekAll/TwitterHealth2.0/SVM-starter-code`.
-```
-    inspect_SVM.py  
-
-    # contains json objects to create testing data for SVM
-    test_file 
-    
-    # createTestingDataSVM.py creates testing_data.dat
-    python -OO createTestingDataSVM.py ../test_file WORDS_training_data
-
-    # interpret_results.py 
-    python -OO interpret_results.py predictions_svm ../nyc.trim.sort 0.8
-```

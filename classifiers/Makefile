@@ -34,7 +34,7 @@ train:
 	python -OO src/interpret_results.py $(model_bin)/predictions_svm $(model_dir)/nyc.trim.sort 0.8
 	
 	@echo "\n Joined lines:"
-	paste predictions_svm $(model_mod)/testing_data.dat | head
+	paste $(model_bin)/predictions_svm $(model_mod)/testing_data.dat | head
 
 svm_perf:
 	mkdir -p ../svm_perf/
