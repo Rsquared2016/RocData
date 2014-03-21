@@ -20,7 +20,7 @@ require 'colorize'
 
 
 def store_in_db(filename, str)
-    File.write(filename, str, File.size(filename), mode:'a')
+    filename.puts(str)
 end
 def twitter_client
    Twitter::REST::Client.new do |config|
@@ -31,7 +31,7 @@ def twitter_client
   end
 end
 
-def fetch_all_friends(twitter_username, degree, max_attempts = 100)
+def fetch_all_friends(db, twitter_username, degree, max_attempts = 100)
   num_attempts = 0
   new_users = Hash.new(0)
   client = twitter_client
@@ -46,7 +46,7 @@ def fetch_all_friends(twitter_username, degree, max_attempts = 100)
       friends.each do |f|
         running_count += 1
         new_users[f.screen_name] = degree+1
-        store_in_db('social_graph.txt', "  #{twitter_username} -- #{f.screen_name};\n")
+        store_in_db(db, "  #{twitter_username} -- #{f.screen_name};\n")
         myfile.puts "\"#{running_count}\",\"#{f.name.gsub('"','\"')}\",\"#{f.screen_name}\",\"#{f.url}\",\"#{f.followers_count}\",\"#{f.location.gsub('"','\"').gsub(/[\n\r]/," ")}\",\"#{f.created_at}\",\"#{f.description.gsub('"','\"').gsub(/[\n\r]/," ")}\",\"#{f.lang}\",\"#{f.time_zone}\",\"#{f.verified}\",\"#{f.profile_image_url}\",\"#{f.website}\",\"#{f.statuses_count}\",\"#{f.profile_background_image_url}\",\"#{f.profile_banner_url}\""
       end
       return new_users if not friends.respond_to? :next_cursor
@@ -54,11 +54,15 @@ def fetch_all_friends(twitter_username, degree, max_attempts = 100)
       return new_users if cursor == 0
     rescue Twitter::Error::TooManyRequests => error
       if num_attempts <= max_attempts
-        return new_users if not friends.respond_to? :next_cursor
-        cursor = friends.next_cursor
-        cursor = friends.next_cursor if friends && friends.next_cursor
-        puts "Hit rate limit, sleeping for #{error.rate_limit.reset_in}...".red
-        sleep error.rate_limit.reset_in
+        if friends != nil
+          return new_users if not friends.respond_to? :next_cursor
+          cursor = friends.next_cursor
+          cursor = friends.next_cursor if friends && friends.next_cursor
+        end
+        time = 5* (error.rate_limit.reset_in + num_attempts)
+        print "Hit rate limit on #{twitter_username}, sleeping for #{time} seconds | ".red
+        time.times{sleep 1; print "."}
+        print "\n"
         retry
       else
         raise
@@ -68,18 +72,20 @@ def fetch_all_friends(twitter_username, degree, max_attempts = 100)
 end
 
 
-def crawl_graph(users, total)
+def crawl_graph(db, users, total)
   new_users = Hash.new(0)
   users.each do |user|
     if user[1] < total
-      new_users.merge!(fetch_all_friends( user[0], user[1]))
+      new_users.merge!(fetch_all_friends(db, user[0], user[1]))
     end
   end
   puts new_users
-  crawl_graph(new_users, total) if new_users.size > 0
+  crawl_graph(db, new_users, total) if new_users.size > 0
 end
 
-store_in_db('social_graph.txt',"graph relations { \n")
+
+db = File.new("androwis_social_graph.txt", "w")
+store_in_db(db,"graph relations { \n")
 users["androwis"] = 0
-crawl_graph(users, 2)
-store_in_db('social_graph.txt',"} \n")
+crawl_graph(db, users, 2)
+store_in_db(db,"} \n")
