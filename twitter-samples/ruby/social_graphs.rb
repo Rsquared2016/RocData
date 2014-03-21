@@ -54,6 +54,8 @@ def fetch_all_friends(twitter_username, degree, max_attempts = 100)
       return new_users if cursor == 0
     rescue Twitter::Error::TooManyRequests => error
       if num_attempts <= max_attempts
+        return new_users if not friends.respond_to? :next_cursor
+        cursor = friends.next_cursor
         cursor = friends.next_cursor if friends && friends.next_cursor
         puts "Hit rate limit, sleeping for #{error.rate_limit.reset_in}...".red
         sleep error.rate_limit.reset_in
