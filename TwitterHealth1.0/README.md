@@ -14,14 +14,13 @@ To compile and run the frontend:
 
 ```bash 
 cd TwitterHealth/frontend
-mvn clean install
+./dev_run_webapp.sh 
 
-# make sure port 8080 is unoccupied
-sh target/bin/webapp
-
+#-------------------------------------------------------------------------
 # OPTIONAL --- You shouldn't need this for development.
 # You can optionally redirect port 80 to 8080 on your local machine
 # This is what we did for public facing servers.
+#-------------------------------------------------------------------------
 
 # on gnu/linux:
 iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
