@@ -42,23 +42,7 @@ make install   # should compile and install all components necessary
 make run       # should start all the services necessary for the given software.
 ```
 
-## TODO : Organize. 
-
-Get data:
-```bash 
-cd ./process-tweets
-wget http://cs.rochester.edu/~sadilek/log-geo-area_NYC_GPS_sorted_filtered_6237.dat
-```
-
-Process data:
-```bash 
-python -OO processTweets.py 2000 words.txt log-geo-area_NYC_GPS_sorted_filtered_6237.dat
-```
-
-Display social graph:
-```bash 
-cd ./graph-manipulation
-```
+## TODO : Organize, not sure what to do about this... 
 
 Render heatmap of twitter flights:
 ```bash
