@@ -3,6 +3,27 @@ RocData
 
 Prof. Henry Kautz at University of Rochester's Research Group Repository
 
+## Directory Structure
+
+#### TwitterHealth 1.0
+This is the code for the web server used to visualize TwitterHealth. This includes both a backend server used to collect and classify tweets, and a frontend for serving pages.  [Readme](https://github.com/HenryKautz/RocData/tree/master/TwitterHealth1.0)
+
+#### Training a classifier using svmPERF
+Here is the code used to train an SVM by using N-grams from already labeled data:
+[Readme](https://github.com/HenryKautz/RocData/tree/master/classifiers)
+
+#### Graph visualizations
+If you have a social graph you would like to visualize : 
+[Readme](https://github.com/HenryKautz/RocData/tree/master/graph-manipulation)
+
+#### Puppet : Server Management
+How to configure and then autoscale servers on AWS
+[Readme](https://github.com/HenryKautz/RocData/tree/master/puppet)
+
+#### Twitter API Examples
+Ruby code for (1) Downloading an entire follows graph and (2) using Twitter's REST and Streaming APIs
+[Readme](https://github.com/HenryKautz/RocData/tree/master/twitter-samples/ruby)
+
 ## Notes
 - There are two database files missing from this repository because of github's
 policy changes. I will add links to them ASAP.
